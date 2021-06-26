@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Starship.Telemetry;
 
-namespace Starship.Sensors
+namespace Starship.Sensor
 {
     public sealed class SensorSuite : ITelemetryProvider
     {

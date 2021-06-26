@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Starship.Telemetry;
 using UnityEngine;
 
-namespace Starship.Sensors
+namespace Starship.Sensor
 {
     public sealed class PitchSensor : ITelemetryProvider
     {

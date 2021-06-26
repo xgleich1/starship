@@ -1,4 +1,5 @@
-using Starship.Sensors;
+using Starship.Control;
+using Starship.Sensor;
 
 namespace Starship.Flight
 {
@@ -15,7 +16,7 @@ namespace Starship.Flight
             _flightDependencies = flightDependencies;
         }
 
-        public FlightCommand CommandFlight(SensorSuite sensorSuite)
+        public void CommandFlight(SensorSuite sensorSuite, ControlSuite controlSuite)
         {
             // Do certain things only once.
             // This will become a state machine
@@ -28,7 +29,19 @@ namespace Starship.Flight
 
             _flightDependencies.TelemetryEmitter.EmitTelemetry(sensorSuite);
 
-            return new FlightCommand(mainThrottle: 0.5f);
+            var flightCommand = new FlightCommand(
+                topLeftRcsThrottle: 1.0f, 
+                topRightRcsThrottle: 1.0f,
+                bottomLeftRcsThrottle: 1.0f,
+                bottomRightRcsThrottle: 1.0f,
+                topMainEngineThrottle: 0.0f,
+                bottomLeftMainEngineThrottle: 0.0f,
+                bottomRightMainEngineThrottle: 0.0f,
+                mainEngineGimbalYaw: 0.0f,
+                mainEngineGimbalRoll: 0.0f,
+                mainEngineGimbalPitch: 0.0f);
+            
+            controlSuite.ExertControl(flightCommand);
         }
     }
 }

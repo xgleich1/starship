@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using Starship.Sensors;
+using Starship.Sensor;
 using Starship.Telemetry;
 
-namespace StarshipUnitTests.Sensors
+namespace StarshipUnitTests.Sensor
 {
     public sealed class HeightSensorTest
     {

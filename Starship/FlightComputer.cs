@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Starship.Control;
 using Starship.Flight;
-using Starship.Sensors;
+using Starship.Sensor;
 using static Vessel.Situations;
 
 namespace Starship
@@ -27,7 +26,7 @@ namespace Starship
                     return;
                 }
 
-                // What sensors can I access in a real rocket?
+                // What sensors can I sense in a real rocket?
                 // Position Sensor?
                 // Acceleration Sensor?
                 // Speed Sensor?
@@ -44,32 +43,18 @@ namespace Starship
                     new PitchSensor(vessel),
                     new HeightSensor(vessel));
 
-                // What can I manipulate in a real rocket?
-                // Individual engines throttle?
-                // Individual engines gimbal?
-                // Individual rcs thruster?
-                var flightCommand = _flightCommander.CommandFlight(sensorSuite);
+                // What can I control in a real rocket?
+                // Control individual rcs?
+                // Control individual gimbal?
+                // Control individual throttle?
+                var controlSuite = new ControlSuite(
+                    new RcsControl(vessel),
+                    new GimbalControl(vessel),
+                    new ThrottleControl(vessel));
 
-
-                // TODO: Find out how to throttle individual engines
-                var engines = FindPartModules<ModuleEnginesFX>(vessel);
-
-                // Backward engine
-                var engineOne = engines[0];
-                engineOne.useEngineResponseTime = true;
-                engineOne.currentThrottle = 0.75f;
-
-
-                // TODO: Find out how to gimbal individual engines
-                // var gimbalModules = FindPartModules<ModuleGimbal>(vessel);
-
-                // TODO: Find out how to enable individual rcs
-                // var rcsModules = FindPartModules<ModuleRCS>(vessel);
+                _flightCommander
+                    .CommandFlight(sensorSuite, controlSuite);
             };
         }
-
-        private static List<T> FindPartModules<T>(Vessel vessel) where T : PartModule =>
-            vessel.parts.Select(vesselPart => vesselPart.FindModuleImplementing<T>())
-                .Where(partModule => partModule != null).ToList();
     }
 }
