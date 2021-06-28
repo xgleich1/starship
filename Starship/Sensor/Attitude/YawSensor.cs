@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Starship.Telemetry;
 using UnityEngine;
 
-namespace Starship.Sensor
+namespace Starship.Sensor.Attitude
 {
     public sealed class YawSensor : ITelemetryProvider
     {

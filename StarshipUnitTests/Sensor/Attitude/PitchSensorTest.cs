@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using Starship.Sensor;
+using Starship.Sensor.Attitude;
 using Starship.Telemetry;
 
-namespace StarshipUnitTests.Sensor
+namespace StarshipUnitTests.Sensor.Attitude
 {
     public sealed class PitchSensorTest
     {

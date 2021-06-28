@@ -4,6 +4,8 @@ using Starship.Control.MainEnginesThrottle;
 using Starship.Control.RcsEnginesThrottle;
 using Starship.Flight;
 using Starship.Sensor;
+using Starship.Sensor.Attitude;
+using Starship.Sensor.Position;
 using static Vessel.Situations;
 
 namespace Starship

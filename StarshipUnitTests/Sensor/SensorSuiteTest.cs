@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Starship.Sensor;
+using Starship.Sensor.Attitude;
+using Starship.Sensor.Position;
 using Starship.Telemetry;
 
 namespace StarshipUnitTests.Sensor

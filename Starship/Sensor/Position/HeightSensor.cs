@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Starship.Telemetry;
 
-namespace Starship.Sensor
+namespace Starship.Sensor.Position
 {
     public sealed class HeightSensor : ITelemetryProvider
     {

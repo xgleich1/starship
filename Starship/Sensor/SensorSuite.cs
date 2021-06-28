@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using Starship.Sensor.Attitude;
+using Starship.Sensor.Position;
 using Starship.Telemetry;
 
 namespace Starship.Sensor
 {
-    public sealed class SensorSuite : ITelemetryProvider
+    public sealed class SensorSuite : ISensorSuite
     {
         public YawSensor YawSensor { get; }
         public RollSensor RollSensor { get; }

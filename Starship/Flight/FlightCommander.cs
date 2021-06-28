@@ -20,7 +20,7 @@ namespace Starship.Flight
         }
 
         public void CommandFlight(
-            SensorSuite sensorSuite,
+            ISensorSuite sensorSuite,
             IControlSuite controlSuite)
         {
             // Do certain things only once.
