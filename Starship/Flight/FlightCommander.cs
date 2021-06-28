@@ -1,5 +1,8 @@
 using Starship.Control;
+using Starship.Flight.Command;
 using Starship.Sensor;
+using static Starship.Flight.Command.AttitudeCommand;
+using static Starship.Flight.Command.ThrottleCommand;
 
 namespace Starship.Flight
 {
@@ -16,7 +19,9 @@ namespace Starship.Flight
             _flightDependencies = flightDependencies;
         }
 
-        public void CommandFlight(SensorSuite sensorSuite, ControlSuite controlSuite)
+        public void CommandFlight(
+            SensorSuite sensorSuite,
+            IControlSuite controlSuite)
         {
             // Do certain things only once.
             // This will become a state machine
@@ -30,17 +35,19 @@ namespace Starship.Flight
             _flightDependencies.TelemetryEmitter.EmitTelemetry(sensorSuite);
 
             var flightCommand = new FlightCommand(
-                topLeftRcsThrottle: 1.0f, 
-                topRightRcsThrottle: 1.0f,
-                bottomLeftRcsThrottle: 1.0f,
-                bottomRightRcsThrottle: 1.0f,
-                topMainEngineThrottle: 0.0f,
-                bottomLeftMainEngineThrottle: 0.0f,
-                bottomRightMainEngineThrottle: 0.0f,
-                mainEngineGimbalYaw: 0.0f,
-                mainEngineGimbalRoll: 0.0f,
-                mainEngineGimbalPitch: 0.0f);
-            
+                new TopLeftRcsEngineThrottle(0.0f),
+                new TopRightRcsEngineThrottle(0.0f),
+                new BottomLeftRcsEngineThrottle(0.0f),
+                new BottomRightRcsEngineThrottle(0.0f),
+                new TopMainEngineThrottle(0.0f),
+                new BottomLeftMainEngineThrottle(0.0f),
+                new BottomRightMainEngineThrottle(0.0f),
+                new MainEngineAttitudeYaw(0.0f),
+                new MainEngineAttitudeRoll(0.0f),
+                new MainEngineAttitudePitch(0.0f));
+
+            // Emit Flight Command Telemetry
+
             controlSuite.ExertControl(flightCommand);
         }
     }

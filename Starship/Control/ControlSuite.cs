@@ -1,29 +1,33 @@
-using Starship.Flight;
+using Starship.Control.MainEnginesAttitude;
+using Starship.Control.MainEnginesThrottle;
+using Starship.Control.RcsEnginesThrottle;
+using Starship.Flight.Command;
 
 namespace Starship.Control
 {
-    public sealed class ControlSuite
+    public sealed class ControlSuite : IControlSuite
     {
-        private readonly RcsControl _rcsControl;
-        private readonly GimbalControl _gimbalControl;
-        private readonly ThrottleControl _throttleControl;
+        private readonly IRcsEnginesThrottleControl _rcsEnginesThrottleControl;
+        private readonly IMainEnginesThrottleControl _mainEnginesThrottleControl;
+        private readonly IMainEnginesAttitudeControl _mainEnginesAttitudeControl;
 
 
         public ControlSuite(
-            RcsControl rcsControl,
-            GimbalControl gimbalControl,
-            ThrottleControl throttleControl)
+            IRcsEnginesThrottleControl rcsEnginesThrottleControl,
+            IMainEnginesThrottleControl mainEnginesThrottleControl,
+            IMainEnginesAttitudeControl mainEnginesAttitudeControl)
         {
-            _rcsControl = rcsControl;
-            _gimbalControl = gimbalControl;
-            _throttleControl = throttleControl;
+            _rcsEnginesThrottleControl = rcsEnginesThrottleControl;
+            _mainEnginesThrottleControl = mainEnginesThrottleControl;
+            _mainEnginesAttitudeControl = mainEnginesAttitudeControl;
         }
 
-        public void ExertControl(FlightCommand flightCommand)
+        // Test
+        public void ExertControl(IFlightCommand flightCommand)
         {
-            _rcsControl.ControlRcs(flightCommand);
-            _gimbalControl.ControlGimbal(flightCommand);
-            _throttleControl.ControlThrottle(flightCommand);
+            _rcsEnginesThrottleControl.ControlRcsEnginesThrottle(flightCommand);
+            _mainEnginesThrottleControl.ControlMainEnginesThrottle(flightCommand);
+            _mainEnginesAttitudeControl.ControlMainEnginesAttitude(flightCommand);
         }
     }
 }

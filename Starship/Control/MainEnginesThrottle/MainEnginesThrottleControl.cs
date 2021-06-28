@@ -1,15 +1,15 @@
-using Starship.Flight;
+using Starship.Flight.Command;
 
-namespace Starship.Control
+namespace Starship.Control.MainEnginesThrottle
 {
-    public sealed class ThrottleControl
+    public sealed class MainEnginesThrottleControl : IMainEnginesThrottleControl
     {
         private readonly ModuleEngines _topMainEngine;
         private readonly ModuleEngines _bottomLeftMainEngine;
         private readonly ModuleEngines _bottomRightMainEngine;
 
 
-        public ThrottleControl(Vessel vessel)
+        public MainEnginesThrottleControl(Vessel vessel)
         {
             var engines = vessel
                 .FindPartModulesImplementing<ModuleEngines>();
@@ -21,16 +21,16 @@ namespace Starship.Control
             EnableIndependentEngineControl();
         }
 
-        public void ControlThrottle(FlightCommand flightCommand)
+        public void ControlMainEnginesThrottle(IFlightCommand flightCommand)
         {
             _topMainEngine.currentThrottle =
-                flightCommand.TopMainEngineThrottle;
+                flightCommand.TopMainEngineThrottle.ThrottlePercent;
 
             _bottomLeftMainEngine.currentThrottle =
-                flightCommand.BottomLeftMainEngineThrottle;
+                flightCommand.BottomLeftMainEngineThrottle.ThrottlePercent;
 
             _bottomRightMainEngine.currentThrottle =
-                flightCommand.BottomRightMainEngineThrottle;
+                flightCommand.BottomRightMainEngineThrottle.ThrottlePercent;
         }
 
         private void EnableIndependentEngineControl()

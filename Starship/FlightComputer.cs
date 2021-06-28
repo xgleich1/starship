@@ -1,4 +1,7 @@
 ﻿using Starship.Control;
+using Starship.Control.MainEnginesAttitude;
+using Starship.Control.MainEnginesThrottle;
+using Starship.Control.RcsEnginesThrottle;
 using Starship.Flight;
 using Starship.Sensor;
 using static Vessel.Situations;
@@ -44,13 +47,10 @@ namespace Starship
                     new HeightSensor(vessel));
 
                 // What can I control in a real rocket?
-                // Control individual rcs?
-                // Control individual gimbal?
-                // Control individual throttle?
                 var controlSuite = new ControlSuite(
-                    new RcsControl(vessel),
-                    new GimbalControl(vessel),
-                    new ThrottleControl(vessel));
+                    new RcsEnginesThrottleControl(vessel),
+                    new MainEnginesThrottleControl(vessel),
+                    new MainEnginesAttitudeControl(vessel));
 
                 _flightCommander
                     .CommandFlight(sensorSuite, controlSuite);

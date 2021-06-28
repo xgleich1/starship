@@ -13,21 +13,8 @@ namespace StarshipUnitTests.Telemetry
         private Mock<ILogger> _unityLogger;
         private Mock<IMissionClock> _missionClock;
         private Mock<ITelemetryProvider> _telemetryProvider;
-
         private TelemetryEmitter _telemetryEmitter;
 
-
-        [SetUp]
-        public void Setup()
-        {
-            _unityLogger = new Mock<ILogger>();
-            _missionClock = new Mock<IMissionClock>();
-            _telemetryProvider = new Mock<ITelemetryProvider>();
-
-            _telemetryEmitter = new TelemetryEmitter(
-                _unityLogger.Object,
-                _missionClock.Object);
-        }
 
         [Test]
         public void Should_emit_a_single_telemetry_message()
@@ -67,6 +54,18 @@ namespace StarshipUnitTests.Telemetry
             _unityLogger.Verify(mock => mock.Log(LogType.Log, "1:Yaw:10"));
             _unityLogger.Verify(mock => mock.Log(LogType.Log, "2:Roll:15"));
             _unityLogger.Verify(mock => mock.Log(LogType.Log, "3:Pitch:20"));
+        }
+
+        [SetUp]
+        public void Setup()
+        {
+            _unityLogger = new Mock<ILogger>();
+            _missionClock = new Mock<IMissionClock>();
+            _telemetryProvider = new Mock<ITelemetryProvider>();
+
+            _telemetryEmitter = new TelemetryEmitter(
+                _unityLogger.Object,
+                _missionClock.Object);
         }
     }
 }

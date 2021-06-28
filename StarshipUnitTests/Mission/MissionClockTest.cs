@@ -9,17 +9,8 @@ namespace StarshipUnitTests.Mission
     public sealed class MissionClockTest
     {
         private Mock<IStopwatch> _stopwatch;
-
         private MissionClock _missionClock;
 
-
-        [SetUp]
-        public void Setup()
-        {
-            _stopwatch = new Mock<IStopwatch>();
-
-            _missionClock = new MissionClock(_stopwatch.Object);
-        }
 
         [Test]
         public void Should_start_the_mission_clock_with_zero_seconds()
@@ -41,6 +32,14 @@ namespace StarshipUnitTests.Mission
             // THEN
             Assert.That(_missionClock.GetElapsedSecondsInMission(),
                 Is.EqualTo(new Seconds(60)));
+        }
+
+        [SetUp]
+        public void Setup()
+        {
+            _stopwatch = new Mock<IStopwatch>();
+
+            _missionClock = new MissionClock(_stopwatch.Object);
         }
     }
 }
