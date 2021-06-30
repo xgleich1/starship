@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Starship.Flight
 {
-    // Currently under development
     public sealed class FlightDependencies
     {
         public IMissionClock MissionClock { get; }

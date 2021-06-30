@@ -10,7 +10,6 @@ using static Vessel.Situations;
 
 namespace Starship
 {
-    // Currently under development
     public sealed class FlightComputer : PartModule
     {
         private readonly FlightCommander _flightCommander =
@@ -31,14 +30,14 @@ namespace Starship
                     return;
                 }
 
-                // What sensors can I sense in a real rocket?
-                // Position Sensor?
-                // Acceleration Sensor?
-                // Speed Sensor?
-                // Center Of MassSensor?
-                // Center Of Lift Sensor?
-                // Thrust Sensor?
-                // Mass Sensor?
+                // What can I sense in a real rocket?
+                // Position?
+                // Acceleration?
+                // Speed?
+                // Center Of Mass?
+                // Center Of Lift?
+                // Thrust?
+                // Mass?
                 // Thrust To Weight?
                 var sensorSuite = new SensorSuite(
                     new YawSensor(vessel),
