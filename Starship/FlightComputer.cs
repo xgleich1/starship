@@ -1,7 +1,7 @@
 ﻿using Starship.Control;
-using Starship.Control.MainEnginesAttitude;
-using Starship.Control.MainEnginesThrottle;
-using Starship.Control.RcsEnginesThrottle;
+using Starship.Control.Attitude;
+using Starship.Control.Throttle.Main;
+using Starship.Control.Throttle.Rcs;
 using Starship.Flight;
 using Starship.Sensor;
 using Starship.Sensor.Attitude;
@@ -35,11 +35,9 @@ namespace Starship
                 // Position Sensor?
                 // Acceleration Sensor?
                 // Speed Sensor?
-                // Throttle Sensor?
                 // Center Of MassSensor?
                 // Center Of Lift Sensor?
                 // Thrust Sensor?
-                // Gimbal Sensor?
                 // Mass Sensor?
                 // Thrust To Weight?
                 var sensorSuite = new SensorSuite(

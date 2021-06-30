@@ -1,54 +1,54 @@
 using Moq;
 using NUnit.Framework;
 using Starship.Control;
-using Starship.Control.MainEnginesAttitude;
-using Starship.Control.MainEnginesThrottle;
-using Starship.Control.RcsEnginesThrottle;
+using Starship.Control.Attitude;
+using Starship.Control.Throttle.Main;
+using Starship.Control.Throttle.Rcs;
 using Starship.Flight.Command;
 
 namespace StarshipUnitTests.Control
 {
-    public class ControlSuiteTest
+    public sealed class ControlSuiteTest
     {
         private Mock<IRcsEnginesThrottleControl> _rcsEnginesThrottleControl;
         private Mock<IMainEnginesThrottleControl> _mainEnginesThrottleControl;
         private Mock<IMainEnginesAttitudeControl> _mainEnginesAttitudeControl;
         private ControlSuite _controlSuite;
 
-        private IFlightCommand _flightCommand;
+        private ICommandSuite _commandSuite;
 
 
         [Test]
         public void Should_control_the_throttle_of_the_rcs_engines()
         {
             // WHEN
-            _controlSuite.ExertControl(_flightCommand);
+            _controlSuite.ExertControl(_commandSuite);
 
             // THEN
             _rcsEnginesThrottleControl.Verify(mock =>
-                mock.ControlRcsEnginesThrottle(_flightCommand));
+                mock.ControlRcsEnginesThrottle(_commandSuite));
         }
 
         [Test]
         public void Should_control_the_throttle_of_the_main_engines()
         {
             // WHEN
-            _controlSuite.ExertControl(_flightCommand);
+            _controlSuite.ExertControl(_commandSuite);
 
             // THEN
             _mainEnginesThrottleControl.Verify(mock =>
-                mock.ControlMainEnginesThrottle(_flightCommand));
+                mock.ControlMainEnginesThrottle(_commandSuite));
         }
 
         [Test]
         public void Should_control_the_attitude_of_the_main_engines()
         {
             // WHEN
-            _controlSuite.ExertControl(_flightCommand);
+            _controlSuite.ExertControl(_commandSuite);
 
             // THEN
             _mainEnginesAttitudeControl.Verify(mock =>
-                mock.ControlMainEnginesAttitude(_flightCommand));
+                mock.ControlMainEnginesAttitude(_commandSuite));
         }
 
         [SetUp]
@@ -68,8 +68,8 @@ namespace StarshipUnitTests.Control
                 _mainEnginesThrottleControl.Object,
                 _mainEnginesAttitudeControl.Object);
 
-            _flightCommand =
-                new Mock<IFlightCommand>().Object;
+            _commandSuite =
+                new Mock<ICommandSuite>().Object;
         }
     }
 }

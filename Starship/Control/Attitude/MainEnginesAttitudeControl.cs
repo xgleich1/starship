@@ -1,6 +1,6 @@
 using Starship.Flight.Command;
 
-namespace Starship.Control.MainEnginesAttitude
+namespace Starship.Control.Attitude
 {
     public sealed class MainEnginesAttitudeControl : IMainEnginesAttitudeControl
     {
@@ -12,16 +12,16 @@ namespace Starship.Control.MainEnginesAttitude
             _flightControlState = vessel.ctrlState;
         }
 
-        public void ControlMainEnginesAttitude(IFlightCommand flightCommand)
+        public void ControlMainEnginesAttitude(ICommandSuite commandSuite)
         {
             _flightControlState.yaw =
-                flightCommand.MainEngineAttitudeYaw.AttitudeInput;
+                commandSuite.MainEngineAttitudeYawCommand.YawInput;
 
             _flightControlState.roll =
-                flightCommand.MainEngineAttitudeRoll.AttitudeInput;
+                commandSuite.MainEngineAttitudeRollCommand.RollInput;
 
             _flightControlState.pitch =
-                flightCommand.MainEngineAttitudePitch.AttitudeInput;
+                commandSuite.MainEngineAttitudePitchCommand.PitchInput;
         }
     }
 }

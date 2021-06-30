@@ -24,10 +24,10 @@ namespace StarshipUnitTests.Telemetry
                 .Returns(new Seconds(1));
 
             // WHEN
-            _telemetryEmitter.EmitTelemetry(new TelemetryMessage("Yaw:10"));
+            _telemetryEmitter.EmitTelemetry(new TelemetryMessage("Yaw:0"));
 
             // THEN
-            _unityLogger.Verify(mock => mock.Log(LogType.Log, "1:Yaw:10"));
+            _unityLogger.Verify(mock => mock.Log(LogType.Log, "1:Yaw:0"));
         }
 
         [Test]
@@ -42,18 +42,18 @@ namespace StarshipUnitTests.Telemetry
             _telemetryProvider.Setup(mock => mock.ProvideTelemetry())
                 .Returns(new List<TelemetryMessage>
                 {
-                    new TelemetryMessage("Yaw:10"),
-                    new TelemetryMessage("Roll:15"),
-                    new TelemetryMessage("Pitch:20")
+                    new TelemetryMessage("Yaw:0"),
+                    new TelemetryMessage("Roll:0"),
+                    new TelemetryMessage("Pitch:0")
                 });
 
             // WHEN
             _telemetryEmitter.EmitTelemetry(_telemetryProvider.Object);
 
             // THEN
-            _unityLogger.Verify(mock => mock.Log(LogType.Log, "1:Yaw:10"));
-            _unityLogger.Verify(mock => mock.Log(LogType.Log, "2:Roll:15"));
-            _unityLogger.Verify(mock => mock.Log(LogType.Log, "3:Pitch:20"));
+            _unityLogger.Verify(mock => mock.Log(LogType.Log, "1:Yaw:0"));
+            _unityLogger.Verify(mock => mock.Log(LogType.Log, "2:Roll:0"));
+            _unityLogger.Verify(mock => mock.Log(LogType.Log, "3:Pitch:0"));
         }
 
         [SetUp]

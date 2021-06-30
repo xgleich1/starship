@@ -1,6 +1,6 @@
 using Starship.Flight.Command;
 
-namespace Starship.Control.RcsEnginesThrottle
+namespace Starship.Control.Throttle.Rcs
 {
     public sealed class RcsEnginesThrottleControl : IRcsEnginesThrottleControl
     {
@@ -23,19 +23,19 @@ namespace Starship.Control.RcsEnginesThrottle
             EnableIndependentEngineControl();
         }
 
-        public void ControlRcsEnginesThrottle(IFlightCommand flightCommand)
+        public void ControlRcsEnginesThrottle(ICommandSuite commandSuite)
         {
             _topLeftRcsEngine.currentThrottle =
-                flightCommand.TopLeftRcsEngineThrottle.ThrottlePercent;
+                commandSuite.TopLeftRcsEngineThrottleCommand.ThrottlePercent;
 
             _topRightRcsEngine.currentThrottle =
-                flightCommand.TopRightRcsEngineThrottle.ThrottlePercent;
+                commandSuite.TopRightRcsEngineThrottleCommand.ThrottlePercent;
 
             _bottomLeftRcsEngine.currentThrottle =
-                flightCommand.BottomLeftRcsEngineThrottle.ThrottlePercent;
+                commandSuite.BottomLeftRcsEngineThrottleCommand.ThrottlePercent;
 
             _bottomRightRcsEngine.currentThrottle =
-                flightCommand.BottomRightRcsEngineThrottle.ThrottlePercent;
+                commandSuite.BottomRightRcsEngineThrottleCommand.ThrottlePercent;
         }
 
         private void EnableIndependentEngineControl()

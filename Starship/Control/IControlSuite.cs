@@ -4,6 +4,6 @@ namespace Starship.Control
 {
     public interface IControlSuite
     {
-        void ExertControl(IFlightCommand flightCommand);
+        void ExertControl(ICommandSuite commandSuite);
     }
 }

@@ -14,18 +14,18 @@ namespace StarshipUnitTests.Sensor
         {
             // GIVEN
             var sensorSuite = new SensorSuite(
-                new YawSensor(25),
-                new RollSensor(50),
-                new PitchSensor(75),
-                new HeightSensor(100));
+                new YawSensor(0),
+                new RollSensor(0),
+                new PitchSensor(0),
+                new HeightSensor(0));
 
             // THEN
             var expectedTelemetry = new List<TelemetryMessage>
             {
-                new TelemetryMessage("Yaw:25"),
-                new TelemetryMessage("Roll:50"),
-                new TelemetryMessage("Pitch:75"),
-                new TelemetryMessage("Height:100")
+                new TelemetryMessage("Yaw:0"),
+                new TelemetryMessage("Roll:0"),
+                new TelemetryMessage("Pitch:0"),
+                new TelemetryMessage("Height:0")
             };
 
             Assert.That(sensorSuite.ProvideTelemetry(),

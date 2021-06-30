@@ -1,6 +1,6 @@
 using Starship.Flight.Command;
 
-namespace Starship.Control.MainEnginesThrottle
+namespace Starship.Control.Throttle.Main
 {
     public sealed class MainEnginesThrottleControl : IMainEnginesThrottleControl
     {
@@ -21,16 +21,16 @@ namespace Starship.Control.MainEnginesThrottle
             EnableIndependentEngineControl();
         }
 
-        public void ControlMainEnginesThrottle(IFlightCommand flightCommand)
+        public void ControlMainEnginesThrottle(ICommandSuite commandSuite)
         {
             _topMainEngine.currentThrottle =
-                flightCommand.TopMainEngineThrottle.ThrottlePercent;
+                commandSuite.TopMainEngineThrottleCommand.ThrottlePercent;
 
             _bottomLeftMainEngine.currentThrottle =
-                flightCommand.BottomLeftMainEngineThrottle.ThrottlePercent;
+                commandSuite.BottomLeftMainEngineThrottleCommand.ThrottlePercent;
 
             _bottomRightMainEngine.currentThrottle =
-                flightCommand.BottomRightMainEngineThrottle.ThrottlePercent;
+                commandSuite.BottomRightMainEngineThrottleCommand.ThrottlePercent;
         }
 
         private void EnableIndependentEngineControl()

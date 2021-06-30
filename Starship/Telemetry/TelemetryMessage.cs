@@ -9,5 +9,7 @@ namespace Starship.Telemetry
         {
             Message = message;
         }
+
+        public override string ToString() => Message;
     }
 }

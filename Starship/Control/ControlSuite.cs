@@ -1,6 +1,6 @@
-using Starship.Control.MainEnginesAttitude;
-using Starship.Control.MainEnginesThrottle;
-using Starship.Control.RcsEnginesThrottle;
+using Starship.Control.Attitude;
+using Starship.Control.Throttle.Main;
+using Starship.Control.Throttle.Rcs;
 using Starship.Flight.Command;
 
 namespace Starship.Control
@@ -22,12 +22,11 @@ namespace Starship.Control
             _mainEnginesAttitudeControl = mainEnginesAttitudeControl;
         }
 
-        // Test
-        public void ExertControl(IFlightCommand flightCommand)
+        public void ExertControl(ICommandSuite commandSuite)
         {
-            _rcsEnginesThrottleControl.ControlRcsEnginesThrottle(flightCommand);
-            _mainEnginesThrottleControl.ControlMainEnginesThrottle(flightCommand);
-            _mainEnginesAttitudeControl.ControlMainEnginesAttitude(flightCommand);
+            _rcsEnginesThrottleControl.ControlRcsEnginesThrottle(commandSuite);
+            _mainEnginesThrottleControl.ControlMainEnginesThrottle(commandSuite);
+            _mainEnginesAttitudeControl.ControlMainEnginesAttitude(commandSuite);
         }
     }
 }
