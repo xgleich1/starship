@@ -6,15 +6,15 @@ namespace Starship.Telemetry
     public sealed class TelemetryEmitter : ITelemetryEmitter
     {
         private readonly ILogger _unityLogger;
-        private readonly IMissionClock _missionClock;
+        private readonly IMissionTimer _missionTimer;
 
 
         public TelemetryEmitter(
             ILogger unityLogger,
-            IMissionClock missionClock)
+            IMissionTimer missionTimer)
         {
             _unityLogger = unityLogger;
-            _missionClock = missionClock;
+            _missionTimer = missionTimer;
         }
 
         public void EmitTelemetry(TelemetryMessage telemetryMessage) =>
@@ -29,6 +29,6 @@ namespace Starship.Telemetry
         }
 
         private string CreateLogMessage(TelemetryMessage telemetryMessage) =>
-            $"{_missionClock.GetElapsedSecondsInMission().Quantity}:{telemetryMessage.Message}";
+            $"{_missionTimer.GetElapsedSecondsInMission().Quantity}:{telemetryMessage.Message}";
     }
 }

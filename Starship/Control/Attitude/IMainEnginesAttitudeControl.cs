@@ -1,9 +1,12 @@
-using Starship.Flight.Command;
+using Starship.Flight.Command.Attitude;
 
 namespace Starship.Control.Attitude
 {
     public interface IMainEnginesAttitudeControl
     {
-        void ControlMainEnginesAttitude(ICommandSuite commandSuite);
+        void ControlMainEnginesAttitude(
+            MainEngineAttitudeYawCommand mainEngineAttitudeYawCommand,
+            MainEngineAttitudeRollCommand mainEngineAttitudeRollCommand,
+            MainEngineAttitudePitchCommand mainEngineAttitudePitchCommand);
     }
 }

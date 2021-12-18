@@ -3,15 +3,13 @@ using Starship.Telemetry;
 
 namespace Starship.Flight.Command.Throttle.Rcs
 {
-    public sealed class BottomRightRcsEngineThrottleCommand : ITelemetryProvider
+    public readonly struct BottomRightRcsEngineThrottleCommand : ITelemetryProvider
     {
         public float ThrottlePercent { get; }
 
 
-        public BottomRightRcsEngineThrottleCommand(float throttlePercent)
-        {
+        public BottomRightRcsEngineThrottleCommand(float throttlePercent) =>
             ThrottlePercent = throttlePercent;
-        }
 
         public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>
         {

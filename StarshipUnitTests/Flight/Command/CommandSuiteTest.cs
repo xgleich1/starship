@@ -15,16 +15,16 @@ namespace StarshipUnitTests.Flight.Command
         {
             // GIVEN
             var commandSuite = new CommandSuite(
-                new TopLeftRcsEngineThrottleCommand(0.0f),
-                new TopRightRcsEngineThrottleCommand(0.0f),
-                new BottomLeftRcsEngineThrottleCommand(0.0f),
-                new BottomRightRcsEngineThrottleCommand(0.0f),
-                new TopMainEngineThrottleCommand(0.0f),
-                new BottomLeftMainEngineThrottleCommand(0.0f),
-                new BottomRightMainEngineThrottleCommand(0.0f),
-                new MainEngineAttitudeYawCommand(0.0f),
-                new MainEngineAttitudeRollCommand(0.0f),
-                new MainEngineAttitudePitchCommand(0.0f));
+                new TopLeftRcsEngineThrottleCommand(0.0F),
+                new TopRightRcsEngineThrottleCommand(0.0F),
+                new BottomLeftRcsEngineThrottleCommand(0.0F),
+                new BottomRightRcsEngineThrottleCommand(0.0F),
+                new TopMainEngineThrottleCommand(0.0F),
+                new BottomLeftMainEngineThrottleCommand(0.0F),
+                new BottomRightMainEngineThrottleCommand(0.0F),
+                new MainEngineAttitudeYawCommand(0.0F),
+                new MainEngineAttitudeRollCommand(0.0F),
+                new MainEngineAttitudePitchCommand(0.0F));
 
             // THEN
             var expectedTelemetry = new List<TelemetryMessage>

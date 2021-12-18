@@ -24,9 +24,21 @@ namespace Starship.Control
 
         public void ExertControl(ICommandSuite commandSuite)
         {
-            _rcsEnginesThrottleControl.ControlRcsEnginesThrottle(commandSuite);
-            _mainEnginesThrottleControl.ControlMainEnginesThrottle(commandSuite);
-            _mainEnginesAttitudeControl.ControlMainEnginesAttitude(commandSuite);
+            _rcsEnginesThrottleControl.ControlRcsEnginesThrottle(
+                commandSuite.TopLeftRcsEngineThrottleCommand,
+                commandSuite.TopRightRcsEngineThrottleCommand,
+                commandSuite.BottomLeftRcsEngineThrottleCommand,
+                commandSuite.BottomRightRcsEngineThrottleCommand);
+
+            _mainEnginesThrottleControl.ControlMainEnginesThrottle(
+                commandSuite.TopMainEngineThrottleCommand,
+                commandSuite.BottomLeftMainEngineThrottleCommand,
+                commandSuite.BottomRightMainEngineThrottleCommand);
+
+            _mainEnginesAttitudeControl.ControlMainEnginesAttitude(
+                commandSuite.MainEngineAttitudeYawCommand,
+                commandSuite.MainEngineAttitudeRollCommand,
+                commandSuite.MainEngineAttitudePitchCommand);
         }
     }
 }

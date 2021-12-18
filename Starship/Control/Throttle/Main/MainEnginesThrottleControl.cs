@@ -1,15 +1,15 @@
-using Starship.Flight.Command;
+using Starship.Flight.Command.Throttle.Main;
 
 namespace Starship.Control.Throttle.Main
 {
     public sealed class MainEnginesThrottleControl : IMainEnginesThrottleControl
     {
-        private readonly ModuleEngines _topMainEngine;
-        private readonly ModuleEngines _bottomLeftMainEngine;
-        private readonly ModuleEngines _bottomRightMainEngine;
+        private ModuleEngines _topMainEngine;
+        private ModuleEngines _bottomLeftMainEngine;
+        private ModuleEngines _bottomRightMainEngine;
 
 
-        public MainEnginesThrottleControl(Vessel vessel)
+        public void Bind(Vessel vessel)
         {
             var engines = vessel
                 .FindPartModulesImplementing<ModuleEngines>();
@@ -21,16 +21,14 @@ namespace Starship.Control.Throttle.Main
             EnableIndependentEngineControl();
         }
 
-        public void ControlMainEnginesThrottle(ICommandSuite commandSuite)
+        public void ControlMainEnginesThrottle(
+            TopMainEngineThrottleCommand topMainEngineThrottleCommand,
+            BottomLeftMainEngineThrottleCommand bottomLeftMainEngineThrottleCommand,
+            BottomRightMainEngineThrottleCommand bottomRightMainEngineThrottleCommand)
         {
-            _topMainEngine.currentThrottle =
-                commandSuite.TopMainEngineThrottleCommand.ThrottlePercent;
-
-            _bottomLeftMainEngine.currentThrottle =
-                commandSuite.BottomLeftMainEngineThrottleCommand.ThrottlePercent;
-
-            _bottomRightMainEngine.currentThrottle =
-                commandSuite.BottomRightMainEngineThrottleCommand.ThrottlePercent;
+            _topMainEngine.currentThrottle = topMainEngineThrottleCommand.ThrottlePercent;
+            _bottomLeftMainEngine.currentThrottle = bottomLeftMainEngineThrottleCommand.ThrottlePercent;
+            _bottomRightMainEngine.currentThrottle = bottomRightMainEngineThrottleCommand.ThrottlePercent;
         }
 
         private void EnableIndependentEngineControl()

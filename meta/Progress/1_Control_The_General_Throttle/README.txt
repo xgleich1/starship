@@ -7,4 +7,4 @@ as throttling up in the game using the related hotkey.
 
 There was no attitude control yet, which meant RUD at the end.
 
-RUD = Rapid Unscheduled Disassbembly
+RUD = Rapid Unscheduled Disassembly

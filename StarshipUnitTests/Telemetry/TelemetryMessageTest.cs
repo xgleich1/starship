@@ -25,15 +25,5 @@ namespace StarshipUnitTests.Telemetry
             // THEN
             Assert.That(telemetryMessageA, Is.EqualTo(telemetryMessageB));
         }
-
-        [Test]
-        public void Should_convert_a_telemetry_message_to_a_string()
-        {
-            // GIVEN
-            var telemetryMessage = new TelemetryMessage("Yaw:0");
-
-            // THEN
-            Assert.That(telemetryMessage.ToString(), Is.EqualTo("Yaw:0"));
-        }
     }
 }

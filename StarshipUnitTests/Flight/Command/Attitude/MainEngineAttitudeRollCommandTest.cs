@@ -11,17 +11,17 @@ namespace StarshipUnitTests.Flight.Command.Attitude
         public void Should_expose_the_commanded_roll_input()
         {
             // GIVEN
-            var rollCommand = new MainEngineAttitudeRollCommand(0.5f);
+            var rollCommand = new MainEngineAttitudeRollCommand(0.5F);
 
             // THEN
-            Assert.That(rollCommand.RollInput, Is.EqualTo(0.5f));
+            Assert.That(rollCommand.RollInput, Is.EqualTo(0.5F));
         }
 
         [Test]
         public void Should_provide_telemetry_containing_the_roll_input()
         {
             // GIVEN
-            var rollCommand = new MainEngineAttitudeRollCommand(0.5f);
+            var rollCommand = new MainEngineAttitudeRollCommand(0.5F);
 
             // THEN
             var expectedTelemetry = new List<TelemetryMessage>
@@ -30,6 +30,17 @@ namespace StarshipUnitTests.Flight.Command.Attitude
             };
 
             Assert.That(rollCommand.ProvideTelemetry(), Is.EqualTo(expectedTelemetry));
+        }
+
+        [Test]
+        public void Should_compare_two_equal_main_engine_attitude_roll_commands()
+        {
+            // GIVEN
+            var rollCommandA = new MainEngineAttitudeRollCommand(0.5F);
+            var rollCommandB = new MainEngineAttitudeRollCommand(0.5F);
+
+            // THEN
+            Assert.That(rollCommandA, Is.EqualTo(rollCommandB));
         }
     }
 }

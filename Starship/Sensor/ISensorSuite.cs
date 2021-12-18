@@ -1,14 +1,16 @@
-using Starship.Sensor.Attitude;
-using Starship.Sensor.Position;
+using Starship.Sensor.Attitude.Pitch;
+using Starship.Sensor.Attitude.Roll;
+using Starship.Sensor.Attitude.Yaw;
+using Starship.Sensor.Position.Height;
 using Starship.Telemetry;
 
 namespace Starship.Sensor
 {
     public interface ISensorSuite : ITelemetryProvider
     {
-        YawSensor YawSensor { get; }
-        RollSensor RollSensor { get; }
-        PitchSensor PitchSensor { get; }
-        HeightSensor HeightSensor { get; }
+        IYawSensor YawSensor { get; }
+        IRollSensor RollSensor { get; }
+        IPitchSensor PitchSensor { get; }
+        IHeightSensor HeightSensor { get; }
     }
 }

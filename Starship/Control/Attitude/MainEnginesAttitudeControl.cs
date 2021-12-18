@@ -1,27 +1,25 @@
-using Starship.Flight.Command;
+using Starship.Flight.Command.Attitude;
 
 namespace Starship.Control.Attitude
 {
     public sealed class MainEnginesAttitudeControl : IMainEnginesAttitudeControl
     {
-        private readonly FlightCtrlState _flightControlState;
+        private FlightCtrlState _flightControlState;
 
 
-        public MainEnginesAttitudeControl(Vessel vessel)
+        public void Bind(Vessel vessel)
         {
             _flightControlState = vessel.ctrlState;
         }
 
-        public void ControlMainEnginesAttitude(ICommandSuite commandSuite)
+        public void ControlMainEnginesAttitude(
+            MainEngineAttitudeYawCommand mainEngineAttitudeYawCommand,
+            MainEngineAttitudeRollCommand mainEngineAttitudeRollCommand,
+            MainEngineAttitudePitchCommand mainEngineAttitudePitchCommand)
         {
-            _flightControlState.yaw =
-                commandSuite.MainEngineAttitudeYawCommand.YawInput;
-
-            _flightControlState.roll =
-                commandSuite.MainEngineAttitudeRollCommand.RollInput;
-
-            _flightControlState.pitch =
-                commandSuite.MainEngineAttitudePitchCommand.PitchInput;
+            _flightControlState.yaw = mainEngineAttitudeYawCommand.YawInput;
+            _flightControlState.roll = mainEngineAttitudeRollCommand.RollInput;
+            _flightControlState.pitch = mainEngineAttitudePitchCommand.PitchInput;
         }
     }
 }

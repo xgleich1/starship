@@ -1,16 +1,16 @@
-using Starship.Flight.Command;
+using Starship.Flight.Command.Throttle.Rcs;
 
 namespace Starship.Control.Throttle.Rcs
 {
     public sealed class RcsEnginesThrottleControl : IRcsEnginesThrottleControl
     {
-        private readonly ModuleEngines _topLeftRcsEngine;
-        private readonly ModuleEngines _topRightRcsEngine;
-        private readonly ModuleEngines _bottomLeftRcsEngine;
-        private readonly ModuleEngines _bottomRightRcsEngine;
+        private ModuleEngines _topLeftRcsEngine;
+        private ModuleEngines _topRightRcsEngine;
+        private ModuleEngines _bottomLeftRcsEngine;
+        private ModuleEngines _bottomRightRcsEngine;
 
 
-        public RcsEnginesThrottleControl(Vessel vessel)
+        public void Bind(Vessel vessel)
         {
             var engines = vessel
                 .FindPartModulesImplementing<ModuleEngines>();
@@ -23,19 +23,16 @@ namespace Starship.Control.Throttle.Rcs
             EnableIndependentEngineControl();
         }
 
-        public void ControlRcsEnginesThrottle(ICommandSuite commandSuite)
+        public void ControlRcsEnginesThrottle(
+            TopLeftRcsEngineThrottleCommand topLeftRcsEngineThrottleCommand,
+            TopRightRcsEngineThrottleCommand topRightRcsEngineThrottleCommand,
+            BottomLeftRcsEngineThrottleCommand bottomLeftRcsEngineThrottleCommand,
+            BottomRightRcsEngineThrottleCommand bottomRightRcsEngineThrottleCommand)
         {
-            _topLeftRcsEngine.currentThrottle =
-                commandSuite.TopLeftRcsEngineThrottleCommand.ThrottlePercent;
-
-            _topRightRcsEngine.currentThrottle =
-                commandSuite.TopRightRcsEngineThrottleCommand.ThrottlePercent;
-
-            _bottomLeftRcsEngine.currentThrottle =
-                commandSuite.BottomLeftRcsEngineThrottleCommand.ThrottlePercent;
-
-            _bottomRightRcsEngine.currentThrottle =
-                commandSuite.BottomRightRcsEngineThrottleCommand.ThrottlePercent;
+            _topLeftRcsEngine.currentThrottle = topLeftRcsEngineThrottleCommand.ThrottlePercent;
+            _topRightRcsEngine.currentThrottle = topRightRcsEngineThrottleCommand.ThrottlePercent;
+            _bottomLeftRcsEngine.currentThrottle = bottomLeftRcsEngineThrottleCommand.ThrottlePercent;
+            _bottomRightRcsEngine.currentThrottle = bottomRightRcsEngineThrottleCommand.ThrottlePercent;
         }
 
         private void EnableIndependentEngineControl()

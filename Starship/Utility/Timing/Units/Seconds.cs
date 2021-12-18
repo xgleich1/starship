@@ -5,9 +5,7 @@ namespace Starship.Utility.Timing.Units
         public long Quantity { get; }
 
 
-        public Seconds(long quantity)
-        {
+        public Seconds(long quantity) =>
             Quantity = quantity;
-        }
     }
 }

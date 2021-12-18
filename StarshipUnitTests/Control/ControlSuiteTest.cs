@@ -5,6 +5,9 @@ using Starship.Control.Attitude;
 using Starship.Control.Throttle.Main;
 using Starship.Control.Throttle.Rcs;
 using Starship.Flight.Command;
+using Starship.Flight.Command.Attitude;
+using Starship.Flight.Command.Throttle.Main;
+using Starship.Flight.Command.Throttle.Rcs;
 
 namespace StarshipUnitTests.Control
 {
@@ -15,41 +18,6 @@ namespace StarshipUnitTests.Control
         private Mock<IMainEnginesAttitudeControl> _mainEnginesAttitudeControl;
         private ControlSuite _controlSuite;
 
-        private ICommandSuite _commandSuite;
-
-
-        [Test]
-        public void Should_control_the_throttle_of_the_rcs_engines()
-        {
-            // WHEN
-            _controlSuite.ExertControl(_commandSuite);
-
-            // THEN
-            _rcsEnginesThrottleControl.Verify(mock =>
-                mock.ControlRcsEnginesThrottle(_commandSuite));
-        }
-
-        [Test]
-        public void Should_control_the_throttle_of_the_main_engines()
-        {
-            // WHEN
-            _controlSuite.ExertControl(_commandSuite);
-
-            // THEN
-            _mainEnginesThrottleControl.Verify(mock =>
-                mock.ControlMainEnginesThrottle(_commandSuite));
-        }
-
-        [Test]
-        public void Should_control_the_attitude_of_the_main_engines()
-        {
-            // WHEN
-            _controlSuite.ExertControl(_commandSuite);
-
-            // THEN
-            _mainEnginesAttitudeControl.Verify(mock =>
-                mock.ControlMainEnginesAttitude(_commandSuite));
-        }
 
         [SetUp]
         public void Setup()
@@ -67,9 +35,71 @@ namespace StarshipUnitTests.Control
                 _rcsEnginesThrottleControl.Object,
                 _mainEnginesThrottleControl.Object,
                 _mainEnginesAttitudeControl.Object);
-
-            _commandSuite =
-                new Mock<ICommandSuite>().Object;
         }
+
+        [Test]
+        public void Should_control_the_throttle_of_the_rcs_engines()
+        {
+            // GIVEN
+            var commandSuite = CreateCommandSuite();
+
+            // WHEN
+            _controlSuite.ExertControl(commandSuite);
+
+            // THEN
+            _rcsEnginesThrottleControl.Verify(mock =>
+                mock.ControlRcsEnginesThrottle(
+                    commandSuite.TopLeftRcsEngineThrottleCommand,
+                    commandSuite.TopRightRcsEngineThrottleCommand,
+                    commandSuite.BottomLeftRcsEngineThrottleCommand,
+                    commandSuite.BottomRightRcsEngineThrottleCommand));
+        }
+
+        [Test]
+        public void Should_control_the_throttle_of_the_main_engines()
+        {
+            // GIVEN
+            var commandSuite = CreateCommandSuite();
+
+            // WHEN
+            _controlSuite.ExertControl(commandSuite);
+
+            // THEN
+            _mainEnginesThrottleControl.Verify(mock =>
+                mock.ControlMainEnginesThrottle(
+                    commandSuite.TopMainEngineThrottleCommand,
+                    commandSuite.BottomLeftMainEngineThrottleCommand,
+                    commandSuite.BottomRightMainEngineThrottleCommand));
+        }
+
+        [Test]
+        public void Should_control_the_attitude_of_the_main_engines()
+        {
+            // GIVEN
+            var commandSuite = CreateCommandSuite();
+
+            // WHEN
+            _controlSuite.ExertControl(commandSuite);
+
+            // THEN
+            _mainEnginesAttitudeControl.Verify(mock =>
+                mock.ControlMainEnginesAttitude(
+                    commandSuite.MainEngineAttitudeYawCommand,
+                    commandSuite.MainEngineAttitudeRollCommand,
+                    commandSuite.MainEngineAttitudePitchCommand));
+        }
+
+        private static CommandSuite CreateCommandSuite() =>
+            new CommandSuite(
+                new TopLeftRcsEngineThrottleCommand(0F),
+                new TopRightRcsEngineThrottleCommand(0F),
+                new BottomLeftRcsEngineThrottleCommand(0F),
+                new BottomRightRcsEngineThrottleCommand(0F),
+                new TopMainEngineThrottleCommand(0F),
+                new BottomLeftMainEngineThrottleCommand(0F),
+                new BottomRightMainEngineThrottleCommand(0F),
+                new MainEngineAttitudeYawCommand(0F),
+                new MainEngineAttitudeRollCommand(0F),
+                new MainEngineAttitudePitchCommand(0F));
     }
 }

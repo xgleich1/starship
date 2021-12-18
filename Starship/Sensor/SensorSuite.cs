@@ -1,23 +1,25 @@
 using System.Collections.Generic;
-using Starship.Sensor.Attitude;
-using Starship.Sensor.Position;
+using Starship.Sensor.Attitude.Pitch;
+using Starship.Sensor.Attitude.Roll;
+using Starship.Sensor.Attitude.Yaw;
+using Starship.Sensor.Position.Height;
 using Starship.Telemetry;
 
 namespace Starship.Sensor
 {
     public sealed class SensorSuite : ISensorSuite
     {
-        public YawSensor YawSensor { get; }
-        public RollSensor RollSensor { get; }
-        public PitchSensor PitchSensor { get; }
-        public HeightSensor HeightSensor { get; }
+        public IYawSensor YawSensor { get; }
+        public IRollSensor RollSensor { get; }
+        public IPitchSensor PitchSensor { get; }
+        public IHeightSensor HeightSensor { get; }
 
 
         public SensorSuite(
-            YawSensor yawSensor,
-            RollSensor rollSensor,
-            PitchSensor pitchSensor,
-            HeightSensor heightSensor)
+            IYawSensor yawSensor,
+            IRollSensor rollSensor,
+            IPitchSensor pitchSensor,
+            IHeightSensor heightSensor)
         {
             YawSensor = yawSensor;
             RollSensor = rollSensor;

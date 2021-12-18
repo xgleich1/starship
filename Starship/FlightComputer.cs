@@ -3,17 +3,35 @@ using Starship.Control.Attitude;
 using Starship.Control.Throttle.Main;
 using Starship.Control.Throttle.Rcs;
 using Starship.Flight;
+using Starship.Mission;
 using Starship.Sensor;
-using Starship.Sensor.Attitude;
-using Starship.Sensor.Position;
+using Starship.Sensor.Attitude.Pitch;
+using Starship.Sensor.Attitude.Roll;
+using Starship.Sensor.Attitude.Yaw;
+using Starship.Sensor.Position.Height;
+using Starship.Telemetry;
+using Starship.Utility.Timing;
+using static UnityEngine.Debug;
 using static Vessel.Situations;
 
 namespace Starship
 {
+    // Currently under development
     public sealed class FlightComputer : PartModule
     {
-        private readonly FlightCommander _flightCommander =
-            new FlightCommander(new FlightDependencies());
+        private readonly YawSensor _yawSensor = new YawSensor();
+        private readonly RollSensor _rollSensor = new RollSensor();
+        private readonly PitchSensor _pitchSensor = new PitchSensor();
+        private readonly HeightSensor _heightSensor = new HeightSensor();
+
+        private readonly RcsEnginesThrottleControl _rcsEnginesThrottleControl =
+            new RcsEnginesThrottleControl();
+        private readonly MainEnginesThrottleControl _mainEnginesThrottleControl =
+            new MainEnginesThrottleControl();
+        private readonly MainEnginesAttitudeControl _mainEnginesAttitudeControl =
+            new MainEnginesAttitudeControl();
+
+        private readonly FlightCommander _flightCommander = BuildFlightCommander();
 
 
         public override void OnStart(StartState state)
@@ -23,7 +41,7 @@ namespace Starship
                 return;
             }
 
-            vessel.OnFlyByWire += flightControlState =>
+            vessel.OnFlyByWire += delegate
             {
                 if (vessel.situation == PRELAUNCH)
                 {
@@ -39,21 +57,45 @@ namespace Starship
                 // Thrust?
                 // Mass?
                 // Thrust To Weight?
+                _yawSensor.Update(vessel);
+                _rollSensor.Update(vessel);
+                _pitchSensor.Update(vessel);
+                _heightSensor.Update(vessel);
+
                 var sensorSuite = new SensorSuite(
-                    new YawSensor(vessel),
-                    new RollSensor(vessel),
-                    new PitchSensor(vessel),
-                    new HeightSensor(vessel));
+                    _yawSensor,
+                    _rollSensor,
+                    _pitchSensor,
+                    _heightSensor);
 
                 // What can I control in a real rocket?
+                // Flaps?
+                _rcsEnginesThrottleControl.Bind(vessel);
+                _mainEnginesThrottleControl.Bind(vessel);
+                _mainEnginesAttitudeControl.Bind(vessel);
+
                 var controlSuite = new ControlSuite(
-                    new RcsEnginesThrottleControl(vessel),
-                    new MainEnginesThrottleControl(vessel),
-                    new MainEnginesAttitudeControl(vessel));
+                    _rcsEnginesThrottleControl,
+                    _mainEnginesThrottleControl,
+                    _mainEnginesAttitudeControl);
 
                 _flightCommander
                     .CommandFlight(sensorSuite, controlSuite);
             };
+        }
+
+        private static FlightCommander BuildFlightCommander()
+        {
+            var missionTimer = new MissionTimer(
+                new Stopwatch());
+
+            var telemetryEmitter = new TelemetryEmitter(
+                unityLogger,
+                missionTimer);
+
+            return new FlightCommander(
+                missionTimer,
+                telemetryEmitter);
         }
     }
 }
