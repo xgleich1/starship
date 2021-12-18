@@ -39,13 +39,13 @@ namespace StarshipUnitTests.Flight.Stabilization
                 // currentAttitudeAngleInDegrees,
                 // desiredAttitudeAngleInDegrees,
                 // expectedCalculatedAttitudeInput
-                new TestCaseData(75F, 90F, 0.150000006F),
-                new TestCaseData(80F, 90F, 0.100000001F),
-                new TestCaseData(85F, 90F, 0.0500000007F),
+                new TestCaseData(75F, 90F, 0.149999991F),
+                new TestCaseData(80F, 90F, 0.099999994F),
+                new TestCaseData(85F, 90F, 0.049999997F),
                 new TestCaseData(90F, 90F, 0.0F),
-                new TestCaseData(95F, 90F, -0.0500000007F),
-                new TestCaseData(100F, 90F, -0.100000001F),
-                new TestCaseData(105F, 90F, -0.150000006F)
+                new TestCaseData(95F, 90F, -0.049999997F),
+                new TestCaseData(100F, 90F, -0.099999994F),
+                new TestCaseData(105F, 90F, -0.149999991F)
             };
     }
 }
