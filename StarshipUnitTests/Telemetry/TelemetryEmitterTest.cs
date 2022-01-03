@@ -33,7 +33,7 @@ namespace StarshipUnitTests.Telemetry
         public void Should_emit_a_single_telemetry_message()
         {
             // GIVEN
-            _missionTimer.Setup(mock => mock.GetElapsedSecondsInMission())
+            _missionTimer.Setup(mock => mock.GetElapsedSeconds())
                 .Returns(new Seconds(1));
 
             // WHEN
@@ -47,7 +47,7 @@ namespace StarshipUnitTests.Telemetry
         public void Should_emit_the_provided_telemetry_messages()
         {
             // GIVEN
-            _missionTimer.SetupSequence(mock => mock.GetElapsedSecondsInMission())
+            _missionTimer.SetupSequence(mock => mock.GetElapsedSeconds())
                 .Returns(new Seconds(1))
                 .Returns(new Seconds(2))
                 .Returns(new Seconds(3));

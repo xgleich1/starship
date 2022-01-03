@@ -2,6 +2,8 @@ namespace Starship.Utility.Timing
 {
     public sealed class Stopwatch : IStopwatch
     {
+        public bool IsRunning => _stopwatch.IsRunning;
+
         private readonly System.Diagnostics.Stopwatch _stopwatch =
             new System.Diagnostics.Stopwatch();
 

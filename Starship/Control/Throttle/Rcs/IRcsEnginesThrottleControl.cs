@@ -4,10 +4,10 @@ namespace Starship.Control.Throttle.Rcs
 {
     public interface IRcsEnginesThrottleControl
     {
-        void ControlRcsEnginesThrottle(
-            TopLeftRcsEngineThrottleCommand topLeftRcsEngineThrottleCommand,
-            TopRightRcsEngineThrottleCommand topRightRcsEngineThrottleCommand,
-            BottomLeftRcsEngineThrottleCommand bottomLeftRcsEngineThrottleCommand,
-            BottomRightRcsEngineThrottleCommand bottomRightRcsEngineThrottleCommand);
+        void ThrottleRcsEngines(
+            ThrottleTopLeftRcsEngineCommand throttleTopLeftRcsEngineCommand,
+            ThrottleTopRightRcsEngineCommand throttleTopRightRcsEngineCommand,
+            ThrottleBottomLeftRcsEngineCommand throttleBottomLeftRcsEngineCommand,
+            ThrottleBottomRightRcsEngineCommand throttleBottomRightRcsEngineCommand);
     }
 }

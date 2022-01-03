@@ -29,6 +29,6 @@ namespace Starship.Telemetry
         }
 
         private string CreateLogMessage(TelemetryMessage telemetryMessage) =>
-            $"{_missionTimer.GetElapsedSecondsInMission().Quantity}:{telemetryMessage.Message}";
+            $"{_missionTimer.GetElapsedSeconds().Quantity}:{telemetryMessage.Message}";
     }
 }

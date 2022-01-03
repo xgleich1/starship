@@ -23,16 +23,16 @@ namespace Starship.Control.Throttle.Rcs
             EnableIndependentEngineControl();
         }
 
-        public void ControlRcsEnginesThrottle(
-            TopLeftRcsEngineThrottleCommand topLeftRcsEngineThrottleCommand,
-            TopRightRcsEngineThrottleCommand topRightRcsEngineThrottleCommand,
-            BottomLeftRcsEngineThrottleCommand bottomLeftRcsEngineThrottleCommand,
-            BottomRightRcsEngineThrottleCommand bottomRightRcsEngineThrottleCommand)
+        public void ThrottleRcsEngines(
+            ThrottleTopLeftRcsEngineCommand throttleTopLeftRcsEngineCommand,
+            ThrottleTopRightRcsEngineCommand throttleTopRightRcsEngineCommand,
+            ThrottleBottomLeftRcsEngineCommand throttleBottomLeftRcsEngineCommand,
+            ThrottleBottomRightRcsEngineCommand throttleBottomRightRcsEngineCommand)
         {
-            _topLeftRcsEngine.currentThrottle = topLeftRcsEngineThrottleCommand.ThrottlePercent;
-            _topRightRcsEngine.currentThrottle = topRightRcsEngineThrottleCommand.ThrottlePercent;
-            _bottomLeftRcsEngine.currentThrottle = bottomLeftRcsEngineThrottleCommand.ThrottlePercent;
-            _bottomRightRcsEngine.currentThrottle = bottomRightRcsEngineThrottleCommand.ThrottlePercent;
+            _topLeftRcsEngine.currentThrottle = throttleTopLeftRcsEngineCommand.ThrottlePercent;
+            _topRightRcsEngine.currentThrottle = throttleTopRightRcsEngineCommand.ThrottlePercent;
+            _bottomLeftRcsEngine.currentThrottle = throttleBottomLeftRcsEngineCommand.ThrottlePercent;
+            _bottomRightRcsEngine.currentThrottle = throttleBottomRightRcsEngineCommand.ThrottlePercent;
         }
 
         private void EnableIndependentEngineControl()

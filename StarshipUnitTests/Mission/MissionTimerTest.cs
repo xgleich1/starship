@@ -21,6 +21,26 @@ namespace StarshipUnitTests.Mission
         }
 
         [Test]
+        public void Should_indicate_when_the_mission_timer_is_running()
+        {
+            // GIVEN
+            _stopwatch.Setup(mock => mock.IsRunning).Returns(true);
+
+            // THEN
+            Assert.That(_missionTimer.IsRunning, Is.True);
+        }
+
+        [Test]
+        public void Should_indicate_when_the_mission_timer_is_not_running()
+        {
+            // GIVEN
+            _stopwatch.Setup(mock => mock.IsRunning).Returns(false);
+
+            // THEN
+            Assert.That(_missionTimer.IsRunning, Is.False);
+        }
+
+        [Test]
         public void Should_start_the_mission_time_with_zero_seconds()
         {
             // WHEN
@@ -38,7 +58,7 @@ namespace StarshipUnitTests.Mission
                 .Returns(60000L);
 
             // THEN
-            Assert.That(_missionTimer.GetElapsedSecondsInMission(),
+            Assert.That(_missionTimer.GetElapsedSeconds(),
                 Is.EqualTo(new Seconds(60L)));
         }
     }

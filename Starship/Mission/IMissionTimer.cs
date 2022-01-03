@@ -4,8 +4,11 @@ namespace Starship.Mission
 {
     public interface IMissionTimer
     {
+        bool IsRunning { get; }
+
+
         void StartWithZeroSeconds();
 
-        Seconds GetElapsedSecondsInMission();
+        Seconds GetElapsedSeconds();
     }
 }

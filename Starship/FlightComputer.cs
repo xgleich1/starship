@@ -1,5 +1,6 @@
 ﻿using Starship.Control;
-using Starship.Control.Attitude;
+using Starship.Control.Actuation.Engine;
+using Starship.Control.Actuation.Flap;
 using Starship.Control.Throttle.Main;
 using Starship.Control.Throttle.Rcs;
 using Starship.Flight;
@@ -28,10 +29,14 @@ namespace Starship
             new RcsEnginesThrottleControl();
         private readonly MainEnginesThrottleControl _mainEnginesThrottleControl =
             new MainEnginesThrottleControl();
-        private readonly MainEnginesAttitudeControl _mainEnginesAttitudeControl =
-            new MainEnginesAttitudeControl();
+        private readonly MainEnginesGimbalControl _mainEnginesGimbalControl =
+            new MainEnginesGimbalControl();
+        private readonly FlapsActuationControl _flapsActuationControl =
+            new FlapsActuationControl();
 
         private readonly FlightCommander _flightCommander = BuildFlightCommander();
+
+        private ScreenMessage _screenMessage;
 
 
         public override void OnStart(StartState state)
@@ -69,18 +74,27 @@ namespace Starship
                     _heightSensor);
 
                 // What can I control in a real rocket?
-                // Flaps?
                 _rcsEnginesThrottleControl.Bind(vessel);
                 _mainEnginesThrottleControl.Bind(vessel);
-                _mainEnginesAttitudeControl.Bind(vessel);
+                _mainEnginesGimbalControl.Bind(vessel);
+                _flapsActuationControl.Bind(vessel);
 
                 var controlSuite = new ControlSuite(
                     _rcsEnginesThrottleControl,
                     _mainEnginesThrottleControl,
-                    _mainEnginesAttitudeControl);
+                    _mainEnginesGimbalControl,
+                    _flapsActuationControl);
 
                 _flightCommander
                     .CommandFlight(sensorSuite, controlSuite);
+
+
+                ScreenMessages.RemoveMessage(_screenMessage);
+                _screenMessage = ScreenMessages.PostScreenMessage(
+                    $"pitch angle:{_pitchSensor.PitchAngleInDegrees}," +
+                    $"\nyaw angle:{_yawSensor.YawAngleInDegrees}," +
+                    $"\nroll angle:{_rollSensor.RollAngleInDegrees},",
+                    5, ScreenMessageStyle.UPPER_LEFT);
             };
         }
 

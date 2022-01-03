@@ -4,9 +4,9 @@ namespace Starship.Control.Throttle.Main
 {
     public interface IMainEnginesThrottleControl
     {
-        void ControlMainEnginesThrottle(
-            TopMainEngineThrottleCommand topMainEngineThrottleCommand,
-            BottomLeftMainEngineThrottleCommand bottomLeftMainEngineThrottleCommand,
-            BottomRightMainEngineThrottleCommand bottomRightMainEngineThrottleCommand);
+        void ThrottleMainEngines(
+            ThrottleTopMainEngineCommand throttleTopMainEngineCommand,
+            ThrottleBottomLeftMainEngineCommand throttleBottomLeftMainEngineCommand,
+            ThrottleBottomRightMainEngineCommand throttleBottomRightMainEngineCommand);
     }
 }

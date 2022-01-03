@@ -1,4 +1,5 @@
-using Starship.Control.Attitude;
+using Starship.Control.Actuation.Engine;
+using Starship.Control.Actuation.Flap;
 using Starship.Control.Throttle.Main;
 using Starship.Control.Throttle.Rcs;
 using Starship.Flight.Command;
@@ -9,36 +10,45 @@ namespace Starship.Control
     {
         private readonly IRcsEnginesThrottleControl _rcsEnginesThrottleControl;
         private readonly IMainEnginesThrottleControl _mainEnginesThrottleControl;
-        private readonly IMainEnginesAttitudeControl _mainEnginesAttitudeControl;
+        private readonly IMainEnginesGimbalControl _mainEnginesGimbalControl;
+        private readonly IFlapsActuationControl _flapsActuationControl;
 
 
         public ControlSuite(
             IRcsEnginesThrottleControl rcsEnginesThrottleControl,
             IMainEnginesThrottleControl mainEnginesThrottleControl,
-            IMainEnginesAttitudeControl mainEnginesAttitudeControl)
+            IMainEnginesGimbalControl mainEnginesGimbalControl,
+            IFlapsActuationControl flapsActuationControl)
         {
             _rcsEnginesThrottleControl = rcsEnginesThrottleControl;
             _mainEnginesThrottleControl = mainEnginesThrottleControl;
-            _mainEnginesAttitudeControl = mainEnginesAttitudeControl;
+            _mainEnginesGimbalControl = mainEnginesGimbalControl;
+            _flapsActuationControl = flapsActuationControl;
         }
 
         public void ExertControl(ICommandSuite commandSuite)
         {
-            _rcsEnginesThrottleControl.ControlRcsEnginesThrottle(
-                commandSuite.TopLeftRcsEngineThrottleCommand,
-                commandSuite.TopRightRcsEngineThrottleCommand,
-                commandSuite.BottomLeftRcsEngineThrottleCommand,
-                commandSuite.BottomRightRcsEngineThrottleCommand);
+            _rcsEnginesThrottleControl.ThrottleRcsEngines(
+                commandSuite.ThrottleTopLeftRcsEngineCommand,
+                commandSuite.ThrottleTopRightRcsEngineCommand,
+                commandSuite.ThrottleBottomLeftRcsEngineCommand,
+                commandSuite.ThrottleBottomRightRcsEngineCommand);
 
-            _mainEnginesThrottleControl.ControlMainEnginesThrottle(
-                commandSuite.TopMainEngineThrottleCommand,
-                commandSuite.BottomLeftMainEngineThrottleCommand,
-                commandSuite.BottomRightMainEngineThrottleCommand);
+            _mainEnginesThrottleControl.ThrottleMainEngines(
+                commandSuite.ThrottleTopMainEngineCommand,
+                commandSuite.ThrottleBottomLeftMainEngineCommand,
+                commandSuite.ThrottleBottomRightMainEngineCommand);
 
-            _mainEnginesAttitudeControl.ControlMainEnginesAttitude(
-                commandSuite.MainEngineAttitudeYawCommand,
-                commandSuite.MainEngineAttitudeRollCommand,
-                commandSuite.MainEngineAttitudePitchCommand);
+            _mainEnginesGimbalControl.GimbalMainEngines(
+                commandSuite.YawMainEnginesCommand,
+                commandSuite.RollMainEnginesCommand,
+                commandSuite.PitchMainEnginesCommand);
+
+            _flapsActuationControl.ActuateFlaps(
+                commandSuite.ActuateTopLeftFlapCommand,
+                commandSuite.ActuateTopRightFlapCommand,
+                commandSuite.ActuateBottomLeftFlapCommand,
+                commandSuite.ActuateBottomRightFlapCommand);
         }
     }
 }
