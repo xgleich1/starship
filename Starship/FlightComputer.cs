@@ -36,8 +36,6 @@ namespace Starship
 
         private readonly FlightCommander _flightCommander = BuildFlightCommander();
 
-        private ScreenMessage _screenMessage;
-
 
         public override void OnStart(StartState state)
         {
@@ -87,14 +85,6 @@ namespace Starship
 
                 _flightCommander
                     .CommandFlight(sensorSuite, controlSuite);
-
-
-                ScreenMessages.RemoveMessage(_screenMessage);
-                _screenMessage = ScreenMessages.PostScreenMessage(
-                    $"pitch angle:{_pitchSensor.PitchAngleInDegrees}," +
-                    $"\nyaw angle:{_yawSensor.YawAngleInDegrees}," +
-                    $"\nroll angle:{_rollSensor.RollAngleInDegrees},",
-                    5, ScreenMessageStyle.UPPER_LEFT);
             };
         }
 
