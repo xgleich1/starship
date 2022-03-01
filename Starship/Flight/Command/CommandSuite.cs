@@ -2,17 +2,12 @@ using System.Collections.Generic;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
 using Starship.Flight.Command.Throttle.Main;
-using Starship.Flight.Command.Throttle.Rcs;
 using Starship.Telemetry;
 
 namespace Starship.Flight.Command
 {
     public sealed class CommandSuite : ICommandSuite
     {
-        public ThrottleTopLeftRcsEngineCommand ThrottleTopLeftRcsEngineCommand { get; }
-        public ThrottleTopRightRcsEngineCommand ThrottleTopRightRcsEngineCommand { get; }
-        public ThrottleBottomLeftRcsEngineCommand ThrottleBottomLeftRcsEngineCommand { get; }
-        public ThrottleBottomRightRcsEngineCommand ThrottleBottomRightRcsEngineCommand { get; }
         public ThrottleTopMainEngineCommand ThrottleTopMainEngineCommand { get; }
         public ThrottleBottomLeftMainEngineCommand ThrottleBottomLeftMainEngineCommand { get; }
         public ThrottleBottomRightMainEngineCommand ThrottleBottomRightMainEngineCommand { get; }
@@ -26,10 +21,6 @@ namespace Starship.Flight.Command
 
 
         public CommandSuite(
-            ThrottleTopLeftRcsEngineCommand throttleTopLeftRcsEngineCommand,
-            ThrottleTopRightRcsEngineCommand throttleTopRightRcsEngineCommand,
-            ThrottleBottomLeftRcsEngineCommand throttleBottomLeftRcsEngineCommand,
-            ThrottleBottomRightRcsEngineCommand throttleBottomRightRcsEngineCommand,
             ThrottleTopMainEngineCommand throttleTopMainEngineCommand,
             ThrottleBottomLeftMainEngineCommand throttleBottomLeftMainEngineCommand,
             ThrottleBottomRightMainEngineCommand throttleBottomRightMainEngineCommand,
@@ -41,10 +32,6 @@ namespace Starship.Flight.Command
             ActuateBottomLeftFlapCommand actuateBottomLeftFlapCommand,
             ActuateBottomRightFlapCommand actuateBottomRightFlapCommand)
         {
-            ThrottleTopLeftRcsEngineCommand = throttleTopLeftRcsEngineCommand;
-            ThrottleTopRightRcsEngineCommand = throttleTopRightRcsEngineCommand;
-            ThrottleBottomLeftRcsEngineCommand = throttleBottomLeftRcsEngineCommand;
-            ThrottleBottomRightRcsEngineCommand = throttleBottomRightRcsEngineCommand;
             ThrottleTopMainEngineCommand = throttleTopMainEngineCommand;
             ThrottleBottomLeftMainEngineCommand = throttleBottomLeftMainEngineCommand;
             ThrottleBottomRightMainEngineCommand = throttleBottomRightMainEngineCommand;
@@ -61,10 +48,6 @@ namespace Starship.Flight.Command
         {
             var telemetry = new List<TelemetryMessage>();
 
-            telemetry.AddRange(ThrottleTopLeftRcsEngineCommand.ProvideTelemetry());
-            telemetry.AddRange(ThrottleTopRightRcsEngineCommand.ProvideTelemetry());
-            telemetry.AddRange(ThrottleBottomLeftRcsEngineCommand.ProvideTelemetry());
-            telemetry.AddRange(ThrottleBottomRightRcsEngineCommand.ProvideTelemetry());
             telemetry.AddRange(ThrottleTopMainEngineCommand.ProvideTelemetry());
             telemetry.AddRange(ThrottleBottomLeftMainEngineCommand.ProvideTelemetry());
             telemetry.AddRange(ThrottleBottomRightMainEngineCommand.ProvideTelemetry());

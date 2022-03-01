@@ -5,9 +5,7 @@ namespace Starship.Flight.Regulator
     public abstract class ProportionalRegulator
     {
         protected abstract float MinimumOutput { get; }
-
         protected abstract float MaximumOutput { get; }
-
         protected abstract float ProportionalGain { get; }
 
 

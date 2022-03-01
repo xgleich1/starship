@@ -2,14 +2,10 @@
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
 using Starship.Control.Throttle.Main;
-using Starship.Control.Throttle.Rcs;
 using Starship.Flight;
 using Starship.Mission;
 using Starship.Sensor;
-using Starship.Sensor.Attitude.Pitch;
-using Starship.Sensor.Attitude.Roll;
-using Starship.Sensor.Attitude.Yaw;
-using Starship.Sensor.Position.Height;
+using Starship.Sensor.Attitude;
 using Starship.Telemetry;
 using Starship.Utility.Timing;
 using static UnityEngine.Debug;
@@ -20,13 +16,8 @@ namespace Starship
     // Currently under development
     public sealed class FlightComputer : PartModule
     {
-        private readonly YawSensor _yawSensor = new YawSensor();
-        private readonly RollSensor _rollSensor = new RollSensor();
-        private readonly PitchSensor _pitchSensor = new PitchSensor();
-        private readonly HeightSensor _heightSensor = new HeightSensor();
+        private readonly AttitudeSensor _attitudeSensor = new AttitudeSensor();
 
-        private readonly RcsEnginesThrottleControl _rcsEnginesThrottleControl =
-            new RcsEnginesThrottleControl();
         private readonly MainEnginesThrottleControl _mainEnginesThrottleControl =
             new MainEnginesThrottleControl();
         private readonly MainEnginesGimbalControl _mainEnginesGimbalControl =
@@ -52,6 +43,7 @@ namespace Starship
                 }
 
                 // What can I sense in a real rocket?
+                // Height?
                 // Position?
                 // Acceleration?
                 // Speed?
@@ -60,25 +52,18 @@ namespace Starship
                 // Thrust?
                 // Mass?
                 // Thrust To Weight?
-                _yawSensor.Update(vessel);
-                _rollSensor.Update(vessel);
-                _pitchSensor.Update(vessel);
-                _heightSensor.Update(vessel);
+                _attitudeSensor.Update(vessel);
 
                 var sensorSuite = new SensorSuite(
-                    _yawSensor,
-                    _rollSensor,
-                    _pitchSensor,
-                    _heightSensor);
+                    _attitudeSensor);
 
                 // What can I control in a real rocket?
-                _rcsEnginesThrottleControl.Bind(vessel);
+                // Reaction Control System?
                 _mainEnginesThrottleControl.Bind(vessel);
                 _mainEnginesGimbalControl.Bind(vessel);
                 _flapsActuationControl.Bind(vessel);
 
                 var controlSuite = new ControlSuite(
-                    _rcsEnginesThrottleControl,
                     _mainEnginesThrottleControl,
                     _mainEnginesGimbalControl,
                     _flapsActuationControl);

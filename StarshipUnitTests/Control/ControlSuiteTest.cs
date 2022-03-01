@@ -4,18 +4,15 @@ using Starship.Control;
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
 using Starship.Control.Throttle.Main;
-using Starship.Control.Throttle.Rcs;
 using Starship.Flight.Command;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
 using Starship.Flight.Command.Throttle.Main;
-using Starship.Flight.Command.Throttle.Rcs;
 
 namespace StarshipUnitTests.Control
 {
     public sealed class ControlSuiteTest
     {
-        private Mock<IRcsEnginesThrottleControl> _rcsEnginesThrottleControl;
         private Mock<IMainEnginesThrottleControl> _mainEnginesThrottleControl;
         private Mock<IMainEnginesGimbalControl> _mainEnginesGimbalControl;
         private Mock<IFlapsActuationControl> _flapsActuationControl;
@@ -25,8 +22,6 @@ namespace StarshipUnitTests.Control
         [SetUp]
         public void Setup()
         {
-            _rcsEnginesThrottleControl =
-                new Mock<IRcsEnginesThrottleControl>();
             _mainEnginesThrottleControl =
                 new Mock<IMainEnginesThrottleControl>();
             _mainEnginesGimbalControl =
@@ -35,28 +30,9 @@ namespace StarshipUnitTests.Control
                 new Mock<IFlapsActuationControl>();
 
             _controlSuite = new ControlSuite(
-                _rcsEnginesThrottleControl.Object,
                 _mainEnginesThrottleControl.Object,
                 _mainEnginesGimbalControl.Object,
                 _flapsActuationControl.Object);
-        }
-
-        [Test]
-        public void Should_throttle_the_rcs_engines()
-        {
-            // GIVEN
-            var commandSuite = CreateCommandSuite();
-
-            // WHEN
-            _controlSuite.ExertControl(commandSuite);
-
-            // THEN
-            _rcsEnginesThrottleControl.Verify(mock =>
-                mock.ThrottleRcsEngines(
-                    commandSuite.ThrottleTopLeftRcsEngineCommand,
-                    commandSuite.ThrottleTopRightRcsEngineCommand,
-                    commandSuite.ThrottleBottomLeftRcsEngineCommand,
-                    commandSuite.ThrottleBottomRightRcsEngineCommand));
         }
 
         [Test]
@@ -113,10 +89,6 @@ namespace StarshipUnitTests.Control
 
         private static CommandSuite CreateCommandSuite() =>
             new CommandSuite(
-                new ThrottleTopLeftRcsEngineCommand(0.0F),
-                new ThrottleTopRightRcsEngineCommand(0.0F),
-                new ThrottleBottomLeftRcsEngineCommand(0.0F),
-                new ThrottleBottomRightRcsEngineCommand(0.0F),
                 new ThrottleTopMainEngineCommand(0.0F),
                 new ThrottleBottomLeftMainEngineCommand(0.0F),
                 new ThrottleBottomRightMainEngineCommand(0.0F),

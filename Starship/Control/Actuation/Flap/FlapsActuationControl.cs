@@ -18,8 +18,8 @@ namespace Starship.Control.Actuation.Flap
 
             _topLeftFlap = flaps[0];
             _topRightFlap = flaps[1];
-            _bottomLeftFlap = flaps[3];
-            _bottomRightFlap = flaps[2];
+            _bottomLeftFlap = flaps[2];
+            _bottomRightFlap = flaps[3];
         }
 
         public void ActuateFlaps(

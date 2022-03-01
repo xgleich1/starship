@@ -14,9 +14,9 @@ namespace Starship.Control.Throttle.Main
             var engines = vessel
                 .FindPartModulesImplementing<ModuleEngines>();
 
-            _topMainEngine = engines[4];
-            _bottomLeftMainEngine = engines[5];
-            _bottomRightMainEngine = engines[6];
+            _topMainEngine = engines[0];
+            _bottomLeftMainEngine = engines[1];
+            _bottomRightMainEngine = engines[2];
 
             EnableIndependentEngineControl();
         }

@@ -2,7 +2,6 @@ using Starship.Flight.Command;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
 using Starship.Flight.Command.Throttle.Main;
-using Starship.Flight.Command.Throttle.Rcs;
 using Starship.Sensor;
 using Starship.Utility.Timing.Units;
 
@@ -11,12 +10,9 @@ namespace Starship.Flight.Segment.Ascent
     // Currently under development
     public sealed class AscentFlightCommander : FlightSegmentCommander
     {
-        private readonly AscentAttitudeRegulator _yawRegulator =
-            new AscentAttitudeRegulator();
-        private readonly AscentAttitudeRegulator _rollRegulator =
-            new AscentAttitudeRegulator();
-        private readonly AscentAttitudeRegulator _pitchRegulator =
-            new AscentAttitudeRegulator();
+        private readonly AscentAttitudeRegulator _yawRegulator = new AscentAttitudeRegulator();
+        private readonly AscentAttitudeRegulator _rollRegulator = new AscentAttitudeRegulator();
+        private readonly AscentAttitudeRegulator _pitchRegulator = new AscentAttitudeRegulator();
 
 
         public AscentFlightCommander() : base(new Seconds(0L))
@@ -25,13 +21,13 @@ namespace Starship.Flight.Segment.Ascent
 
         public override ICommandSuite CommandFlight(ISensorSuite sensorSuite)
         {
-            var currentYawAngleInDegrees = sensorSuite.YawSensor.YawAngleInDegrees;
-            var currentRollAngleInDegrees = sensorSuite.RollSensor.RollAngleInDegrees;
-            var currentPitchAngleInDegrees = sensorSuite.PitchSensor.PitchAngleInDegrees;
+            var currentYawAngleInDegrees = sensorSuite.AttitudeSensor.YawAngleInDegrees;
+            var currentRollAngleInDegrees = sensorSuite.AttitudeSensor.RollAngleInDegrees;
+            var currentPitchAngleInDegrees = sensorSuite.AttitudeSensor.PitchAngleInDegrees;
 
-            const float desiredYawAngleInDegrees = 90.0F;
-            const float desiredRollAngleInDegrees = 90.0F;
-            const float desiredPitchAngleInDegrees = 90.0F;
+            const float desiredYawAngleInDegrees = 0.0F;
+            const float desiredRollAngleInDegrees = 0.0F;
+            const float desiredPitchAngleInDegrees = 0.0F;
 
             var yawPercent = _yawRegulator
                 .RegulateValue(currentYawAngleInDegrees, desiredYawAngleInDegrees);
@@ -41,13 +37,9 @@ namespace Starship.Flight.Segment.Ascent
                 .RegulateValue(currentPitchAngleInDegrees, desiredPitchAngleInDegrees);
 
             return new CommandSuite(
-                new ThrottleTopLeftRcsEngineCommand(0.0F),
-                new ThrottleTopRightRcsEngineCommand(0.0F),
-                new ThrottleBottomLeftRcsEngineCommand(0.0F),
-                new ThrottleBottomRightRcsEngineCommand(0.0F),
-                new ThrottleTopMainEngineCommand(0.75F),
-                new ThrottleBottomLeftMainEngineCommand(0.75F),
-                new ThrottleBottomRightMainEngineCommand(0.75F),
+                new ThrottleTopMainEngineCommand(0.25F),
+                new ThrottleBottomLeftMainEngineCommand(0.25F),
+                new ThrottleBottomRightMainEngineCommand(0.25F),
                 new YawMainEnginesCommand(yawPercent),
                 new RollMainEnginesCommand(rollPercent),
                 new PitchMainEnginesCommand(pitchPercent),
