@@ -1,29 +1,27 @@
-using System.Collections.Generic;
 using Starship.Control;
 using Starship.Flight.Command;
 using Starship.Flight.Segment;
-using Starship.Flight.Segment.Ascent;
-using Starship.Flight.Segment.Flip;
-using Starship.Flight.Segment.Flop;
 using Starship.Mission;
 using Starship.Sensor;
 using Starship.Telemetry;
 
 namespace Starship.Flight
 {
-    // Currently under development
     public sealed class FlightCommander
     {
         private readonly IMissionTimer _missionTimer;
         private readonly ITelemetryEmitter _telemetryEmitter;
+        private readonly IFlightSegmentCommanders _flightSegmentCommanders;
 
 
         public FlightCommander(
             IMissionTimer missionTimer,
-            ITelemetryEmitter telemetryEmitter)
+            ITelemetryEmitter telemetryEmitter,
+            IFlightSegmentCommanders flightSegmentCommanders)
         {
             _missionTimer = missionTimer;
             _telemetryEmitter = telemetryEmitter;
+            _flightSegmentCommanders = flightSegmentCommanders;
         }
 
         public void CommandFlight(
@@ -46,22 +44,12 @@ namespace Starship.Flight
 
         private ICommandSuite CommandFlight(ISensorSuite sensorSuite)
         {
-            var flightSegmentCommanders = new List<FlightSegmentCommander>
-            {
-                new AscentFlightCommander(),
-                new FlipFlightCommander(),
-                new FlopFlightCommander()
-            };
+            var currentFlightSegmentCommander = _flightSegmentCommanders
+                .GetCurrentFlightSegmentCommander();
 
-            var responsibleFlightSegmentCommander =
-                FindResponsibleFlightSegmentCommander(flightSegmentCommanders);
+            _telemetryEmitter.EmitTelemetry(currentFlightSegmentCommander);
 
-            return responsibleFlightSegmentCommander.CommandFlight(sensorSuite);
+            return currentFlightSegmentCommander.CommandFlight(sensorSuite);
         }
-
-        private FlightSegmentCommander FindResponsibleFlightSegmentCommander(
-            List<FlightSegmentCommander> flightSegmentCommanders
-        ) => flightSegmentCommanders.FindLast(commander =>
-            commander.TakeoverSecondsInMission <= _missionTimer.GetElapsedSeconds());
     }
 }

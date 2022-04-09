@@ -6,14 +6,20 @@ namespace Starship.Flight.Regulator
     {
         protected abstract float MinimumOutput { get; }
         protected abstract float MaximumOutput { get; }
-        protected abstract float ProportionalGain { get; }
 
+        private readonly float _proportionalGain;
+
+
+        protected ProportionalRegulator(float proportionalGain)
+        {
+            _proportionalGain = proportionalGain;
+        }
 
         public float RegulateValue(float currentValue, float desiredValue)
         {
             var deviation = desiredValue - currentValue;
 
-            var outputToReduceDeviation = deviation * ProportionalGain;
+            var outputToReduceDeviation = deviation * _proportionalGain;
 
             return outputToReduceDeviation.Clamp(MinimumOutput, MaximumOutput);
         }

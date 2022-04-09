@@ -16,7 +16,7 @@ namespace StarshipUnitTests.Flight.Regulator
         }
 
         [Test, TestCaseSource(nameof(ProvideTestData))]
-        public void Should_proportionally_regulate_a_value(
+        public void Should_proportionally_regulate_a_value_between_its_bounds(
             float currentValue,
             float desiredValue,
             float expectedOutput)
@@ -54,10 +54,12 @@ namespace StarshipUnitTests.Flight.Regulator
         private sealed class TestProportionalRegulator : ProportionalRegulator
         {
             protected override float MinimumOutput => -1.0F;
+            protected override float MaximumOutput => +1.0F;
 
-            protected override float MaximumOutput => 1.0F;
 
-            protected override float ProportionalGain => 0.022222222222222223F;
+            public TestProportionalRegulator() : base(0.022222222222222223F)
+            {
+            }
         }
     }
 }

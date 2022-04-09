@@ -5,10 +5,6 @@
         <RootNamespace>Starship</RootNamespace>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <OutputPath>C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program\GameData\FlightComputer\Plugins</OutputPath>
-    </PropertyGroup>
-
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <OutputPath>C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program\GameData\FlightComputer\Plugins</OutputPath>
     </PropertyGroup>

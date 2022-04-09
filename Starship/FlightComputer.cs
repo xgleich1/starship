@@ -1,8 +1,12 @@
-﻿using Starship.Control;
+﻿using System;
+using Starship.Control;
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
 using Starship.Control.Throttle.Main;
 using Starship.Flight;
+using Starship.Flight.Segment;
+using Starship.Flight.Segment.Config;
+using Starship.Flight.Segment.Config.Path;
 using Starship.Mission;
 using Starship.Sensor;
 using Starship.Sensor.Attitude;
@@ -13,19 +17,19 @@ using static Vessel.Situations;
 
 namespace Starship
 {
-    // Currently under development
     public sealed class FlightComputer : PartModule
     {
-        private readonly AttitudeSensor _attitudeSensor = new AttitudeSensor();
+        private readonly Lazy<AttitudeSensor> _attitudeSensor = new Lazy<AttitudeSensor>();
 
-        private readonly MainEnginesThrottleControl _mainEnginesThrottleControl =
-            new MainEnginesThrottleControl();
-        private readonly MainEnginesGimbalControl _mainEnginesGimbalControl =
-            new MainEnginesGimbalControl();
-        private readonly FlapsActuationControl _flapsActuationControl =
-            new FlapsActuationControl();
+        private readonly Lazy<MainEnginesThrottleControl> _mainEnginesThrottleControl =
+            new Lazy<MainEnginesThrottleControl>();
+        private readonly Lazy<MainEnginesGimbalControl> _mainEnginesGimbalControl =
+            new Lazy<MainEnginesGimbalControl>();
+        private readonly Lazy<FlapsActuationControl> _flapsActuationControl =
+            new Lazy<FlapsActuationControl>();
 
-        private readonly FlightCommander _flightCommander = BuildFlightCommander();
+        private readonly Lazy<FlightCommander> _flightCommander =
+            new Lazy<FlightCommander>(BuildFlightCommander);
 
 
         public override void OnStart(StartState state)
@@ -42,49 +46,47 @@ namespace Starship
                     return;
                 }
 
-                // What can I sense in a real rocket?
-                // Height?
-                // Position?
-                // Acceleration?
-                // Speed?
-                // Center Of Mass?
-                // Center Of Lift?
-                // Thrust?
-                // Mass?
-                // Thrust To Weight?
-                _attitudeSensor.Update(vessel);
+                _attitudeSensor.Value.Update(vessel);
 
                 var sensorSuite = new SensorSuite(
-                    _attitudeSensor);
+                    _attitudeSensor.Value);
 
-                // What can I control in a real rocket?
-                // Reaction Control System?
-                _mainEnginesThrottleControl.Bind(vessel);
-                _mainEnginesGimbalControl.Bind(vessel);
-                _flapsActuationControl.Bind(vessel);
+                _mainEnginesThrottleControl.Value.Bind(vessel);
+                _mainEnginesGimbalControl.Value.Bind(vessel);
+                _flapsActuationControl.Value.Bind(vessel);
 
                 var controlSuite = new ControlSuite(
-                    _mainEnginesThrottleControl,
-                    _mainEnginesGimbalControl,
-                    _flapsActuationControl);
+                    _mainEnginesThrottleControl.Value,
+                    _mainEnginesGimbalControl.Value,
+                    _flapsActuationControl.Value);
 
-                _flightCommander
-                    .CommandFlight(sensorSuite, controlSuite);
+                _flightCommander.Value.CommandFlight(
+                    sensorSuite,
+                    controlSuite);
             };
         }
 
         private static FlightCommander BuildFlightCommander()
         {
-            var missionTimer = new MissionTimer(
-                new Stopwatch());
+            var missionTimer =
+                new MissionTimer(
+                    new Stopwatch());
 
-            var telemetryEmitter = new TelemetryEmitter(
-                unityLogger,
-                missionTimer);
+            var telemetryEmitter =
+                new TelemetryEmitter(
+                    unityLogger,
+                    missionTimer);
+
+            var flightSegmentCommanders =
+                new FlightSegmentCommanders(
+                    missionTimer,
+                    new FlightSegmentConfigsLoader(
+                        new FlightSegmentConfigsPath()));
 
             return new FlightCommander(
                 missionTimer,
-                telemetryEmitter);
+                telemetryEmitter,
+                flightSegmentCommanders);
         }
     }
 }
