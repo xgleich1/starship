@@ -1,5 +1,5 @@
 The goal of this project is to create software to control
-SpaceX's starship stack, recreated in Kerbal Space Program.
+SpaceX's starship, recreated in Kerbal Space Program.
 
 Kerbal Space Program is built with Unity and aims to be
 close to reality physics-wise. On top of this it can be
@@ -15,9 +15,3 @@ Finally a few important points in general:
   
 * I am an android developer by trade and have no idea
   how C# works. Would love lot's of feedback to improve!
-
-
-
-
-
-
