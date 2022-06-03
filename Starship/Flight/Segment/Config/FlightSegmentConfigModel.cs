@@ -4,6 +4,12 @@ namespace Starship.Flight.Segment.Config
     {
         public long TakeoverSecondsInMission;
 
+        public float DesiredVerticalVelocityInMetrePerSecond;
+
+        public float ThrottleTopMainEngineProportionalGain;
+        public float ThrottleBottomLeftMainEngineProportionalGain;
+        public float ThrottleBottomRightMainEngineProportionalGain;
+
         public float? TopMainEngineThrottlePercentOverwrite;
         public float? BottomLeftMainEngineThrottlePercentOverwrite;
         public float? BottomRightMainEngineThrottlePercentOverwrite;

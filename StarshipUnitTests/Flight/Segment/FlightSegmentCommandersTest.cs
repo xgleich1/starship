@@ -30,7 +30,7 @@ namespace StarshipUnitTests.Flight.Segment
                 .Returns(new Seconds(1L));
 
             _flightSegmentConfigsLoader.Setup(mock => mock.LoadFlightSegmentConfigs())
-                .Returns(new List<FlightSegmentConfig>
+                .Returns(new List<IFlightSegmentConfig>
                 {
                     CreateFlightSegmentConfig(new Seconds(0L))
                 });
@@ -38,11 +38,11 @@ namespace StarshipUnitTests.Flight.Segment
             var flightSegmentCommanders = CreateFlightSegmentCommanders();
 
             // THEN
-            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander(),
-                Is.EqualTo(new FlightSegmentCommander(CreateFlightSegmentConfig(new Seconds(0L)))));
+            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander()
+                .TakeoverSecondsInMission, Is.EqualTo(new Seconds(0L)));
 
-            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander(),
-                Is.EqualTo(new FlightSegmentCommander(CreateFlightSegmentConfig(new Seconds(0L)))));
+            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander()
+                .TakeoverSecondsInMission, Is.EqualTo(new Seconds(0L)));
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace StarshipUnitTests.Flight.Segment
                 .Returns(new Seconds(31L));
 
             _flightSegmentConfigsLoader.Setup(mock => mock.LoadFlightSegmentConfigs())
-                .Returns(new List<FlightSegmentConfig>
+                .Returns(new List<IFlightSegmentConfig>
                 {
                     CreateFlightSegmentConfig(new Seconds(0L)),
                     CreateFlightSegmentConfig(new Seconds(15L)),
@@ -68,36 +68,37 @@ namespace StarshipUnitTests.Flight.Segment
             var flightSegmentCommanders = CreateFlightSegmentCommanders();
 
             // THEN
-            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander(),
-                Is.EqualTo(new FlightSegmentCommander(CreateFlightSegmentConfig(new Seconds(0L)))));
+            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander()
+                .TakeoverSecondsInMission, Is.EqualTo(new Seconds(0L)));
 
-            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander(),
-                Is.EqualTo(new FlightSegmentCommander(CreateFlightSegmentConfig(new Seconds(0L)))));
+            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander()
+                .TakeoverSecondsInMission, Is.EqualTo(new Seconds(0L)));
 
-            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander(),
-                Is.EqualTo(new FlightSegmentCommander(CreateFlightSegmentConfig(new Seconds(15L)))));
+            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander()
+                .TakeoverSecondsInMission, Is.EqualTo(new Seconds(15L)));
 
-            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander(),
-                Is.EqualTo(new FlightSegmentCommander(CreateFlightSegmentConfig(new Seconds(15L)))));
+            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander()
+                .TakeoverSecondsInMission, Is.EqualTo(new Seconds(15L)));
 
-            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander(),
-                Is.EqualTo(new FlightSegmentCommander(CreateFlightSegmentConfig(new Seconds(30L)))));
+            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander()
+                .TakeoverSecondsInMission, Is.EqualTo(new Seconds(30L)));
 
-            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander(),
-                Is.EqualTo(new FlightSegmentCommander(CreateFlightSegmentConfig(new Seconds(30L)))));
+            Assert.That(flightSegmentCommanders.GetCurrentFlightSegmentCommander()
+                .TakeoverSecondsInMission, Is.EqualTo(new Seconds(30L)));
+        }
+
+        private static IFlightSegmentConfig CreateFlightSegmentConfig(Seconds takeoverSecondsInMission)
+        {
+            var flightSegmentConfig = new Mock<IFlightSegmentConfig>();
+
+            flightSegmentConfig.Setup(
+                mock => mock.TakeoverSecondsInMission
+            ).Returns(takeoverSecondsInMission);
+
+            return flightSegmentConfig.Object;
         }
 
         private FlightSegmentCommanders CreateFlightSegmentCommanders() =>
             new FlightSegmentCommanders(_missionTimer.Object, _flightSegmentConfigsLoader.Object);
-
-        private static FlightSegmentConfig CreateFlightSegmentConfig(Seconds takeoverSecondsInMission) =>
-            new FlightSegmentConfig(
-                takeoverSecondsInMission,
-                null, null, null,
-                0.0F, 0.0F, 0.0F,
-                0.0F, 0.0F, 0.0F,
-                null, null, null,
-                0.0F, 0.0F, 0.0F,
-                null, null, null, null);
     }
 }

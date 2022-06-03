@@ -4,6 +4,6 @@ namespace Starship.Flight.Segment.Config
 {
     public interface IFlightSegmentConfigsLoader
     {
-        IEnumerable<FlightSegmentConfig> LoadFlightSegmentConfigs();
+        IEnumerable<IFlightSegmentConfig> LoadFlightSegmentConfigs();
     }
 }

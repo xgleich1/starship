@@ -1,4 +1,4 @@
-namespace Starship.Flight.Regulator.Actuation.Engine
+namespace Starship.Flight.Regulator.Engine
 {
     public sealed class MainEnginesGimbalRegulator : ProportionalRegulator
     {

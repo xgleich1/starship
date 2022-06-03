@@ -7,6 +7,7 @@ using Starship.Utility.Timing.Units;
 
 namespace Starship.Flight.Segment.Config
 {
+    // Currently under development
     public sealed class FlightSegmentConfigsLoader : IFlightSegmentConfigsLoader
     {
         private readonly IFlightSegmentConfigsPath _flightSegmentConfigsPath;
@@ -17,7 +18,7 @@ namespace Starship.Flight.Segment.Config
             _flightSegmentConfigsPath = flightSegmentConfigsPath;
         }
 
-        public IEnumerable<FlightSegmentConfig> LoadFlightSegmentConfigs()
+        public IEnumerable<IFlightSegmentConfig> LoadFlightSegmentConfigs()
         {
             using (var flightSegmentConfigsFile = File.OpenRead(_flightSegmentConfigsPath.RawPath))
             {
@@ -30,10 +31,14 @@ namespace Starship.Flight.Segment.Config
             }
         }
 
-        private static FlightSegmentConfig MapFlightSegmentModelToConfig(
+        private static IFlightSegmentConfig MapFlightSegmentModelToConfig(
             FlightSegmentConfigModel flightSegmentConfigModel
         ) => new FlightSegmentConfig(
             new Seconds(flightSegmentConfigModel.TakeoverSecondsInMission),
+            flightSegmentConfigModel.DesiredVerticalVelocityInMetrePerSecond,
+            flightSegmentConfigModel.ThrottleTopMainEngineProportionalGain,
+            flightSegmentConfigModel.ThrottleBottomLeftMainEngineProportionalGain,
+            flightSegmentConfigModel.ThrottleBottomRightMainEngineProportionalGain,
             flightSegmentConfigModel.TopMainEngineThrottlePercentOverwrite,
             flightSegmentConfigModel.BottomLeftMainEngineThrottlePercentOverwrite,
             flightSegmentConfigModel.BottomRightMainEngineThrottlePercentOverwrite,

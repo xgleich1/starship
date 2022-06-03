@@ -3,8 +3,8 @@ using Starship.Flight.Command;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
 using Starship.Flight.Command.Throttle.Main;
-using Starship.Flight.Regulator.Actuation.Engine;
-using Starship.Flight.Regulator.Actuation.Flap;
+using Starship.Flight.Regulator.Engine;
+using Starship.Flight.Regulator.Flap;
 using Starship.Flight.Segment.Config;
 using Starship.Sensor;
 using Starship.Telemetry;
@@ -19,7 +19,11 @@ namespace Starship.Flight.Segment
         public Seconds TakeoverSecondsInMission =>
             _flightSegmentConfig.TakeoverSecondsInMission;
 
-        private readonly FlightSegmentConfig _flightSegmentConfig;
+        private readonly IFlightSegmentConfig _flightSegmentConfig;
+
+        private readonly MainEnginesThrottleRegulator _throttleTopMainEngineRegulator;
+        private readonly MainEnginesThrottleRegulator _throttleBottomLeftMainEngineRegulator;
+        private readonly MainEnginesThrottleRegulator _throttleBottomRightMainEngineRegulator;
 
         private readonly MainEnginesGimbalRegulator _yawWithMainEnginesRegulator;
         private readonly MainEnginesGimbalRegulator _rollWithMainEnginesRegulator;
@@ -30,9 +34,16 @@ namespace Starship.Flight.Segment
         private readonly FlapsActuationRegulator _pitchWithFlapsRegulator;
 
 
-        public FlightSegmentCommander(FlightSegmentConfig flightSegmentConfig)
+        public FlightSegmentCommander(IFlightSegmentConfig flightSegmentConfig)
         {
             _flightSegmentConfig = flightSegmentConfig;
+
+            _throttleTopMainEngineRegulator = new MainEnginesThrottleRegulator(
+                _flightSegmentConfig.ThrottleTopMainEngineProportionalGain);
+            _throttleBottomLeftMainEngineRegulator = new MainEnginesThrottleRegulator(
+                _flightSegmentConfig.ThrottleBottomLeftMainEngineProportionalGain);
+            _throttleBottomRightMainEngineRegulator = new MainEnginesThrottleRegulator(
+                _flightSegmentConfig.ThrottleBottomRightMainEngineProportionalGain);
 
             _yawWithMainEnginesRegulator = new MainEnginesGimbalRegulator(
                 _flightSegmentConfig.YawWithMainEnginesProportionalGain);
@@ -67,20 +78,20 @@ namespace Starship.Flight.Segment
                     _flightSegmentConfig.DesiredPitchAngleInDegrees);
 
             var topLeftFlapDeployPercent = _flightSegmentConfig.TopLeftFlapDeployPercentOverwrite ??
-                                           0.5F + yawWithFlapsPercent + rollWithFlapsPercent + pitchWithFlapsPercent;
+                                           0.5F - yawWithFlapsPercent + rollWithFlapsPercent + pitchWithFlapsPercent;
 
             var topRightFlapDeployPercent = _flightSegmentConfig.TopRightFlapDeployPercentOverwrite ??
-                                            0.5F - yawWithFlapsPercent - rollWithFlapsPercent + pitchWithFlapsPercent;
+                                            0.5F + yawWithFlapsPercent - rollWithFlapsPercent + pitchWithFlapsPercent;
 
             var bottomLeftFlapDeployPercent = _flightSegmentConfig.BottomLeftFlapDeployPercentOverwrite ??
-                                              0.5F - yawWithFlapsPercent + rollWithFlapsPercent - pitchWithFlapsPercent;
+                                              0.5F + yawWithFlapsPercent + rollWithFlapsPercent - pitchWithFlapsPercent;
 
             var bottomRightLeftFlapDeployPercent = _flightSegmentConfig.BottomRightFlapDeployPercentOverwrite ??
-                                                   0.5F + yawWithFlapsPercent - rollWithFlapsPercent - pitchWithFlapsPercent;
+                                                   0.5F - yawWithFlapsPercent - rollWithFlapsPercent - pitchWithFlapsPercent;
             return new CommandSuite(
-                CommandTopMainEngineThrottle(),
-                CommandBottomLeftMainEngineThrottle(),
-                CommandBottomRightMainEngineThrottle(),
+                CommandTopMainEngineThrottle(sensorSuite),
+                CommandBottomLeftMainEngineThrottle(sensorSuite),
+                CommandBottomRightMainEngineThrottle(sensorSuite),
                 CommandMainEnginesYaw(sensorSuite),
                 CommandMainEnginesRoll(sensorSuite),
                 CommandMainEnginesPitch(sensorSuite),
@@ -98,34 +109,42 @@ namespace Starship.Flight.Segment
 
             return telemetry;
         }
-
-        public override bool Equals(object obj) =>
-            ReferenceEquals(this, obj) ||
-            obj is FlightSegmentCommander other
-            && _flightSegmentConfig.Equals(other._flightSegmentConfig);
-
-        public override int GetHashCode() => _flightSegmentConfig.GetHashCode();
-
-        private ThrottleTopMainEngineCommand CommandTopMainEngineThrottle()
+        
+        private ThrottleTopMainEngineCommand CommandTopMainEngineThrottle(ISensorSuite sensorSuite)
         {
+            float RegulateThrottlePercent() =>
+                _throttleTopMainEngineRegulator.RegulateValue(
+                    sensorSuite.VelocitySensor.VerticalVelocityInMetrePerSecond,
+                    _flightSegmentConfig.DesiredVerticalVelocityInMetrePerSecond);
+
             var throttlePercent =
-                _flightSegmentConfig.TopMainEngineThrottlePercentOverwrite ?? 0.0F;
+                _flightSegmentConfig.TopMainEngineThrottlePercentOverwrite ?? RegulateThrottlePercent();
 
             return new ThrottleTopMainEngineCommand(throttlePercent.Clamp(0.0F, 1.0F));
         }
 
-        private ThrottleBottomLeftMainEngineCommand CommandBottomLeftMainEngineThrottle()
+        private ThrottleBottomLeftMainEngineCommand CommandBottomLeftMainEngineThrottle(ISensorSuite sensorSuite)
         {
+            float RegulateThrottlePercent() =>
+                _throttleBottomLeftMainEngineRegulator.RegulateValue(
+                    sensorSuite.VelocitySensor.VerticalVelocityInMetrePerSecond,
+                    _flightSegmentConfig.DesiredVerticalVelocityInMetrePerSecond);
+
             var throttlePercent =
-                _flightSegmentConfig.BottomLeftMainEngineThrottlePercentOverwrite ?? 0.0F;
+                _flightSegmentConfig.BottomLeftMainEngineThrottlePercentOverwrite ?? RegulateThrottlePercent();
 
             return new ThrottleBottomLeftMainEngineCommand(throttlePercent.Clamp(0.0F, 1.0F));
         }
 
-        private ThrottleBottomRightMainEngineCommand CommandBottomRightMainEngineThrottle()
+        private ThrottleBottomRightMainEngineCommand CommandBottomRightMainEngineThrottle(ISensorSuite sensorSuite)
         {
+            float RegulateThrottlePercent() =>
+                _throttleBottomRightMainEngineRegulator.RegulateValue(
+                    sensorSuite.VelocitySensor.VerticalVelocityInMetrePerSecond,
+                    _flightSegmentConfig.DesiredVerticalVelocityInMetrePerSecond);
+
             var throttlePercent =
-                _flightSegmentConfig.BottomRightMainEngineThrottlePercentOverwrite ?? 0.0F;
+                _flightSegmentConfig.BottomRightMainEngineThrottlePercentOverwrite ?? RegulateThrottlePercent();
 
             return new ThrottleBottomRightMainEngineCommand(throttlePercent.Clamp(0.0F, 1.0F));
         }

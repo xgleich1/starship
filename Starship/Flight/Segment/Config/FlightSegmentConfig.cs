@@ -4,9 +4,16 @@ using Starship.Utility.Timing.Units;
 
 namespace Starship.Flight.Segment.Config
 {
-    public readonly struct FlightSegmentConfig : ITelemetryProvider
+    // Currently under development
+    public readonly struct FlightSegmentConfig : IFlightSegmentConfig
     {
         public Seconds TakeoverSecondsInMission { get; }
+
+        public float DesiredVerticalVelocityInMetrePerSecond { get; }
+
+        public float ThrottleTopMainEngineProportionalGain { get; }
+        public float ThrottleBottomLeftMainEngineProportionalGain { get; }
+        public float ThrottleBottomRightMainEngineProportionalGain { get; }
 
         public float? TopMainEngineThrottlePercentOverwrite { get; }
         public float? BottomLeftMainEngineThrottlePercentOverwrite { get; }
@@ -36,6 +43,10 @@ namespace Starship.Flight.Segment.Config
 
         public FlightSegmentConfig(
             Seconds takeoverSecondsInMission,
+            float desiredVerticalVelocityInMetrePerSecond,
+            float throttleTopMainEngineProportionalGain,
+            float throttleBottomLeftMainEngineProportionalGain,
+            float throttleBottomRightMainEngineProportionalGain,
             float? topMainEngineThrottlePercentOverwrite,
             float? bottomLeftMainEngineThrottlePercentOverwrite,
             float? bottomRightMainEngineThrottlePercentOverwrite,
@@ -57,6 +68,10 @@ namespace Starship.Flight.Segment.Config
             float? bottomRightFlapDeployPercentOverwrite)
         {
             TakeoverSecondsInMission = takeoverSecondsInMission;
+            DesiredVerticalVelocityInMetrePerSecond = desiredVerticalVelocityInMetrePerSecond;
+            ThrottleTopMainEngineProportionalGain = throttleTopMainEngineProportionalGain;
+            ThrottleBottomLeftMainEngineProportionalGain = throttleBottomLeftMainEngineProportionalGain;
+            ThrottleBottomRightMainEngineProportionalGain = throttleBottomRightMainEngineProportionalGain;
             TopMainEngineThrottlePercentOverwrite = topMainEngineThrottlePercentOverwrite;
             BottomLeftMainEngineThrottlePercentOverwrite = bottomLeftMainEngineThrottlePercentOverwrite;
             BottomRightMainEngineThrottlePercentOverwrite = bottomRightMainEngineThrottlePercentOverwrite;
@@ -80,6 +95,11 @@ namespace Starship.Flight.Segment.Config
 
         public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>
         {
+            new TelemetryMessage($"TakeoverSecondsInMission:{TakeoverSecondsInMission}"),
+            new TelemetryMessage($"DesiredVerticalVelocityInMetrePerSecond:{DesiredVerticalVelocityInMetrePerSecond}"),
+            new TelemetryMessage($"ThrottleTopMainEngineProportionalGain:{ThrottleTopMainEngineProportionalGain}"),
+            new TelemetryMessage($"ThrottleBottomLeftMainEngineProportionalGain:{ThrottleBottomLeftMainEngineProportionalGain}"),
+            new TelemetryMessage($"ThrottleBottomRightMainEngineProportionalGain:{ThrottleBottomRightMainEngineProportionalGain}"),
             new TelemetryMessage($"TopMainEngineThrottlePercentOverwrite:{TopMainEngineThrottlePercentOverwrite}"),
             new TelemetryMessage($"BottomLeftMainEngineThrottlePercentOverwrite:{BottomLeftMainEngineThrottlePercentOverwrite}"),
             new TelemetryMessage($"BottomRightMainEngineThrottlePercentOverwrite:{BottomRightMainEngineThrottlePercentOverwrite}"),

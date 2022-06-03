@@ -1,4 +1,4 @@
-namespace Starship.Flight.Regulator.Actuation.Flap
+namespace Starship.Flight.Regulator.Flap
 {
     public sealed class FlapsActuationRegulator : ProportionalRegulator
     {

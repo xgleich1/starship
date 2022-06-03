@@ -47,13 +47,7 @@ namespace Starship.Sensor.Attitude
                 new TelemetryMessage($"Pitch:{PitchAngleInDegrees}")
             };
 
-        private static Vector3 GetAngularVelocityInDegreesPerSecond(Vessel vessel)
-        {
-            var angularVelocityInRadiansPerSecond =
-                Quaternion.Inverse(vessel.GetTransform().rotation) *
-                vessel.GetComponent<Rigidbody>().angularVelocity;
-
-            return angularVelocityInRadiansPerSecond * Rad2Deg;
-        }
+        private static Vector3 GetAngularVelocityInDegreesPerSecond(Vessel vessel) =>
+            vessel.angularVelocity * Rad2Deg;
     }
 }

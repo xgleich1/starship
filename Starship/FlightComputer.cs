@@ -10,6 +10,7 @@ using Starship.Flight.Segment.Config.Path;
 using Starship.Mission;
 using Starship.Sensor;
 using Starship.Sensor.Attitude;
+using Starship.Sensor.Velocity;
 using Starship.Telemetry;
 using Starship.Utility.Timing;
 using static UnityEngine.Debug;
@@ -19,6 +20,7 @@ namespace Starship
 {
     public sealed class FlightComputer : PartModule
     {
+        private readonly Lazy<VelocitySensor> _velocitySensor = new Lazy<VelocitySensor>();
         private readonly Lazy<AttitudeSensor> _attitudeSensor = new Lazy<AttitudeSensor>();
 
         private readonly Lazy<MainEnginesThrottleControl> _mainEnginesThrottleControl =
@@ -46,9 +48,11 @@ namespace Starship
                     return;
                 }
 
+                _velocitySensor.Value.Update(vessel);
                 _attitudeSensor.Value.Update(vessel);
 
                 var sensorSuite = new SensorSuite(
+                    _velocitySensor.Value,
                     _attitudeSensor.Value);
 
                 _mainEnginesThrottleControl.Value.Bind(vessel);
