@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFlightSegmentConfigModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <FlightSegmentConfigModel>
+    <TakeoverSecondsInMission>0</TakeoverSecondsInMission>
+    <DesiredVerticalVelocityInMetrePerSecond>100</DesiredVerticalVelocityInMetrePerSecond>
+    <MainEnginesThrottleProportionalGain>0.5</MainEnginesThrottleProportionalGain>
+    <MainEnginesThrottleIntegralGain>0.005</MainEnginesThrottleIntegralGain>
+    <MainEnginesThrottleDerivativeGain>0.005</MainEnginesThrottleDerivativeGain>
+    <TopMainEngineThrottlePercentOverwrite xsi:nil="true" />
+    <BottomLeftMainEngineThrottlePercentOverwrite xsi:nil="true" />
+    <BottomRightMainEngineThrottlePercentOverwrite xsi:nil="true" />
+    <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+    <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+    <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+    <MainEnginesGimbalProportionalGain>0.05</MainEnginesGimbalProportionalGain>
+    <MainEnginesGimbalIntegralGain>0.005</MainEnginesGimbalIntegralGain>
+    <MainEnginesGimbalDerivativeGain>0.005</MainEnginesGimbalDerivativeGain>
+    <MainEnginesYawPercentOverwrite xsi:nil="true" />
+    <MainEnginesRollPercentOverwrite xsi:nil="true" />
+    <MainEnginesPitchPercentOverwrite xsi:nil="true" />
+    <FlapsYawProportionalGain>0</FlapsYawProportionalGain>
+    <FlapsYawIntegralGain>0</FlapsYawIntegralGain>
+    <FlapsYawDerivativeGain>0</FlapsYawDerivativeGain>
+    <FlapsRollProportionalGain>0</FlapsRollProportionalGain>
+    <FlapsRollIntegralGain>0</FlapsRollIntegralGain>
+    <FlapsRollDerivativeGain>0</FlapsRollDerivativeGain>
+    <FlapsPitchProportionalGain>0</FlapsPitchProportionalGain>
+    <FlapsPitchIntegralGain>0</FlapsPitchIntegralGain>
+    <FlapsPitchDerivativeGain>0</FlapsPitchDerivativeGain>
+    <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+    <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+    <BottomLeftFlapDeployPercentOverwrite>1</BottomLeftFlapDeployPercentOverwrite>
+    <BottomRightFlapDeployPercentOverwrite>1</BottomRightFlapDeployPercentOverwrite>
+  </FlightSegmentConfigModel>
+  <FlightSegmentConfigModel>
+    <TakeoverSecondsInMission>20</TakeoverSecondsInMission>
+    <DesiredVerticalVelocityInMetrePerSecond>0</DesiredVerticalVelocityInMetrePerSecond>
+    <MainEnginesThrottleProportionalGain>0.5</MainEnginesThrottleProportionalGain>
+    <MainEnginesThrottleIntegralGain>0.005</MainEnginesThrottleIntegralGain>
+    <MainEnginesThrottleDerivativeGain>0.005</MainEnginesThrottleDerivativeGain>
+    <TopMainEngineThrottlePercentOverwrite xsi:nil="true" />
+    <BottomLeftMainEngineThrottlePercentOverwrite xsi:nil="true" />
+    <BottomRightMainEngineThrottlePercentOverwrite xsi:nil="true" />
+    <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+    <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+    <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+    <MainEnginesGimbalProportionalGain>0.05</MainEnginesGimbalProportionalGain>
+    <MainEnginesGimbalIntegralGain>0.005</MainEnginesGimbalIntegralGain>
+    <MainEnginesGimbalDerivativeGain>0.005</MainEnginesGimbalDerivativeGain>
+    <MainEnginesYawPercentOverwrite xsi:nil="true" />
+    <MainEnginesRollPercentOverwrite xsi:nil="true" />
+    <MainEnginesPitchPercentOverwrite xsi:nil="true" />
+    <FlapsYawProportionalGain>0</FlapsYawProportionalGain>
+    <FlapsYawIntegralGain>0</FlapsYawIntegralGain>
+    <FlapsYawDerivativeGain>0</FlapsYawDerivativeGain>
+    <FlapsRollProportionalGain>0</FlapsRollProportionalGain>
+    <FlapsRollIntegralGain>0</FlapsRollIntegralGain>
+    <FlapsRollDerivativeGain>0</FlapsRollDerivativeGain>
+    <FlapsPitchProportionalGain>0</FlapsPitchProportionalGain>
+    <FlapsPitchIntegralGain>0</FlapsPitchIntegralGain>
+    <FlapsPitchDerivativeGain>0</FlapsPitchDerivativeGain>
+    <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+    <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+    <BottomLeftFlapDeployPercentOverwrite>1</BottomLeftFlapDeployPercentOverwrite>
+    <BottomRightFlapDeployPercentOverwrite>1</BottomRightFlapDeployPercentOverwrite>
+  </FlightSegmentConfigModel>
+  <FlightSegmentConfigModel>
+    <TakeoverSecondsInMission>35</TakeoverSecondsInMission>
+    <DesiredVerticalVelocityInMetrePerSecond>0</DesiredVerticalVelocityInMetrePerSecond>
+    <MainEnginesThrottleProportionalGain>0</MainEnginesThrottleProportionalGain>
+    <MainEnginesThrottleIntegralGain>0</MainEnginesThrottleIntegralGain>
+    <MainEnginesThrottleDerivativeGain>0</MainEnginesThrottleDerivativeGain>
+    <TopMainEngineThrottlePercentOverwrite>0.3</TopMainEngineThrottlePercentOverwrite>
+    <BottomLeftMainEngineThrottlePercentOverwrite>0.3</BottomLeftMainEngineThrottlePercentOverwrite>
+    <BottomRightMainEngineThrottlePercentOverwrite>0.3</BottomRightMainEngineThrottlePercentOverwrite>
+    <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+    <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+    <DesiredPitchAngleInDegrees>-90</DesiredPitchAngleInDegrees>
+    <MainEnginesGimbalProportionalGain>0</MainEnginesGimbalProportionalGain>
+    <MainEnginesGimbalIntegralGain>0</MainEnginesGimbalIntegralGain>
+    <MainEnginesGimbalDerivativeGain>0</MainEnginesGimbalDerivativeGain>
+    <MainEnginesYawPercentOverwrite>0</MainEnginesYawPercentOverwrite>
+    <MainEnginesRollPercentOverwrite>0</MainEnginesRollPercentOverwrite>
+    <MainEnginesPitchPercentOverwrite>-1</MainEnginesPitchPercentOverwrite>
+    <FlapsYawProportionalGain>0</FlapsYawProportionalGain>
+    <FlapsYawIntegralGain>0</FlapsYawIntegralGain>
+    <FlapsYawDerivativeGain>0</FlapsYawDerivativeGain>
+    <FlapsRollProportionalGain>0</FlapsRollProportionalGain>
+    <FlapsRollIntegralGain>0</FlapsRollIntegralGain>
+    <FlapsRollDerivativeGain>0</FlapsRollDerivativeGain>
+    <FlapsPitchProportionalGain>0</FlapsPitchProportionalGain>
+    <FlapsPitchIntegralGain>0</FlapsPitchIntegralGain>
+    <FlapsPitchDerivativeGain>0</FlapsPitchDerivativeGain>
+    <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+    <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+    <BottomLeftFlapDeployPercentOverwrite>0</BottomLeftFlapDeployPercentOverwrite>
+    <BottomRightFlapDeployPercentOverwrite>0</BottomRightFlapDeployPercentOverwrite>
+  </FlightSegmentConfigModel>
+  <FlightSegmentConfigModel>
+    <TakeoverSecondsInMission>36</TakeoverSecondsInMission>
+    <DesiredVerticalVelocityInMetrePerSecond>0</DesiredVerticalVelocityInMetrePerSecond>
+    <MainEnginesThrottleProportionalGain>0</MainEnginesThrottleProportionalGain>
+    <MainEnginesThrottleIntegralGain>0</MainEnginesThrottleIntegralGain>
+    <MainEnginesThrottleDerivativeGain>0</MainEnginesThrottleDerivativeGain>
+    <TopMainEngineThrottlePercentOverwrite>0</TopMainEngineThrottlePercentOverwrite>
+    <BottomLeftMainEngineThrottlePercentOverwrite>0</BottomLeftMainEngineThrottlePercentOverwrite>
+    <BottomRightMainEngineThrottlePercentOverwrite>0</BottomRightMainEngineThrottlePercentOverwrite>
+    <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+    <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+    <DesiredPitchAngleInDegrees>-90</DesiredPitchAngleInDegrees>
+    <MainEnginesGimbalProportionalGain>0</MainEnginesGimbalProportionalGain>
+    <MainEnginesGimbalIntegralGain>0</MainEnginesGimbalIntegralGain>
+    <MainEnginesGimbalDerivativeGain>0</MainEnginesGimbalDerivativeGain>
+    <MainEnginesYawPercentOverwrite>0</MainEnginesYawPercentOverwrite>
+    <MainEnginesRollPercentOverwrite>0</MainEnginesRollPercentOverwrite>
+    <MainEnginesPitchPercentOverwrite>0</MainEnginesPitchPercentOverwrite>
+    <FlapsYawProportionalGain>0.05</FlapsYawProportionalGain>
+    <FlapsYawIntegralGain>0.0005</FlapsYawIntegralGain>
+    <FlapsYawDerivativeGain>0.003</FlapsYawDerivativeGain>
+    <FlapsRollProportionalGain>0.05</FlapsRollProportionalGain>
+    <FlapsRollIntegralGain>0.0005</FlapsRollIntegralGain>
+    <FlapsRollDerivativeGain>0.003</FlapsRollDerivativeGain>
+    <FlapsPitchProportionalGain>0.05</FlapsPitchProportionalGain>
+    <FlapsPitchIntegralGain>0.0005</FlapsPitchIntegralGain>
+    <FlapsPitchDerivativeGain>0.003</FlapsPitchDerivativeGain>
+    <TopLeftFlapDeployPercentOverwrite xsi:nil="true" />
+    <TopRightFlapDeployPercentOverwrite xsi:nil="true" />
+    <BottomLeftFlapDeployPercentOverwrite xsi:nil="true" />
+    <BottomRightFlapDeployPercentOverwrite xsi:nil="true" />
+  </FlightSegmentConfigModel>
+</ArrayOfFlightSegmentConfigModel>

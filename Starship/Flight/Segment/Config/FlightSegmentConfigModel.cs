@@ -6,9 +6,9 @@ namespace Starship.Flight.Segment.Config
 
         public float DesiredVerticalVelocityInMetrePerSecond;
 
-        public float ThrottleTopMainEngineProportionalGain;
-        public float ThrottleBottomLeftMainEngineProportionalGain;
-        public float ThrottleBottomRightMainEngineProportionalGain;
+        public float MainEnginesThrottleProportionalGain;
+        public float MainEnginesThrottleIntegralGain;
+        public float MainEnginesThrottleDerivativeGain;
 
         public float? TopMainEngineThrottlePercentOverwrite;
         public float? BottomLeftMainEngineThrottlePercentOverwrite;
@@ -18,17 +18,25 @@ namespace Starship.Flight.Segment.Config
         public float DesiredRollAngleInDegrees;
         public float DesiredPitchAngleInDegrees;
 
-        public float YawWithMainEnginesProportionalGain;
-        public float RollWithMainEnginesProportionalGain;
-        public float PitchWithMainEnginesProportionalGain;
+        public float MainEnginesGimbalProportionalGain;
+        public float MainEnginesGimbalIntegralGain;
+        public float MainEnginesGimbalDerivativeGain;
 
         public float? MainEnginesYawPercentOverwrite;
         public float? MainEnginesRollPercentOverwrite;
         public float? MainEnginesPitchPercentOverwrite;
 
-        public float YawWithFlapsProportionalGain;
-        public float RollWithFlapsProportionalGain;
-        public float PitchWithFlapsProportionalGain;
+        public float FlapsYawProportionalGain;
+        public float FlapsYawIntegralGain;
+        public float FlapsYawDerivativeGain;
+
+        public float FlapsRollProportionalGain;
+        public float FlapsRollIntegralGain;
+        public float FlapsRollDerivativeGain;
+
+        public float FlapsPitchProportionalGain;
+        public float FlapsPitchIntegralGain;
+        public float FlapsPitchDerivativeGain;
 
         public float? TopLeftFlapDeployPercentOverwrite;
         public float? TopRightFlapDeployPercentOverwrite;

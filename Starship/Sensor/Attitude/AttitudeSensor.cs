@@ -18,25 +18,24 @@ namespace Starship.Sensor.Attitude
 
         public void Update(Vessel vessel)
         {
+            var currentTime = Now;
+
             if (_previousUpdateTime == null)
             {
-                _previousUpdateTime = Now;
+                _previousUpdateTime = currentTime;
 
                 return;
             }
 
-            var elapsedTimeBetweenUpdatesInSeconds =
-                (Now - _previousUpdateTime)?.TotalSeconds;
-
             var angularChangeBetweenUpdatesInDegrees =
                 GetAngularVelocityInDegreesPerSecond(vessel) *
-                Convert.ToSingle(elapsedTimeBetweenUpdatesInSeconds);
+                CalculateTimeBetweenUpdatesInSeconds(currentTime);
 
             YawAngleInDegrees -= angularChangeBetweenUpdatesInDegrees.z;
             RollAngleInDegrees -= angularChangeBetweenUpdatesInDegrees.y;
             PitchAngleInDegrees -= angularChangeBetweenUpdatesInDegrees.x;
 
-            _previousUpdateTime = Now;
+            _previousUpdateTime = currentTime;
         }
 
         public IEnumerable<TelemetryMessage> ProvideTelemetry() =>
@@ -49,5 +48,8 @@ namespace Starship.Sensor.Attitude
 
         private static Vector3 GetAngularVelocityInDegreesPerSecond(Vessel vessel) =>
             vessel.angularVelocity * Rad2Deg;
+
+        private float CalculateTimeBetweenUpdatesInSeconds(DateTime currentUpdateTime) =>
+            Convert.ToSingle((currentUpdateTime - _previousUpdateTime)?.TotalSeconds);
     }
 }

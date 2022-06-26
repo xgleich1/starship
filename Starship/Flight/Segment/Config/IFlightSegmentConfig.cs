@@ -9,9 +9,9 @@ namespace Starship.Flight.Segment.Config
 
         float DesiredVerticalVelocityInMetrePerSecond { get; }
 
-        float ThrottleTopMainEngineProportionalGain { get; }
-        float ThrottleBottomLeftMainEngineProportionalGain { get; }
-        float ThrottleBottomRightMainEngineProportionalGain { get; }
+        float MainEnginesThrottleProportionalGain { get; }
+        float MainEnginesThrottleIntegralGain { get; }
+        float MainEnginesThrottleDerivativeGain { get; }
 
         float? TopMainEngineThrottlePercentOverwrite { get; }
         float? BottomLeftMainEngineThrottlePercentOverwrite { get; }
@@ -21,17 +21,25 @@ namespace Starship.Flight.Segment.Config
         float DesiredRollAngleInDegrees { get; }
         float DesiredPitchAngleInDegrees { get; }
 
-        float YawWithMainEnginesProportionalGain { get; }
-        float RollWithMainEnginesProportionalGain { get; }
-        float PitchWithMainEnginesProportionalGain { get; }
+        float MainEnginesGimbalProportionalGain { get; }
+        float MainEnginesGimbalIntegralGain { get; }
+        float MainEnginesGimbalDerivativeGain { get; }
 
         float? MainEnginesYawPercentOverwrite { get; }
         float? MainEnginesRollPercentOverwrite { get; }
         float? MainEnginesPitchPercentOverwrite { get; }
 
-        float YawWithFlapsProportionalGain { get; }
-        float RollWithFlapsProportionalGain { get; }
-        float PitchWithFlapsProportionalGain { get; }
+        float FlapsYawProportionalGain { get; }
+        float FlapsYawIntegralGain { get; }
+        float FlapsYawDerivativeGain { get; }
+
+        float FlapsRollProportionalGain { get; }
+        float FlapsRollIntegralGain { get; }
+        float FlapsRollDerivativeGain { get; }
+
+        float FlapsPitchProportionalGain { get; }
+        float FlapsPitchIntegralGain { get; }
+        float FlapsPitchDerivativeGain { get; }
 
         float? TopLeftFlapDeployPercentOverwrite { get; }
         float? TopRightFlapDeployPercentOverwrite { get; }

@@ -8,7 +8,7 @@ namespace Starship.Flight.Segment
     public sealed class FlightSegmentCommanders : IFlightSegmentCommanders
     {
         private readonly IMissionTimer _missionTimer;
-        private readonly IEnumerable<FlightSegmentCommander> _flightSegmentCommanders;
+        private readonly List<FlightSegmentCommander> _flightSegmentCommanders;
 
 
         public FlightSegmentCommanders(
@@ -19,7 +19,8 @@ namespace Starship.Flight.Segment
 
             _flightSegmentCommanders = flightSegmentConfigsLoader
                 .LoadFlightSegmentConfigs()
-                .Select(config => new FlightSegmentCommander(config));
+                .Select(config => new FlightSegmentCommander(config))
+                .ToList();
         }
 
         public IFlightSegmentCommander GetCurrentFlightSegmentCommander()

@@ -11,9 +11,9 @@ namespace Starship.Flight.Segment.Config
 
         public float DesiredVerticalVelocityInMetrePerSecond { get; }
 
-        public float ThrottleTopMainEngineProportionalGain { get; }
-        public float ThrottleBottomLeftMainEngineProportionalGain { get; }
-        public float ThrottleBottomRightMainEngineProportionalGain { get; }
+        public float MainEnginesThrottleProportionalGain { get; }
+        public float MainEnginesThrottleIntegralGain { get; }
+        public float MainEnginesThrottleDerivativeGain { get; }
 
         public float? TopMainEngineThrottlePercentOverwrite { get; }
         public float? BottomLeftMainEngineThrottlePercentOverwrite { get; }
@@ -23,17 +23,25 @@ namespace Starship.Flight.Segment.Config
         public float DesiredRollAngleInDegrees { get; }
         public float DesiredPitchAngleInDegrees { get; }
 
-        public float YawWithMainEnginesProportionalGain { get; }
-        public float RollWithMainEnginesProportionalGain { get; }
-        public float PitchWithMainEnginesProportionalGain { get; }
+        public float MainEnginesGimbalProportionalGain { get; }
+        public float MainEnginesGimbalIntegralGain { get; }
+        public float MainEnginesGimbalDerivativeGain { get; }
 
         public float? MainEnginesYawPercentOverwrite { get; }
         public float? MainEnginesRollPercentOverwrite { get; }
         public float? MainEnginesPitchPercentOverwrite { get; }
 
-        public float YawWithFlapsProportionalGain { get; }
-        public float RollWithFlapsProportionalGain { get; }
-        public float PitchWithFlapsProportionalGain { get; }
+        public float FlapsYawProportionalGain { get; }
+        public float FlapsYawIntegralGain { get; }
+        public float FlapsYawDerivativeGain { get; }
+
+        public float FlapsRollProportionalGain { get; }
+        public float FlapsRollIntegralGain { get; }
+        public float FlapsRollDerivativeGain { get; }
+
+        public float FlapsPitchProportionalGain { get; }
+        public float FlapsPitchIntegralGain { get; }
+        public float FlapsPitchDerivativeGain { get; }
 
         public float? TopLeftFlapDeployPercentOverwrite { get; }
         public float? TopRightFlapDeployPercentOverwrite { get; }
@@ -44,24 +52,30 @@ namespace Starship.Flight.Segment.Config
         public FlightSegmentConfig(
             Seconds takeoverSecondsInMission,
             float desiredVerticalVelocityInMetrePerSecond,
-            float throttleTopMainEngineProportionalGain,
-            float throttleBottomLeftMainEngineProportionalGain,
-            float throttleBottomRightMainEngineProportionalGain,
+            float mainEnginesThrottleProportionalGain,
+            float mainEnginesThrottleIntegralGain,
+            float mainEnginesThrottleDerivativeGain,
             float? topMainEngineThrottlePercentOverwrite,
             float? bottomLeftMainEngineThrottlePercentOverwrite,
             float? bottomRightMainEngineThrottlePercentOverwrite,
             float desiredYawAngleInDegrees,
             float desiredRollAngleInDegrees,
             float desiredPitchAngleInDegrees,
-            float yawWithMainEnginesProportionalGain,
-            float rollWithMainEnginesProportionalGain,
-            float pitchWithMainEnginesProportionalGain,
+            float mainEnginesGimbalProportionalGain,
+            float mainEnginesGimbalIntegralGain,
+            float mainEnginesGimbalDerivativeGain,
             float? mainEnginesYawPercentOverwrite,
             float? mainEnginesRollPercentOverwrite,
             float? mainEnginesPitchPercentOverwrite,
-            float yawWithFlapsProportionalGain,
-            float rollWithFlapsProportionalGain,
-            float pitchWithFlapsProportionalGain,
+            float flapsYawProportionalGain,
+            float flapsYawIntegralGain,
+            float flapsYawDerivativeGain,
+            float flapsRollProportionalGain,
+            float flapsRollIntegralGain,
+            float flapsRollDerivativeGain,
+            float flapsPitchProportionalGain,
+            float flapsPitchIntegralGain,
+            float flapsPitchDerivativeGain,
             float? topLeftFlapDeployPercentOverwrite,
             float? topRightFlapDeployPercentOverwrite,
             float? bottomLeftFlapDeployPercentOverwrite,
@@ -69,24 +83,30 @@ namespace Starship.Flight.Segment.Config
         {
             TakeoverSecondsInMission = takeoverSecondsInMission;
             DesiredVerticalVelocityInMetrePerSecond = desiredVerticalVelocityInMetrePerSecond;
-            ThrottleTopMainEngineProportionalGain = throttleTopMainEngineProportionalGain;
-            ThrottleBottomLeftMainEngineProportionalGain = throttleBottomLeftMainEngineProportionalGain;
-            ThrottleBottomRightMainEngineProportionalGain = throttleBottomRightMainEngineProportionalGain;
+            MainEnginesThrottleProportionalGain = mainEnginesThrottleProportionalGain;
+            MainEnginesThrottleIntegralGain = mainEnginesThrottleIntegralGain;
+            MainEnginesThrottleDerivativeGain = mainEnginesThrottleDerivativeGain;
             TopMainEngineThrottlePercentOverwrite = topMainEngineThrottlePercentOverwrite;
             BottomLeftMainEngineThrottlePercentOverwrite = bottomLeftMainEngineThrottlePercentOverwrite;
             BottomRightMainEngineThrottlePercentOverwrite = bottomRightMainEngineThrottlePercentOverwrite;
             DesiredYawAngleInDegrees = desiredYawAngleInDegrees;
             DesiredRollAngleInDegrees = desiredRollAngleInDegrees;
             DesiredPitchAngleInDegrees = desiredPitchAngleInDegrees;
-            YawWithMainEnginesProportionalGain = yawWithMainEnginesProportionalGain;
-            RollWithMainEnginesProportionalGain = rollWithMainEnginesProportionalGain;
-            PitchWithMainEnginesProportionalGain = pitchWithMainEnginesProportionalGain;
+            MainEnginesGimbalProportionalGain = mainEnginesGimbalProportionalGain;
+            MainEnginesGimbalIntegralGain = mainEnginesGimbalIntegralGain;
+            MainEnginesGimbalDerivativeGain = mainEnginesGimbalDerivativeGain;
             MainEnginesYawPercentOverwrite = mainEnginesYawPercentOverwrite;
             MainEnginesRollPercentOverwrite = mainEnginesRollPercentOverwrite;
             MainEnginesPitchPercentOverwrite = mainEnginesPitchPercentOverwrite;
-            YawWithFlapsProportionalGain = yawWithFlapsProportionalGain;
-            RollWithFlapsProportionalGain = rollWithFlapsProportionalGain;
-            PitchWithFlapsProportionalGain = pitchWithFlapsProportionalGain;
+            FlapsYawProportionalGain = flapsYawProportionalGain;
+            FlapsYawIntegralGain = flapsYawIntegralGain;
+            FlapsYawDerivativeGain = flapsYawDerivativeGain;
+            FlapsRollProportionalGain = flapsRollProportionalGain;
+            FlapsRollIntegralGain = flapsRollIntegralGain;
+            FlapsRollDerivativeGain = flapsRollDerivativeGain;
+            FlapsPitchProportionalGain = flapsPitchProportionalGain;
+            FlapsPitchIntegralGain = flapsPitchIntegralGain;
+            FlapsPitchDerivativeGain = flapsPitchDerivativeGain;
             TopLeftFlapDeployPercentOverwrite = topLeftFlapDeployPercentOverwrite;
             TopRightFlapDeployPercentOverwrite = topRightFlapDeployPercentOverwrite;
             BottomLeftFlapDeployPercentOverwrite = bottomLeftFlapDeployPercentOverwrite;
@@ -97,24 +117,30 @@ namespace Starship.Flight.Segment.Config
         {
             new TelemetryMessage($"TakeoverSecondsInMission:{TakeoverSecondsInMission}"),
             new TelemetryMessage($"DesiredVerticalVelocityInMetrePerSecond:{DesiredVerticalVelocityInMetrePerSecond}"),
-            new TelemetryMessage($"ThrottleTopMainEngineProportionalGain:{ThrottleTopMainEngineProportionalGain}"),
-            new TelemetryMessage($"ThrottleBottomLeftMainEngineProportionalGain:{ThrottleBottomLeftMainEngineProportionalGain}"),
-            new TelemetryMessage($"ThrottleBottomRightMainEngineProportionalGain:{ThrottleBottomRightMainEngineProportionalGain}"),
+            new TelemetryMessage($"MainEnginesThrottleProportionalGain:{MainEnginesThrottleProportionalGain}"),
+            new TelemetryMessage($"MainEnginesThrottleIntegralGain:{MainEnginesThrottleIntegralGain}"),
+            new TelemetryMessage($"MainEnginesThrottleDerivativeGain:{MainEnginesThrottleDerivativeGain}"),
             new TelemetryMessage($"TopMainEngineThrottlePercentOverwrite:{TopMainEngineThrottlePercentOverwrite}"),
             new TelemetryMessage($"BottomLeftMainEngineThrottlePercentOverwrite:{BottomLeftMainEngineThrottlePercentOverwrite}"),
             new TelemetryMessage($"BottomRightMainEngineThrottlePercentOverwrite:{BottomRightMainEngineThrottlePercentOverwrite}"),
             new TelemetryMessage($"DesiredYawAngleInDegrees:{DesiredYawAngleInDegrees}"),
             new TelemetryMessage($"DesiredRollAngleInDegrees:{DesiredRollAngleInDegrees}"),
             new TelemetryMessage($"DesiredPitchAngleInDegrees:{DesiredPitchAngleInDegrees}"),
-            new TelemetryMessage($"YawWithMainEnginesProportionalGain:{YawWithMainEnginesProportionalGain}"),
-            new TelemetryMessage($"RollWithMainEnginesProportionalGain:{RollWithMainEnginesProportionalGain}"),
-            new TelemetryMessage($"PitchWithMainEnginesProportionalGain:{PitchWithMainEnginesProportionalGain}"),
+            new TelemetryMessage($"MainEnginesGimbalProportionalGain:{MainEnginesGimbalProportionalGain}"),
+            new TelemetryMessage($"MainEnginesGimbalIntegralGain:{MainEnginesGimbalIntegralGain}"),
+            new TelemetryMessage($"MainEnginesGimbalDerivativeGain:{MainEnginesGimbalDerivativeGain}"),
             new TelemetryMessage($"MainEnginesYawPercentOverwrite:{MainEnginesYawPercentOverwrite}"),
             new TelemetryMessage($"MainEnginesRollPercentOverwrite:{MainEnginesRollPercentOverwrite}"),
             new TelemetryMessage($"MainEnginesPitchPercentOverwrite:{MainEnginesPitchPercentOverwrite}"),
-            new TelemetryMessage($"YawWithFlapsProportionalGain:{YawWithFlapsProportionalGain}"),
-            new TelemetryMessage($"RollWithFlapsProportionalGain:{RollWithFlapsProportionalGain}"),
-            new TelemetryMessage($"PitchWithFlapsProportionalGain:{PitchWithFlapsProportionalGain}"),
+            new TelemetryMessage($"FlapsYawProportionalGain:{FlapsYawProportionalGain}"),
+            new TelemetryMessage($"FlapsYawIntegralGain:{FlapsYawIntegralGain}"),
+            new TelemetryMessage($"FlapsYawDerivativeGain:{FlapsYawDerivativeGain}"),
+            new TelemetryMessage($"FlapsRollProportionalGain:{FlapsRollProportionalGain}"),
+            new TelemetryMessage($"FlapsRollIntegralGain:{FlapsRollIntegralGain}"),
+            new TelemetryMessage($"FlapsRollDerivativeGain:{FlapsRollDerivativeGain}"),
+            new TelemetryMessage($"FlapsPitchProportionalGain:{FlapsPitchProportionalGain}"),
+            new TelemetryMessage($"FlapsPitchIntegralGain:{FlapsPitchIntegralGain}"),
+            new TelemetryMessage($"FlapsPitchDerivativeGain:{FlapsPitchDerivativeGain}"),
             new TelemetryMessage($"TopLeftFlapDeployPercentOverwrite:{TopLeftFlapDeployPercentOverwrite}"),
             new TelemetryMessage($"TopRightFlapDeployPercentOverwrite:{TopRightFlapDeployPercentOverwrite}"),
             new TelemetryMessage($"BottomLeftFlapDeployPercentOverwrite:{BottomLeftFlapDeployPercentOverwrite}"),
