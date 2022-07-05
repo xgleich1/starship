@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFlightSegmentConfigModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <FlightSegmentConfigModel>
+    <TakeoverSecondsInMission>0</TakeoverSecondsInMission>
+    <TopMainEngineThrottlePercentOverwrite>0.45</TopMainEngineThrottlePercentOverwrite>
+    <BottomLeftMainEngineThrottlePercentOverwrite>0.45</BottomLeftMainEngineThrottlePercentOverwrite>
+    <BottomRightMainEngineThrottlePercentOverwrite>0.45</BottomRightMainEngineThrottlePercentOverwrite>
+    <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+    <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+    <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+    <YawWithMainEnginesProportionalGain>0.01</YawWithMainEnginesProportionalGain>
+    <RollWithMainEnginesProportionalGain>0.01</RollWithMainEnginesProportionalGain>
+    <PitchWithMainEnginesProportionalGain>0.01</PitchWithMainEnginesProportionalGain>
+    <MainEnginesYawPercentOverwrite xsi:nil="true" />
+    <MainEnginesRollPercentOverwrite xsi:nil="true" />
+    <MainEnginesPitchPercentOverwrite xsi:nil="true" />
+    <YawWithFlapsProportionalGain>0</YawWithFlapsProportionalGain>
+    <RollWithFlapsProportionalGain>0</RollWithFlapsProportionalGain>
+    <PitchWithFlapsProportionalGain>0</PitchWithFlapsProportionalGain>
+    <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+    <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+    <BottomLeftFlapDeployPercentOverwrite>1</BottomLeftFlapDeployPercentOverwrite>
+    <BottomRightFlapDeployPercentOverwrite>1</BottomRightFlapDeployPercentOverwrite>
+  </FlightSegmentConfigModel>
+  <FlightSegmentConfigModel>
+    <TakeoverSecondsInMission>28</TakeoverSecondsInMission>
+    <TopMainEngineThrottlePercentOverwrite>0.2</TopMainEngineThrottlePercentOverwrite>
+    <BottomLeftMainEngineThrottlePercentOverwrite>0.2</BottomLeftMainEngineThrottlePercentOverwrite>
+    <BottomRightMainEngineThrottlePercentOverwrite>0.2</BottomRightMainEngineThrottlePercentOverwrite>
+    <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+    <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+    <DesiredPitchAngleInDegrees>-90</DesiredPitchAngleInDegrees>
+    <YawWithMainEnginesProportionalGain>0.01</YawWithMainEnginesProportionalGain>
+    <RollWithMainEnginesProportionalGain>0.01</RollWithMainEnginesProportionalGain>
+    <PitchWithMainEnginesProportionalGain>0.01</PitchWithMainEnginesProportionalGain>
+    <MainEnginesYawPercentOverwrite xsi:nil="true" />
+    <MainEnginesRollPercentOverwrite xsi:nil="true" />
+    <MainEnginesPitchPercentOverwrite xsi:nil="true" />
+    <YawWithFlapsProportionalGain>0</YawWithFlapsProportionalGain>
+    <RollWithFlapsProportionalGain>0</RollWithFlapsProportionalGain>
+    <PitchWithFlapsProportionalGain>0</PitchWithFlapsProportionalGain>
+    <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+    <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+    <BottomLeftFlapDeployPercentOverwrite>0</BottomLeftFlapDeployPercentOverwrite>
+    <BottomRightFlapDeployPercentOverwrite>0</BottomRightFlapDeployPercentOverwrite>
+  </FlightSegmentConfigModel>
+  <FlightSegmentConfigModel>
+    <TakeoverSecondsInMission>30</TakeoverSecondsInMission>
+    <TopMainEngineThrottlePercentOverwrite>0</TopMainEngineThrottlePercentOverwrite>
+    <BottomLeftMainEngineThrottlePercentOverwrite>0</BottomLeftMainEngineThrottlePercentOverwrite>
+    <BottomRightMainEngineThrottlePercentOverwrite>0</BottomRightMainEngineThrottlePercentOverwrite>
+    <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+    <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+    <DesiredPitchAngleInDegrees>-90</DesiredPitchAngleInDegrees>
+    <YawWithMainEnginesProportionalGain>0</YawWithMainEnginesProportionalGain>
+    <RollWithMainEnginesProportionalGain>0</RollWithMainEnginesProportionalGain>
+    <PitchWithMainEnginesProportionalGain>0</PitchWithMainEnginesProportionalGain>
+    <MainEnginesYawPercentOverwrite>0</MainEnginesYawPercentOverwrite>
+    <MainEnginesRollPercentOverwrite>0</MainEnginesRollPercentOverwrite>
+    <MainEnginesPitchPercentOverwrite>0</MainEnginesPitchPercentOverwrite>
+    <YawWithFlapsProportionalGain>0.01</YawWithFlapsProportionalGain>
+    <RollWithFlapsProportionalGain>0.01</RollWithFlapsProportionalGain>
+    <PitchWithFlapsProportionalGain>0.01</PitchWithFlapsProportionalGain>
+    <TopLeftFlapDeployPercentOverwrite xsi:nil="true" />
+    <TopRightFlapDeployPercentOverwrite xsi:nil="true" />
+    <BottomLeftFlapDeployPercentOverwrite xsi:nil="true" />
+    <BottomRightFlapDeployPercentOverwrite xsi:nil="true" />
+  </FlightSegmentConfigModel>
+</ArrayOfFlightSegmentConfigModel>

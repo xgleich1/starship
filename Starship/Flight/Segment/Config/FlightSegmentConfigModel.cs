@@ -26,17 +26,9 @@ namespace Starship.Flight.Segment.Config
         public float? MainEnginesRollPercentOverwrite;
         public float? MainEnginesPitchPercentOverwrite;
 
-        public float FlapsYawProportionalGain;
-        public float FlapsYawIntegralGain;
-        public float FlapsYawDerivativeGain;
-
-        public float FlapsRollProportionalGain;
-        public float FlapsRollIntegralGain;
-        public float FlapsRollDerivativeGain;
-
-        public float FlapsPitchProportionalGain;
-        public float FlapsPitchIntegralGain;
-        public float FlapsPitchDerivativeGain;
+        public float FlapsActuationProportionalGain;
+        public float FlapsActuationIntegralGain;
+        public float FlapsActuationDerivativeGain;
 
         public float? TopLeftFlapDeployPercentOverwrite;
         public float? TopRightFlapDeployPercentOverwrite;

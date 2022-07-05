@@ -29,17 +29,9 @@ namespace Starship.Flight.Segment.Config
         float? MainEnginesRollPercentOverwrite { get; }
         float? MainEnginesPitchPercentOverwrite { get; }
 
-        float FlapsYawProportionalGain { get; }
-        float FlapsYawIntegralGain { get; }
-        float FlapsYawDerivativeGain { get; }
-
-        float FlapsRollProportionalGain { get; }
-        float FlapsRollIntegralGain { get; }
-        float FlapsRollDerivativeGain { get; }
-
-        float FlapsPitchProportionalGain { get; }
-        float FlapsPitchIntegralGain { get; }
-        float FlapsPitchDerivativeGain { get; }
+        float FlapsActuationProportionalGain { get; }
+        float FlapsActuationIntegralGain { get; }
+        float FlapsActuationDerivativeGain { get; }
 
         float? TopLeftFlapDeployPercentOverwrite { get; }
         float? TopRightFlapDeployPercentOverwrite { get; }

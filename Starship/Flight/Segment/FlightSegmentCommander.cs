@@ -36,15 +36,22 @@ namespace Starship.Flight.Segment
         {
             _flightSegmentConfig = flightSegmentConfig;
 
-            _mainEnginesThrottleRegulator = CreateMainEnginesThrottleRegulator();
+            _mainEnginesThrottleRegulator = CreateMainEnginesThrottleRegulator(
+                _flightSegmentConfig.DesiredVerticalVelocityInMetrePerSecond);
 
-            _mainEnginesYawRegulator = CreateMainEnginesYawRegulator();
-            _mainEnginesRollRegulator = CreateMainEnginesRollRegulator();
-            _mainEnginesPitchRegulator = CreateMainEnginesPitchRegulator();
+            _mainEnginesYawRegulator = CreateMainEnginesGimbalRegulator(
+                _flightSegmentConfig.DesiredYawAngleInDegrees);
+            _mainEnginesRollRegulator = CreateMainEnginesGimbalRegulator(
+                _flightSegmentConfig.DesiredRollAngleInDegrees);
+            _mainEnginesPitchRegulator = CreateMainEnginesGimbalRegulator(
+                _flightSegmentConfig.DesiredPitchAngleInDegrees);
 
-            _flapsYawRegulator = CreateFlapsYawRegulator();
-            _flapsRollRegulator = CreateFlapsRollRegulator();
-            _flapsPitchRegulator = CreateFlapsPitchRegulator();
+            _flapsYawRegulator = CreateFlapsActuationRegulator(
+                _flightSegmentConfig.DesiredYawAngleInDegrees);
+            _flapsRollRegulator = CreateFlapsActuationRegulator(
+                _flightSegmentConfig.DesiredRollAngleInDegrees);
+            _flapsPitchRegulator = CreateFlapsActuationRegulator(
+                _flightSegmentConfig.DesiredPitchAngleInDegrees);
         }
 
         public ICommandSuite CommandFlight(ISensorSuite sensorSuite)
@@ -100,47 +107,29 @@ namespace Starship.Flight.Segment
             return telemetry;
         }
 
-        private MainEnginesThrottleRegulator CreateMainEnginesThrottleRegulator() => new MainEnginesThrottleRegulator(
-            _flightSegmentConfig.DesiredVerticalVelocityInMetrePerSecond,
+        private MainEnginesThrottleRegulator CreateMainEnginesThrottleRegulator(
+            float desiredVerticalVelocityInMetrePerSecond
+        ) => new MainEnginesThrottleRegulator(
+            desiredVerticalVelocityInMetrePerSecond,
             _flightSegmentConfig.MainEnginesThrottleProportionalGain,
             _flightSegmentConfig.MainEnginesThrottleIntegralGain,
             _flightSegmentConfig.MainEnginesThrottleDerivativeGain);
 
-        private MainEnginesGimbalRegulator CreateMainEnginesYawRegulator() => new MainEnginesGimbalRegulator(
-            _flightSegmentConfig.DesiredYawAngleInDegrees,
+        private MainEnginesGimbalRegulator CreateMainEnginesGimbalRegulator(
+            float desiredAttitudeAngleInDegrees
+        ) => new MainEnginesGimbalRegulator(
+            desiredAttitudeAngleInDegrees,
             _flightSegmentConfig.MainEnginesGimbalProportionalGain,
             _flightSegmentConfig.MainEnginesGimbalIntegralGain,
             _flightSegmentConfig.MainEnginesGimbalDerivativeGain);
 
-        private MainEnginesGimbalRegulator CreateMainEnginesRollRegulator() => new MainEnginesGimbalRegulator(
-            _flightSegmentConfig.DesiredRollAngleInDegrees,
-            _flightSegmentConfig.MainEnginesGimbalProportionalGain,
-            _flightSegmentConfig.MainEnginesGimbalIntegralGain,
-            _flightSegmentConfig.MainEnginesGimbalDerivativeGain);
-
-        private MainEnginesGimbalRegulator CreateMainEnginesPitchRegulator() => new MainEnginesGimbalRegulator(
-            _flightSegmentConfig.DesiredPitchAngleInDegrees,
-            _flightSegmentConfig.MainEnginesGimbalProportionalGain,
-            _flightSegmentConfig.MainEnginesGimbalIntegralGain,
-            _flightSegmentConfig.MainEnginesGimbalDerivativeGain);
-
-        private FlapsActuationRegulator CreateFlapsYawRegulator() => new FlapsActuationRegulator(
-            _flightSegmentConfig.DesiredYawAngleInDegrees,
-            _flightSegmentConfig.FlapsYawProportionalGain,
-            _flightSegmentConfig.FlapsYawIntegralGain,
-            _flightSegmentConfig.FlapsYawDerivativeGain);
-
-        private FlapsActuationRegulator CreateFlapsRollRegulator() => new FlapsActuationRegulator(
-            _flightSegmentConfig.DesiredRollAngleInDegrees,
-            _flightSegmentConfig.FlapsRollProportionalGain,
-            _flightSegmentConfig.FlapsRollIntegralGain,
-            _flightSegmentConfig.FlapsRollDerivativeGain);
-
-        private FlapsActuationRegulator CreateFlapsPitchRegulator() => new FlapsActuationRegulator(
-            _flightSegmentConfig.DesiredPitchAngleInDegrees,
-            _flightSegmentConfig.FlapsPitchProportionalGain,
-            _flightSegmentConfig.FlapsPitchIntegralGain,
-            _flightSegmentConfig.FlapsPitchDerivativeGain);
+        private FlapsActuationRegulator CreateFlapsActuationRegulator(
+            float desiredAttitudeAngleInDegrees
+        ) => new FlapsActuationRegulator(
+            desiredAttitudeAngleInDegrees,
+            _flightSegmentConfig.FlapsActuationProportionalGain,
+            _flightSegmentConfig.FlapsActuationIntegralGain,
+            _flightSegmentConfig.FlapsActuationDerivativeGain);
 
         private float RegulateMainEnginesThrottlePercent(ISensorSuite sensorSuite) => _mainEnginesThrottleRegulator
             .RegulateValue(sensorSuite.VelocitySensor.VerticalVelocityInMetrePerSecond);

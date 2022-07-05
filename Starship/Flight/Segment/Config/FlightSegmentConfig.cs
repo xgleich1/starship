@@ -31,17 +31,9 @@ namespace Starship.Flight.Segment.Config
         public float? MainEnginesRollPercentOverwrite { get; }
         public float? MainEnginesPitchPercentOverwrite { get; }
 
-        public float FlapsYawProportionalGain { get; }
-        public float FlapsYawIntegralGain { get; }
-        public float FlapsYawDerivativeGain { get; }
-
-        public float FlapsRollProportionalGain { get; }
-        public float FlapsRollIntegralGain { get; }
-        public float FlapsRollDerivativeGain { get; }
-
-        public float FlapsPitchProportionalGain { get; }
-        public float FlapsPitchIntegralGain { get; }
-        public float FlapsPitchDerivativeGain { get; }
+        public float FlapsActuationProportionalGain { get; }
+        public float FlapsActuationIntegralGain { get; }
+        public float FlapsActuationDerivativeGain { get; }
 
         public float? TopLeftFlapDeployPercentOverwrite { get; }
         public float? TopRightFlapDeployPercentOverwrite { get; }
@@ -67,15 +59,9 @@ namespace Starship.Flight.Segment.Config
             float? mainEnginesYawPercentOverwrite,
             float? mainEnginesRollPercentOverwrite,
             float? mainEnginesPitchPercentOverwrite,
-            float flapsYawProportionalGain,
-            float flapsYawIntegralGain,
-            float flapsYawDerivativeGain,
-            float flapsRollProportionalGain,
-            float flapsRollIntegralGain,
-            float flapsRollDerivativeGain,
-            float flapsPitchProportionalGain,
-            float flapsPitchIntegralGain,
-            float flapsPitchDerivativeGain,
+            float flapsActuationProportionalGain,
+            float flapsActuationIntegralGain,
+            float flapsActuationDerivativeGain,
             float? topLeftFlapDeployPercentOverwrite,
             float? topRightFlapDeployPercentOverwrite,
             float? bottomLeftFlapDeployPercentOverwrite,
@@ -98,15 +84,9 @@ namespace Starship.Flight.Segment.Config
             MainEnginesYawPercentOverwrite = mainEnginesYawPercentOverwrite;
             MainEnginesRollPercentOverwrite = mainEnginesRollPercentOverwrite;
             MainEnginesPitchPercentOverwrite = mainEnginesPitchPercentOverwrite;
-            FlapsYawProportionalGain = flapsYawProportionalGain;
-            FlapsYawIntegralGain = flapsYawIntegralGain;
-            FlapsYawDerivativeGain = flapsYawDerivativeGain;
-            FlapsRollProportionalGain = flapsRollProportionalGain;
-            FlapsRollIntegralGain = flapsRollIntegralGain;
-            FlapsRollDerivativeGain = flapsRollDerivativeGain;
-            FlapsPitchProportionalGain = flapsPitchProportionalGain;
-            FlapsPitchIntegralGain = flapsPitchIntegralGain;
-            FlapsPitchDerivativeGain = flapsPitchDerivativeGain;
+            FlapsActuationProportionalGain = flapsActuationProportionalGain;
+            FlapsActuationIntegralGain = flapsActuationIntegralGain;
+            FlapsActuationDerivativeGain = flapsActuationDerivativeGain;
             TopLeftFlapDeployPercentOverwrite = topLeftFlapDeployPercentOverwrite;
             TopRightFlapDeployPercentOverwrite = topRightFlapDeployPercentOverwrite;
             BottomLeftFlapDeployPercentOverwrite = bottomLeftFlapDeployPercentOverwrite;
@@ -132,15 +112,9 @@ namespace Starship.Flight.Segment.Config
             new TelemetryMessage($"MainEnginesYawPercentOverwrite:{MainEnginesYawPercentOverwrite}"),
             new TelemetryMessage($"MainEnginesRollPercentOverwrite:{MainEnginesRollPercentOverwrite}"),
             new TelemetryMessage($"MainEnginesPitchPercentOverwrite:{MainEnginesPitchPercentOverwrite}"),
-            new TelemetryMessage($"FlapsYawProportionalGain:{FlapsYawProportionalGain}"),
-            new TelemetryMessage($"FlapsYawIntegralGain:{FlapsYawIntegralGain}"),
-            new TelemetryMessage($"FlapsYawDerivativeGain:{FlapsYawDerivativeGain}"),
-            new TelemetryMessage($"FlapsRollProportionalGain:{FlapsRollProportionalGain}"),
-            new TelemetryMessage($"FlapsRollIntegralGain:{FlapsRollIntegralGain}"),
-            new TelemetryMessage($"FlapsRollDerivativeGain:{FlapsRollDerivativeGain}"),
-            new TelemetryMessage($"FlapsPitchProportionalGain:{FlapsPitchProportionalGain}"),
-            new TelemetryMessage($"FlapsPitchIntegralGain:{FlapsPitchIntegralGain}"),
-            new TelemetryMessage($"FlapsPitchDerivativeGain:{FlapsPitchDerivativeGain}"),
+            new TelemetryMessage($"FlapsActuationProportionalGain:{FlapsActuationProportionalGain}"),
+            new TelemetryMessage($"FlapsActuationIntegralGain:{FlapsActuationIntegralGain}"),
+            new TelemetryMessage($"FlapsActuationDerivativeGain:{FlapsActuationDerivativeGain}"),
             new TelemetryMessage($"TopLeftFlapDeployPercentOverwrite:{TopLeftFlapDeployPercentOverwrite}"),
             new TelemetryMessage($"TopRightFlapDeployPercentOverwrite:{TopRightFlapDeployPercentOverwrite}"),
             new TelemetryMessage($"BottomLeftFlapDeployPercentOverwrite:{BottomLeftFlapDeployPercentOverwrite}"),
