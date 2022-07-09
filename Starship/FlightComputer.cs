@@ -2,6 +2,7 @@
 using Starship.Control;
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
+using Starship.Control.Actuation.Leg;
 using Starship.Control.Throttle.Main;
 using Starship.Flight;
 using Starship.Flight.Segment;
@@ -29,6 +30,8 @@ namespace Starship
             new Lazy<MainEnginesGimbalControl>();
         private readonly Lazy<FlapsActuationControl> _flapsActuationControl =
             new Lazy<FlapsActuationControl>();
+        private readonly Lazy<LegsActuationControl> _legsActuationControl =
+            new Lazy<LegsActuationControl>();
 
         private readonly Lazy<FlightCommander> _flightCommander =
             new Lazy<FlightCommander>(BuildFlightCommander);
@@ -58,11 +61,13 @@ namespace Starship
                 _mainEnginesThrottleControl.Value.Bind(vessel);
                 _mainEnginesGimbalControl.Value.Bind(vessel);
                 _flapsActuationControl.Value.Bind(vessel);
+                _legsActuationControl.Value.Bind(vessel);
 
                 var controlSuite = new ControlSuite(
                     _mainEnginesThrottleControl.Value,
                     _mainEnginesGimbalControl.Value,
-                    _flapsActuationControl.Value);
+                    _flapsActuationControl.Value,
+                    _legsActuationControl.Value);
 
                 _flightCommander.Value.CommandFlight(
                     sensorSuite,

@@ -57,6 +57,7 @@ namespace Starship.Flight.Segment.Config
             flightSegmentConfigModel.TopLeftFlapDeployPercentOverwrite,
             flightSegmentConfigModel.TopRightFlapDeployPercentOverwrite,
             flightSegmentConfigModel.BottomLeftFlapDeployPercentOverwrite,
-            flightSegmentConfigModel.BottomRightFlapDeployPercentOverwrite);
+            flightSegmentConfigModel.BottomRightFlapDeployPercentOverwrite,
+            flightSegmentConfigModel.LegsActuationExtendedState);
     }
 }

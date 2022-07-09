@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Starship.Flight.Command;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
+using Starship.Flight.Command.Actuation.Leg;
 using Starship.Flight.Command.Throttle.Main;
 using Starship.Telemetry;
 
@@ -24,7 +25,8 @@ namespace StarshipUnitTests.Flight.Command
                 new ActuateTopLeftFlapCommand(0.0F),
                 new ActuateTopRightFlapCommand(0.0F),
                 new ActuateBottomLeftFlapCommand(0.0F),
-                new ActuateBottomRightFlapCommand(0.0F));
+                new ActuateBottomRightFlapCommand(0.0F),
+                new ActuateLegsCommand(false));
 
             // THEN
             var expectedTelemetry = new List<TelemetryMessage>
@@ -38,7 +40,8 @@ namespace StarshipUnitTests.Flight.Command
                 new TelemetryMessage("TopLeftFlapDeployPercent:0"),
                 new TelemetryMessage("TopRightFlapDeployPercent:0"),
                 new TelemetryMessage("BottomLeftFlapDeployPercent:0"),
-                new TelemetryMessage("BottomRightFlapDeployPercent:0")
+                new TelemetryMessage("BottomRightFlapDeployPercent:0"),
+                new TelemetryMessage("LegsExtended:False")
             };
 
             Assert.That(commandSuite.ProvideTelemetry(), Is.EqualTo(expectedTelemetry));

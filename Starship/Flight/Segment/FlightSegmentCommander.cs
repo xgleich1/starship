@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Starship.Flight.Command;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
+using Starship.Flight.Command.Actuation.Leg;
 using Starship.Flight.Command.Throttle.Main;
 using Starship.Flight.Regulator.Engine;
 using Starship.Flight.Regulator.Flap;
@@ -85,6 +86,8 @@ namespace Starship.Flight.Segment
             var bottomRightLeftFlapDeployPercent = _flightSegmentConfig
                 .BottomRightFlapDeployPercentOverwrite ?? 0.5F - flapsYawPercent - flapsRollPercent - flapsPitchPercent;
 
+            var legsActuationExtendedState = _flightSegmentConfig.LegsActuationExtendedState;
+
             return new CommandSuite(
                 new ThrottleTopMainEngineCommand(topMainEngineThrottlePercent.Clamp(0.0F, 1.0F)),
                 new ThrottleBottomLeftMainEngineCommand(bottomLeftEngineThrottlePercent.Clamp(0.0F, 1.0F)),
@@ -95,7 +98,8 @@ namespace Starship.Flight.Segment
                 new ActuateTopLeftFlapCommand(topLeftFlapDeployPercent.Clamp(0.0F, 1.0F)),
                 new ActuateTopRightFlapCommand(topRightFlapDeployPercent.Clamp(0.0F, 1.0F)),
                 new ActuateBottomLeftFlapCommand(bottomLeftFlapDeployPercent.Clamp(0.0F, 1.0F)),
-                new ActuateBottomRightFlapCommand(bottomRightLeftFlapDeployPercent.Clamp(0.0F, 1.0F)));
+                new ActuateBottomRightFlapCommand(bottomRightLeftFlapDeployPercent.Clamp(0.0F, 1.0F)),
+                new ActuateLegsCommand(legsActuationExtendedState));
         }
 
         public IEnumerable<TelemetryMessage> ProvideTelemetry()

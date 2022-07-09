@@ -3,10 +3,12 @@ using NUnit.Framework;
 using Starship.Control;
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
+using Starship.Control.Actuation.Leg;
 using Starship.Control.Throttle.Main;
 using Starship.Flight.Command;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
+using Starship.Flight.Command.Actuation.Leg;
 using Starship.Flight.Command.Throttle.Main;
 
 namespace StarshipUnitTests.Control
@@ -16,6 +18,7 @@ namespace StarshipUnitTests.Control
         private Mock<IMainEnginesThrottleControl> _mainEnginesThrottleControl;
         private Mock<IMainEnginesGimbalControl> _mainEnginesGimbalControl;
         private Mock<IFlapsActuationControl> _flapsActuationControl;
+        private Mock<ILegsActuationControl> _legsActuationControl;
         private ControlSuite _controlSuite;
 
 
@@ -28,11 +31,14 @@ namespace StarshipUnitTests.Control
                 new Mock<IMainEnginesGimbalControl>();
             _flapsActuationControl =
                 new Mock<IFlapsActuationControl>();
+            _legsActuationControl =
+                new Mock<ILegsActuationControl>();
 
             _controlSuite = new ControlSuite(
                 _mainEnginesThrottleControl.Object,
                 _mainEnginesGimbalControl.Object,
-                _flapsActuationControl.Object);
+                _flapsActuationControl.Object,
+                _legsActuationControl.Object);
         }
 
         [Test]
@@ -87,6 +93,20 @@ namespace StarshipUnitTests.Control
                     commandSuite.ActuateBottomRightFlapCommand));
         }
 
+        [Test]
+        public void Should_actuate_the_legs()
+        {
+            // GIVEN
+            var commandSuite = CreateCommandSuite();
+
+            // WHEN
+            _controlSuite.ExertControl(commandSuite);
+
+            // THEN
+            _legsActuationControl.Verify(mock =>
+                mock.ActuateLegs(commandSuite.ActuateLegsCommand));
+        }
+
         private static CommandSuite CreateCommandSuite() =>
             new CommandSuite(
                 new ThrottleTopMainEngineCommand(0.0F),
@@ -98,6 +118,7 @@ namespace StarshipUnitTests.Control
                 new ActuateTopLeftFlapCommand(0.0F),
                 new ActuateTopRightFlapCommand(0.0F),
                 new ActuateBottomLeftFlapCommand(0.0F),
-                new ActuateBottomRightFlapCommand(0.0F));
+                new ActuateBottomRightFlapCommand(0.0F),
+                new ActuateLegsCommand(false));
     }
 }

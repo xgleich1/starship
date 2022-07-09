@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
+using Starship.Flight.Command.Actuation.Leg;
 using Starship.Flight.Command.Throttle.Main;
 using Starship.Telemetry;
 
@@ -18,6 +19,7 @@ namespace Starship.Flight.Command
         public ActuateTopRightFlapCommand ActuateTopRightFlapCommand { get; }
         public ActuateBottomLeftFlapCommand ActuateBottomLeftFlapCommand { get; }
         public ActuateBottomRightFlapCommand ActuateBottomRightFlapCommand { get; }
+        public ActuateLegsCommand ActuateLegsCommand { get; }
 
 
         public CommandSuite(
@@ -30,7 +32,8 @@ namespace Starship.Flight.Command
             ActuateTopLeftFlapCommand actuateTopLeftFlapCommand,
             ActuateTopRightFlapCommand actuateTopRightFlapCommand,
             ActuateBottomLeftFlapCommand actuateBottomLeftFlapCommand,
-            ActuateBottomRightFlapCommand actuateBottomRightFlapCommand)
+            ActuateBottomRightFlapCommand actuateBottomRightFlapCommand,
+            ActuateLegsCommand actuateLegsCommand)
         {
             ThrottleTopMainEngineCommand = throttleTopMainEngineCommand;
             ThrottleBottomLeftMainEngineCommand = throttleBottomLeftMainEngineCommand;
@@ -42,6 +45,7 @@ namespace Starship.Flight.Command
             ActuateTopRightFlapCommand = actuateTopRightFlapCommand;
             ActuateBottomLeftFlapCommand = actuateBottomLeftFlapCommand;
             ActuateBottomRightFlapCommand = actuateBottomRightFlapCommand;
+            ActuateLegsCommand = actuateLegsCommand;
         }
 
         public IEnumerable<TelemetryMessage> ProvideTelemetry()
@@ -58,6 +62,7 @@ namespace Starship.Flight.Command
             telemetry.AddRange(ActuateTopRightFlapCommand.ProvideTelemetry());
             telemetry.AddRange(ActuateBottomLeftFlapCommand.ProvideTelemetry());
             telemetry.AddRange(ActuateBottomRightFlapCommand.ProvideTelemetry());
+            telemetry.AddRange(ActuateLegsCommand.ProvideTelemetry());
 
             return telemetry;
         }

@@ -40,6 +40,8 @@ namespace Starship.Flight.Segment.Config
         public float? BottomLeftFlapDeployPercentOverwrite { get; }
         public float? BottomRightFlapDeployPercentOverwrite { get; }
 
+        public bool LegsActuationExtendedState { get; }
+
 
         public FlightSegmentConfig(
             Seconds takeoverSecondsInMission,
@@ -65,7 +67,8 @@ namespace Starship.Flight.Segment.Config
             float? topLeftFlapDeployPercentOverwrite,
             float? topRightFlapDeployPercentOverwrite,
             float? bottomLeftFlapDeployPercentOverwrite,
-            float? bottomRightFlapDeployPercentOverwrite)
+            float? bottomRightFlapDeployPercentOverwrite,
+            bool legsActuationExtendedState)
         {
             TakeoverSecondsInMission = takeoverSecondsInMission;
             DesiredVerticalVelocityInMetrePerSecond = desiredVerticalVelocityInMetrePerSecond;
@@ -91,6 +94,7 @@ namespace Starship.Flight.Segment.Config
             TopRightFlapDeployPercentOverwrite = topRightFlapDeployPercentOverwrite;
             BottomLeftFlapDeployPercentOverwrite = bottomLeftFlapDeployPercentOverwrite;
             BottomRightFlapDeployPercentOverwrite = bottomRightFlapDeployPercentOverwrite;
+            LegsActuationExtendedState = legsActuationExtendedState;
         }
 
         public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>
@@ -118,7 +122,8 @@ namespace Starship.Flight.Segment.Config
             new TelemetryMessage($"TopLeftFlapDeployPercentOverwrite:{TopLeftFlapDeployPercentOverwrite}"),
             new TelemetryMessage($"TopRightFlapDeployPercentOverwrite:{TopRightFlapDeployPercentOverwrite}"),
             new TelemetryMessage($"BottomLeftFlapDeployPercentOverwrite:{BottomLeftFlapDeployPercentOverwrite}"),
-            new TelemetryMessage($"BottomRightFlapDeployPercentOverwrite:{BottomRightFlapDeployPercentOverwrite}")
+            new TelemetryMessage($"BottomRightFlapDeployPercentOverwrite:{BottomRightFlapDeployPercentOverwrite}"),
+            new TelemetryMessage($"LegsActuationExtendedState:{LegsActuationExtendedState}")
         };
     }
 }

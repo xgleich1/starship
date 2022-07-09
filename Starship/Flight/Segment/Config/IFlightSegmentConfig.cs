@@ -37,5 +37,7 @@ namespace Starship.Flight.Segment.Config
         float? TopRightFlapDeployPercentOverwrite { get; }
         float? BottomLeftFlapDeployPercentOverwrite { get; }
         float? BottomRightFlapDeployPercentOverwrite { get; }
+
+        bool LegsActuationExtendedState { get; }
     }
 }
