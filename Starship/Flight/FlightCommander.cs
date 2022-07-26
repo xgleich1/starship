@@ -33,11 +33,11 @@ namespace Starship.Flight
                 _missionTimer.StartWithZeroSeconds();
             }
 
-            _telemetryEmitter.EmitTelemetry(sensorSuite);
+            // _telemetryEmitter.EmitTelemetry(sensorSuite);
 
             var commandSuite = CommandFlight(sensorSuite);
 
-            _telemetryEmitter.EmitTelemetry(commandSuite);
+            // _telemetryEmitter.EmitTelemetry(commandSuite);
 
             controlSuite.ExertControl(commandSuite);
         }
@@ -45,7 +45,7 @@ namespace Starship.Flight
         private ICommandSuite CommandFlight(ISensorSuite sensorSuite)
         {
             var currentFlightSegmentCommander = _flightSegmentCommanders
-                .GetCurrentFlightSegmentCommander();
+                .GetCurrentFlightSegmentCommander(sensorSuite);
 
             _telemetryEmitter.EmitTelemetry(currentFlightSegmentCommander);
 

@@ -2,33 +2,40 @@ using System.Collections.Generic;
 using System.Linq;
 using Starship.Flight.Segment.Config;
 using Starship.Mission;
+using Starship.Sensor;
 
 namespace Starship.Flight.Segment
 {
     public sealed class FlightSegmentCommanders : IFlightSegmentCommanders
     {
-        private readonly IMissionTimer _missionTimer;
-        private readonly List<FlightSegmentCommander> _flightSegmentCommanders;
+        private readonly List<IFlightSegmentCommander> _flightSegmentCommanders;
+
+        private IFlightSegmentCommander _currentFlightSegmentCommander;
 
 
-        public FlightSegmentCommanders(
-            IMissionTimer missionTimer,
-            IFlightSegmentConfigsLoader flightSegmentConfigsLoader)
+        public FlightSegmentCommanders(IFlightSegmentCommandersLoader flightSegmentCommandersLoader)
         {
-            _missionTimer = missionTimer;
+            _flightSegmentCommanders = flightSegmentCommandersLoader
+                .LoadFlightSegmentCommanders();
 
-            _flightSegmentCommanders = flightSegmentConfigsLoader
-                .LoadFlightSegmentConfigs()
-                .Select(config => new FlightSegmentCommander(config))
-                .ToList();
+            _currentFlightSegmentCommander = _flightSegmentCommanders.First();
+
+            // Test for when this line is missing
+            _flightSegmentCommanders.Remove(_currentFlightSegmentCommander);
         }
 
-        public IFlightSegmentCommander GetCurrentFlightSegmentCommander()
+        public IFlightSegmentCommander GetCurrentFlightSegmentCommander(ISensorSuite sensorSuite)
         {
-            var elapsedSecondsInMission = _missionTimer.GetElapsedSeconds();
+            var nextFlightSegmentCommander = _flightSegmentCommanders.FirstOrDefault();
 
-            return _flightSegmentCommanders.Last(commander =>
-                commander.TakeoverSecondsInMission <= elapsedSecondsInMission);
+            if (nextFlightSegmentCommander?.CanTakeover(sensorSuite) == true)
+            {
+                _flightSegmentCommanders.Remove(nextFlightSegmentCommander);
+
+                _currentFlightSegmentCommander = nextFlightSegmentCommander;
+            }
+
+            return _currentFlightSegmentCommander;
         }
     }
 }

@@ -10,6 +10,7 @@ using Starship.Flight.Segment.Config;
 using Starship.Flight.Segment.Config.Path;
 using Starship.Mission;
 using Starship.Sensor;
+using Starship.Sensor.Altitude;
 using Starship.Sensor.Attitude;
 using Starship.Sensor.Velocity;
 using Starship.Telemetry;
@@ -23,6 +24,7 @@ namespace Starship
     {
         private readonly Lazy<VelocitySensor> _velocitySensor = new Lazy<VelocitySensor>();
         private readonly Lazy<AttitudeSensor> _attitudeSensor = new Lazy<AttitudeSensor>();
+        private readonly Lazy<AltitudeSensor> _altitudeSensor = new Lazy<AltitudeSensor>();
 
         private readonly Lazy<MainEnginesThrottleControl> _mainEnginesThrottleControl =
             new Lazy<MainEnginesThrottleControl>();
@@ -36,6 +38,7 @@ namespace Starship
         private readonly Lazy<FlightCommander> _flightCommander =
             new Lazy<FlightCommander>(BuildFlightCommander);
 
+        private ScreenMessage _screenMessage;
 
         public override void OnStart(StartState state)
         {
@@ -53,10 +56,12 @@ namespace Starship
 
                 _velocitySensor.Value.Update(vessel);
                 _attitudeSensor.Value.Update(vessel);
+                _altitudeSensor.Value.Update(vessel);
 
                 var sensorSuite = new SensorSuite(
                     _velocitySensor.Value,
-                    _attitudeSensor.Value);
+                    _attitudeSensor.Value,
+                    _altitudeSensor.Value);
 
                 _mainEnginesThrottleControl.Value.Bind(vessel);
                 _mainEnginesGimbalControl.Value.Bind(vessel);
@@ -72,6 +77,15 @@ namespace Starship
                 _flightCommander.Value.CommandFlight(
                     sensorSuite,
                     controlSuite);
+
+                ScreenMessages.RemoveMessage(_screenMessage);
+                _screenMessage = ScreenMessages.PostScreenMessage(
+                    $"vertical velocity:{(int)sensorSuite.VelocitySensor.VerticalVelocityInMetrePerSecond}," +
+                    $"\nyaw angle:{(int)sensorSuite.AttitudeSensor.YawAngleInDegrees}," +
+                    $"\nroll angle:{(int)sensorSuite.AttitudeSensor.RollAngleInDegrees}," +
+                    $"\npitch angle:{(int)sensorSuite.AttitudeSensor.PitchAngleInDegrees}," +
+                    $"\naltitude:{(int)sensorSuite.AltitudeSensor.AltitudeInMeters},",
+                    float.MaxValue, ScreenMessageStyle.UPPER_LEFT);
             };
         }
 
@@ -88,9 +102,9 @@ namespace Starship
 
             var flightSegmentCommanders =
                 new FlightSegmentCommanders(
-                    missionTimer,
-                    new FlightSegmentConfigsLoader(
-                        new FlightSegmentConfigsPath()));
+                    new FlightSegmentCommandersLoader(
+                        new FlightSegmentConfigsLoader(
+                            new FlightSegmentConfigsPath())));
 
             return new FlightCommander(
                 missionTimer,

@@ -138,7 +138,7 @@ namespace StarshipUnitTests.Flight
 
         private void SetupCurrentFlightSegmentCommander(IFlightSegmentCommander flightSegmentCommander) =>
             _flightSegmentCommanders.Setup(
-                mock => mock.GetCurrentFlightSegmentCommander()
+                mock => mock.GetCurrentFlightSegmentCommander(_sensorSuite.Object)
             ).Returns(flightSegmentCommander);
     }
 }

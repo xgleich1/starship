@@ -1,13 +1,28 @@
 using System.Collections.Generic;
 using Starship.Telemetry;
-using Starship.Utility.Timing.Units;
 
 namespace Starship.Flight.Segment.Config
 {
     // Currently under development
     public readonly struct FlightSegmentConfig : IFlightSegmentConfig
     {
-        public Seconds TakeoverSecondsInMission { get; }
+        // public float? TakeoverVerticalVelocityEqual { get; }
+        //
+        // public float? TakeoverVerticalVelocityTollerance { get; }
+        public float? TakeoverVerticalVelocityEqualOrOver { get; }
+        public float? TakeoverVerticalVelocityEqualOrUnder { get; }
+        
+        public float? TakeoverYawAngleEqualOrOver { get; }
+        public float? TakeoverYawAngleEqualOrUnder { get; }
+
+        public float? TakeoverRollAngleEqualOrOver { get; }
+        public float? TakeoverRollAngleEqualOrUnder { get; }
+
+        public float? TakeoverPitchAngleEqualOrOver { get; }
+        public float? TakeoverPitchAngleEqualOrUnder { get; }
+
+        public float? TakeoverAltitudeEqualOrOver { get; }
+        public float? TakeoverAltitudeEqualOrUnder { get; }
 
         public float DesiredVerticalVelocityInMetrePerSecond { get; }
 
@@ -44,7 +59,16 @@ namespace Starship.Flight.Segment.Config
 
 
         public FlightSegmentConfig(
-            Seconds takeoverSecondsInMission,
+            float? takeoverVerticalVelocityEqualOrOver,
+            float? takeoverVerticalVelocityEqualOrUnder,
+            float? takeoverYawAngleEqualOrOver,
+            float? takeoverYawAngleEqualOrUnder,
+            float? takeoverRollAngleEqualOrOver,
+            float? takeoverRollAngleEqualOrUnder,
+            float? takeoverPitchAngleEqualOrOver,
+            float? takeoverPitchAngleEqualOrUnder,
+            float? takeoverAltitudeEqualOrOver,
+            float? takeoverAltitudeEqualOrUnder,
             float desiredVerticalVelocityInMetrePerSecond,
             float mainEnginesThrottleProportionalGain,
             float mainEnginesThrottleIntegralGain,
@@ -70,7 +94,16 @@ namespace Starship.Flight.Segment.Config
             float? bottomRightFlapDeployPercentOverwrite,
             bool legsActuationExtendedState)
         {
-            TakeoverSecondsInMission = takeoverSecondsInMission;
+            TakeoverVerticalVelocityEqualOrOver = takeoverVerticalVelocityEqualOrOver;
+            TakeoverVerticalVelocityEqualOrUnder = takeoverVerticalVelocityEqualOrUnder;
+            TakeoverYawAngleEqualOrOver = takeoverYawAngleEqualOrOver;
+            TakeoverYawAngleEqualOrUnder = takeoverYawAngleEqualOrUnder;
+            TakeoverRollAngleEqualOrOver = takeoverRollAngleEqualOrOver;
+            TakeoverRollAngleEqualOrUnder = takeoverRollAngleEqualOrUnder;
+            TakeoverPitchAngleEqualOrOver = takeoverPitchAngleEqualOrOver;
+            TakeoverPitchAngleEqualOrUnder = takeoverPitchAngleEqualOrUnder;
+            TakeoverAltitudeEqualOrOver = takeoverAltitudeEqualOrOver;
+            TakeoverAltitudeEqualOrUnder = takeoverAltitudeEqualOrUnder;
             DesiredVerticalVelocityInMetrePerSecond = desiredVerticalVelocityInMetrePerSecond;
             MainEnginesThrottleProportionalGain = mainEnginesThrottleProportionalGain;
             MainEnginesThrottleIntegralGain = mainEnginesThrottleIntegralGain;
@@ -99,7 +132,16 @@ namespace Starship.Flight.Segment.Config
 
         public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>
         {
-            new TelemetryMessage($"TakeoverSecondsInMission:{TakeoverSecondsInMission}"),
+            new TelemetryMessage($"TakeoverVerticalVelocityEqualOrOver:{TakeoverVerticalVelocityEqualOrOver}"),
+            new TelemetryMessage($"TakeoverVerticalVelocityEqualOrUnder:{TakeoverVerticalVelocityEqualOrUnder}"),
+            new TelemetryMessage($"TakeoverYawAngleEqualOrOver:{TakeoverYawAngleEqualOrOver}"),
+            new TelemetryMessage($"TakeoverYawAngleEqualOrUnder:{TakeoverYawAngleEqualOrUnder}"),
+            new TelemetryMessage($"TakeoverRollAngleEqualOrOver:{TakeoverRollAngleEqualOrOver}"),
+            new TelemetryMessage($"TakeoverRollAngleEqualOrUnder:{TakeoverRollAngleEqualOrUnder}"),
+            new TelemetryMessage($"TakeoverPitchAngleEqualOrOver:{TakeoverPitchAngleEqualOrOver}"),
+            new TelemetryMessage($"TakeoverPitchAngleEqualOrUnder:{TakeoverPitchAngleEqualOrUnder}"),
+            new TelemetryMessage($"TakeoverAltitudeEqualOrOver:{TakeoverAltitudeEqualOrOver}"),
+            new TelemetryMessage($"TakeoverAltitudeEqualOrUnder:{TakeoverAltitudeEqualOrUnder}"),
             new TelemetryMessage($"DesiredVerticalVelocityInMetrePerSecond:{DesiredVerticalVelocityInMetrePerSecond}"),
             new TelemetryMessage($"MainEnginesThrottleProportionalGain:{MainEnginesThrottleProportionalGain}"),
             new TelemetryMessage($"MainEnginesThrottleIntegralGain:{MainEnginesThrottleIntegralGain}"),

@@ -1,11 +1,23 @@
 using Starship.Telemetry;
-using Starship.Utility.Timing.Units;
 
 namespace Starship.Flight.Segment.Config
 {
     public interface IFlightSegmentConfig : ITelemetryProvider
     {
-        Seconds TakeoverSecondsInMission { get; }
+        float? TakeoverVerticalVelocityEqualOrOver { get; }
+        float? TakeoverVerticalVelocityEqualOrUnder { get; }
+
+        float? TakeoverYawAngleEqualOrOver { get; }
+        float? TakeoverYawAngleEqualOrUnder { get; }
+
+        float? TakeoverRollAngleEqualOrOver { get; }
+        float? TakeoverRollAngleEqualOrUnder { get; }
+
+        float? TakeoverPitchAngleEqualOrOver { get; }
+        float? TakeoverPitchAngleEqualOrUnder { get; }
+
+        float? TakeoverAltitudeEqualOrOver { get; }
+        float? TakeoverAltitudeEqualOrUnder { get; }
 
         float DesiredVerticalVelocityInMetrePerSecond { get; }
 

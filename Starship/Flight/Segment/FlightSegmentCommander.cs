@@ -10,16 +10,12 @@ using Starship.Flight.Segment.Config;
 using Starship.Sensor;
 using Starship.Telemetry;
 using Starship.Utility.Math;
-using Starship.Utility.Timing.Units;
 
 namespace Starship.Flight.Segment
 {
     // Currently under development
     public sealed class FlightSegmentCommander : IFlightSegmentCommander
     {
-        public Seconds TakeoverSecondsInMission =>
-            _flightSegmentConfig.TakeoverSecondsInMission;
-
         private readonly IFlightSegmentConfig _flightSegmentConfig;
 
         private readonly MainEnginesThrottleRegulator _mainEnginesThrottleRegulator;
@@ -53,6 +49,93 @@ namespace Starship.Flight.Segment
                 _flightSegmentConfig.DesiredRollAngleInDegrees);
             _flapsPitchRegulator = CreateFlapsActuationRegulator(
                 _flightSegmentConfig.DesiredPitchAngleInDegrees);
+        }
+
+        public bool CanTakeover(ISensorSuite sensorSuite)
+        {
+            // Sanity Check, dass nicht over und under gleich sind
+            // Alle non null müssen matchen
+            var isResponsibleForCurrentVerticalVelocity = true;
+            var isResponsibleForCurrentYawAngle = true;
+            var isResponsibleForCurrentRollAngle = true;
+            var isResponsibleForCurrentPitchAngle = true;
+            var isResponsibleForCurrentAltitude = true;
+
+            var takeoverVerticalVelocityEqualOrOver = _flightSegmentConfig.TakeoverVerticalVelocityEqualOrOver;
+            var takeoverVerticalVelocityEqualOrUnder = _flightSegmentConfig.TakeoverVerticalVelocityEqualOrUnder;
+            if (takeoverVerticalVelocityEqualOrOver.HasValue)
+            {
+                isResponsibleForCurrentVerticalVelocity =
+                    sensorSuite.VerticalVelocityInMetrePerSecond >= takeoverVerticalVelocityEqualOrOver;
+            }
+
+            if (takeoverVerticalVelocityEqualOrUnder.HasValue)
+            {
+                isResponsibleForCurrentVerticalVelocity =
+                    sensorSuite.VerticalVelocityInMetrePerSecond <= takeoverVerticalVelocityEqualOrUnder;
+            }
+
+            var takeoverYawAngleEqualOrOver = _flightSegmentConfig.TakeoverYawAngleEqualOrOver;
+            var takeoverYawAngleEqualOrUnder = _flightSegmentConfig.TakeoverYawAngleEqualOrUnder;
+            if (takeoverYawAngleEqualOrOver.HasValue)
+            {
+                isResponsibleForCurrentYawAngle =
+                    sensorSuite.YawAngleInDegrees >= takeoverYawAngleEqualOrOver;
+            }
+
+            if (takeoverYawAngleEqualOrUnder.HasValue)
+            {
+                isResponsibleForCurrentYawAngle =
+                    sensorSuite.YawAngleInDegrees <= takeoverYawAngleEqualOrUnder;
+            }
+
+            var takeoverRollAngleEqualOrOver = _flightSegmentConfig.TakeoverRollAngleEqualOrOver;
+            var takeoverRollAngleEqualOrUnder = _flightSegmentConfig.TakeoverRollAngleEqualOrUnder;
+            if (takeoverRollAngleEqualOrOver.HasValue)
+            {
+                isResponsibleForCurrentRollAngle =
+                    sensorSuite.RollAngleInDegrees >= takeoverRollAngleEqualOrOver;
+            }
+
+            if (takeoverRollAngleEqualOrUnder.HasValue)
+            {
+                isResponsibleForCurrentRollAngle =
+                    sensorSuite.RollAngleInDegrees <= takeoverRollAngleEqualOrUnder;
+            }
+
+            var takeoverPitchAngleEqualOrOver = _flightSegmentConfig.TakeoverPitchAngleEqualOrOver;
+            var takeoverPitchAngleEqualOrUnder = _flightSegmentConfig.TakeoverPitchAngleEqualOrUnder;
+            if (takeoverPitchAngleEqualOrOver.HasValue)
+            {
+                isResponsibleForCurrentPitchAngle =
+                    sensorSuite.PitchAngleInDegrees >= takeoverPitchAngleEqualOrOver;
+            }
+
+            if (takeoverPitchAngleEqualOrUnder.HasValue)
+            {
+                isResponsibleForCurrentPitchAngle =
+                    sensorSuite.PitchAngleInDegrees <= takeoverPitchAngleEqualOrUnder;
+            }
+
+            var takeoverAltitudeEqualOrOver = _flightSegmentConfig.TakeoverAltitudeEqualOrOver;
+            var takeoverAltitudeEqualOrUnder = _flightSegmentConfig.TakeoverAltitudeEqualOrUnder;
+            if (takeoverAltitudeEqualOrOver.HasValue)
+            {
+                isResponsibleForCurrentAltitude =
+                    sensorSuite.AltitudeInMeters >= takeoverAltitudeEqualOrOver;
+            }
+
+            if (takeoverAltitudeEqualOrUnder.HasValue)
+            {
+                isResponsibleForCurrentAltitude =
+                    sensorSuite.AltitudeInMeters <= takeoverAltitudeEqualOrUnder;
+            }
+
+            return isResponsibleForCurrentVerticalVelocity
+                   && isResponsibleForCurrentYawAngle
+                   && isResponsibleForCurrentRollAngle
+                   && isResponsibleForCurrentPitchAngle
+                   && isResponsibleForCurrentAltitude;
         }
 
         public ICommandSuite CommandFlight(ISensorSuite sensorSuite)

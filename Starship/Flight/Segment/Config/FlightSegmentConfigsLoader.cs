@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using Starship.Flight.Segment.Config.Path;
-using Starship.Utility.Timing.Units;
 
 namespace Starship.Flight.Segment.Config
 {
@@ -34,7 +33,16 @@ namespace Starship.Flight.Segment.Config
         private static IFlightSegmentConfig MapFlightSegmentModelToConfig(
             FlightSegmentConfigModel flightSegmentConfigModel
         ) => new FlightSegmentConfig(
-            new Seconds(flightSegmentConfigModel.TakeoverSecondsInMission),
+            flightSegmentConfigModel.TakeoverVerticalVelocityEqualOrOver,
+            flightSegmentConfigModel.TakeoverVerticalVelocityEqualOrUnder,
+            flightSegmentConfigModel.TakeoverYawAngleEqualOrOver,
+            flightSegmentConfigModel.TakeoverYawAngleEqualOrUnder,
+            flightSegmentConfigModel.TakeoverRollAngleEqualOrOver,
+            flightSegmentConfigModel.TakeoverRollAngleEqualOrUnder,
+            flightSegmentConfigModel.TakeoverPitchAngleEqualOrOver,
+            flightSegmentConfigModel.TakeoverPitchAngleEqualOrUnder,
+            flightSegmentConfigModel.TakeoverAltitudeEqualOrOver,
+            flightSegmentConfigModel.TakeoverAltitudeEqualOrUnder,
             flightSegmentConfigModel.DesiredVerticalVelocityInMetrePerSecond,
             flightSegmentConfigModel.MainEnginesThrottleProportionalGain,
             flightSegmentConfigModel.MainEnginesThrottleIntegralGain,

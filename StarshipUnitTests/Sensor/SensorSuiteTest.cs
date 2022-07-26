@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Starship.Sensor;
+using Starship.Sensor.Altitude;
 using Starship.Sensor.Attitude;
 using Starship.Sensor.Velocity;
 using Starship.Telemetry;
@@ -12,6 +13,7 @@ namespace StarshipUnitTests.Sensor
     {
         private Mock<IVelocitySensor> _velocitySensor;
         private Mock<IAttitudeSensor> _attitudeSensor;
+        private Mock<IAltitudeSensor> _altitudeSensor;
         private SensorSuite _sensorSuite;
 
 
@@ -20,10 +22,12 @@ namespace StarshipUnitTests.Sensor
         {
             _velocitySensor = new Mock<IVelocitySensor>();
             _attitudeSensor = new Mock<IAttitudeSensor>();
+            _altitudeSensor = new Mock<IAltitudeSensor>();
 
             _sensorSuite = new SensorSuite(
                 _velocitySensor.Object,
-                _attitudeSensor.Object);
+                _attitudeSensor.Object,
+                _altitudeSensor.Object);
         }
 
         [Test]

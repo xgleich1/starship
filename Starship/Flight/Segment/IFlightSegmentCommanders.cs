@@ -1,7 +1,9 @@
+using Starship.Sensor;
+
 namespace Starship.Flight.Segment
 {
     public interface IFlightSegmentCommanders
     {
-        IFlightSegmentCommander GetCurrentFlightSegmentCommander();
+        IFlightSegmentCommander GetCurrentFlightSegmentCommander(ISensorSuite sensorSuite);
     }
 }
