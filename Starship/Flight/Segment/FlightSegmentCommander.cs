@@ -53,82 +53,54 @@ namespace Starship.Flight.Segment
 
         public bool CanTakeover(ISensorSuite sensorSuite)
         {
-            // Sanity Check, dass nicht over und under gleich sind
-            // Alle non null müssen matchen
+            // Ist Wert zwischen altem und neuen Sensorwert, kann es hier zu misses kommen? Aber man könnte nie drann kommen wegen regulator
+            // Auf Int Runden, weil Kommawerte egal?
+            // horizontalvelocity raus nehmen über desired pitch angle manipulation (uff :D )
+            // Nicht takeover , sondern Abgabe
             var isResponsibleForCurrentVerticalVelocity = true;
             var isResponsibleForCurrentYawAngle = true;
             var isResponsibleForCurrentRollAngle = true;
             var isResponsibleForCurrentPitchAngle = true;
             var isResponsibleForCurrentAltitude = true;
 
-            var takeoverVerticalVelocityEqualOrOver = _flightSegmentConfig.TakeoverVerticalVelocityEqualOrOver;
-            var takeoverVerticalVelocityEqualOrUnder = _flightSegmentConfig.TakeoverVerticalVelocityEqualOrUnder;
-            if (takeoverVerticalVelocityEqualOrOver.HasValue)
+            var takeoverVerticalVelocity = _flightSegmentConfig.TakeoverVerticalVelocity;
+            var takeoverVerticalVelocityTolerance = _flightSegmentConfig.TakeoverVerticalVelocityTolerance;
+            if (takeoverVerticalVelocity.HasValue && takeoverVerticalVelocityTolerance.HasValue)
             {
-                isResponsibleForCurrentVerticalVelocity =
-                    sensorSuite.VerticalVelocityInMetrePerSecond >= takeoverVerticalVelocityEqualOrOver;
+                isResponsibleForCurrentVerticalVelocity = sensorSuite.VerticalVelocityInMetrePerSecond
+                    .ApproximatelyEquals(takeoverVerticalVelocity.Value, takeoverVerticalVelocityTolerance.Value);
             }
 
-            if (takeoverVerticalVelocityEqualOrUnder.HasValue)
+            var takeoverYawAngle = _flightSegmentConfig.TakeoverYawAngle;
+            var takeoverYawAngleTolerance = _flightSegmentConfig.TakeoverYawAngleTolerance;
+            if (takeoverYawAngle.HasValue && takeoverYawAngleTolerance.HasValue)
             {
-                isResponsibleForCurrentVerticalVelocity =
-                    sensorSuite.VerticalVelocityInMetrePerSecond <= takeoverVerticalVelocityEqualOrUnder;
+                isResponsibleForCurrentYawAngle = sensorSuite.YawAngleInDegrees
+                    .ApproximatelyEquals(takeoverYawAngle.Value, takeoverYawAngleTolerance.Value);
             }
 
-            var takeoverYawAngleEqualOrOver = _flightSegmentConfig.TakeoverYawAngleEqualOrOver;
-            var takeoverYawAngleEqualOrUnder = _flightSegmentConfig.TakeoverYawAngleEqualOrUnder;
-            if (takeoverYawAngleEqualOrOver.HasValue)
+            var takeoverRollAngle = _flightSegmentConfig.TakeoverRollAngle;
+            var takeoverRollAngleTolerance = _flightSegmentConfig.TakeoverRollAngleTolerance;
+            if (takeoverRollAngle.HasValue && takeoverRollAngleTolerance.HasValue)
             {
-                isResponsibleForCurrentYawAngle =
-                    sensorSuite.YawAngleInDegrees >= takeoverYawAngleEqualOrOver;
+                isResponsibleForCurrentRollAngle = sensorSuite.RollAngleInDegrees
+                    .ApproximatelyEquals(takeoverRollAngle.Value, takeoverRollAngleTolerance.Value);
             }
 
-            if (takeoverYawAngleEqualOrUnder.HasValue)
+            var takeoverPitchAngle = _flightSegmentConfig.TakeoverPitchAngle;
+            var takeoverPitchAngleTolerance = _flightSegmentConfig.TakeoverPitchAngleTolerance;
+            if (takeoverPitchAngle.HasValue && takeoverPitchAngleTolerance.HasValue)
             {
-                isResponsibleForCurrentYawAngle =
-                    sensorSuite.YawAngleInDegrees <= takeoverYawAngleEqualOrUnder;
+                isResponsibleForCurrentPitchAngle = sensorSuite.PitchAngleInDegrees
+                    .ApproximatelyEquals(takeoverPitchAngle.Value, takeoverPitchAngleTolerance.Value);
             }
 
-            var takeoverRollAngleEqualOrOver = _flightSegmentConfig.TakeoverRollAngleEqualOrOver;
-            var takeoverRollAngleEqualOrUnder = _flightSegmentConfig.TakeoverRollAngleEqualOrUnder;
-            if (takeoverRollAngleEqualOrOver.HasValue)
+            var takeoverAltitude = _flightSegmentConfig.TakeoverAltitude;
+            var takeoverAltitudeTolerance = _flightSegmentConfig.TakeoverAltitudeTolerance;
+            if (takeoverAltitude.HasValue && takeoverAltitudeTolerance.HasValue)
             {
-                isResponsibleForCurrentRollAngle =
-                    sensorSuite.RollAngleInDegrees >= takeoverRollAngleEqualOrOver;
-            }
-
-            if (takeoverRollAngleEqualOrUnder.HasValue)
-            {
-                isResponsibleForCurrentRollAngle =
-                    sensorSuite.RollAngleInDegrees <= takeoverRollAngleEqualOrUnder;
-            }
-
-            var takeoverPitchAngleEqualOrOver = _flightSegmentConfig.TakeoverPitchAngleEqualOrOver;
-            var takeoverPitchAngleEqualOrUnder = _flightSegmentConfig.TakeoverPitchAngleEqualOrUnder;
-            if (takeoverPitchAngleEqualOrOver.HasValue)
-            {
-                isResponsibleForCurrentPitchAngle =
-                    sensorSuite.PitchAngleInDegrees >= takeoverPitchAngleEqualOrOver;
-            }
-
-            if (takeoverPitchAngleEqualOrUnder.HasValue)
-            {
-                isResponsibleForCurrentPitchAngle =
-                    sensorSuite.PitchAngleInDegrees <= takeoverPitchAngleEqualOrUnder;
-            }
-
-            var takeoverAltitudeEqualOrOver = _flightSegmentConfig.TakeoverAltitudeEqualOrOver;
-            var takeoverAltitudeEqualOrUnder = _flightSegmentConfig.TakeoverAltitudeEqualOrUnder;
-            if (takeoverAltitudeEqualOrOver.HasValue)
-            {
-                isResponsibleForCurrentAltitude =
-                    sensorSuite.AltitudeInMeters >= takeoverAltitudeEqualOrOver;
-            }
-
-            if (takeoverAltitudeEqualOrUnder.HasValue)
-            {
-                isResponsibleForCurrentAltitude =
-                    sensorSuite.AltitudeInMeters <= takeoverAltitudeEqualOrUnder;
+                isResponsibleForCurrentAltitude = sensorSuite.AltitudeInMeters
+                    .ApproximatelyEquals(takeoverAltitude.Value, takeoverAltitudeTolerance.Value);
             }
 
             return isResponsibleForCurrentVerticalVelocity

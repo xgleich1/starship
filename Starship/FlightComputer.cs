@@ -81,6 +81,9 @@ namespace Starship
                 ScreenMessages.RemoveMessage(_screenMessage);
                 _screenMessage = ScreenMessages.PostScreenMessage(
                     $"vertical velocity:{(int)sensorSuite.VelocitySensor.VerticalVelocityInMetrePerSecond}," +
+                    $"\nvessel.srf_velocity.x:{(int)Convert.ToSingle(vessel.srf_velocity.x)}," +
+                    $"\nvessel.srf_velocity.y:{(int)Convert.ToSingle(vessel.srf_velocity.y)}," + // y sieht gut aus
+                    $"\nvessel.srf_velocity.z:{(int)Convert.ToSingle(vessel.srf_velocity.z)}," +
                     $"\nyaw angle:{(int)sensorSuite.AttitudeSensor.YawAngleInDegrees}," +
                     $"\nroll angle:{(int)sensorSuite.AttitudeSensor.RollAngleInDegrees}," +
                     $"\npitch angle:{(int)sensorSuite.AttitudeSensor.PitchAngleInDegrees}," +

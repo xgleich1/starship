@@ -4,20 +4,20 @@ namespace Starship.Flight.Segment.Config
 {
     public interface IFlightSegmentConfig : ITelemetryProvider
     {
-        float? TakeoverVerticalVelocityEqualOrOver { get; }
-        float? TakeoverVerticalVelocityEqualOrUnder { get; }
+        float? TakeoverVerticalVelocity { get; }
+        float? TakeoverVerticalVelocityTolerance { get; }
 
-        float? TakeoverYawAngleEqualOrOver { get; }
-        float? TakeoverYawAngleEqualOrUnder { get; }
+        float? TakeoverYawAngle { get; }
+        float? TakeoverYawAngleTolerance { get; }
 
-        float? TakeoverRollAngleEqualOrOver { get; }
-        float? TakeoverRollAngleEqualOrUnder { get; }
+        float? TakeoverRollAngle { get; }
+        float? TakeoverRollAngleTolerance { get; }
 
-        float? TakeoverPitchAngleEqualOrOver { get; }
-        float? TakeoverPitchAngleEqualOrUnder { get; }
+        float? TakeoverPitchAngle { get; }
+        float? TakeoverPitchAngleTolerance { get; }
 
-        float? TakeoverAltitudeEqualOrOver { get; }
-        float? TakeoverAltitudeEqualOrUnder { get; }
+        float? TakeoverAltitude { get; }
+        float? TakeoverAltitudeTolerance { get; }
 
         float DesiredVerticalVelocityInMetrePerSecond { get; }
 

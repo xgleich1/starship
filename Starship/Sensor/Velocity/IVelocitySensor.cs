@@ -9,5 +9,9 @@ namespace Starship.Sensor.Velocity
          * Negative velocity: Downward motion.
          */
         float VerticalVelocityInMetrePerSecond { get; }
+        
+        float ForwardVelocityInMetrePerSecond { get; } // Naming
+        
+        float LateralVelocityInMetrePerSecond { get; }
     }
 }
