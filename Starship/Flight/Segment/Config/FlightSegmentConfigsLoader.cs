@@ -34,15 +34,10 @@ namespace Starship.Flight.Segment.Config
             FlightSegmentConfigModel flightSegmentConfigModel
         ) => new FlightSegmentConfig(
             flightSegmentConfigModel.TakeoverVerticalVelocity,
-            flightSegmentConfigModel.TakeoverVerticalVelocityTolerance,
             flightSegmentConfigModel.TakeoverYawAngle,
-            flightSegmentConfigModel.TakeoverYawAngleTolerance,
             flightSegmentConfigModel.TakeoverRollAngle,
-            flightSegmentConfigModel.TakeoverRollAngleTolerance,
             flightSegmentConfigModel.TakeoverPitchAngle,
-            flightSegmentConfigModel.TakeoverPitchAngleTolerance,
             flightSegmentConfigModel.TakeoverAltitude,
-            flightSegmentConfigModel.TakeoverAltitudeTolerance,
             flightSegmentConfigModel.DesiredVerticalVelocityInMetrePerSecond,
             flightSegmentConfigModel.MainEnginesThrottleProportionalGain,
             flightSegmentConfigModel.MainEnginesThrottleIntegralGain,

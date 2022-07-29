@@ -6,20 +6,11 @@ namespace Starship.Flight.Segment.Config
     // Currently under development
     public readonly struct FlightSegmentConfig : IFlightSegmentConfig
     {
-        public float? TakeoverVerticalVelocity { get; }
-        public float? TakeoverVerticalVelocityTolerance { get; }
-
-        public float? TakeoverYawAngle { get; }
-        public float? TakeoverYawAngleTolerance { get; }
-
-        public float? TakeoverRollAngle { get; }
-        public float? TakeoverRollAngleTolerance { get; }
-
-        public float? TakeoverPitchAngle { get; }
-        public float? TakeoverPitchAngleTolerance { get; }
-
-        public float? TakeoverAltitude { get; }
-        public float? TakeoverAltitudeTolerance { get; }
+        public int? TakeoverVerticalVelocity { get; }
+        public int? TakeoverYawAngle { get; }
+        public int? TakeoverRollAngle { get; }
+        public int? TakeoverPitchAngle { get; }
+        public int? TakeoverAltitude { get; }
 
         public float DesiredVerticalVelocityInMetrePerSecond { get; }
 
@@ -56,16 +47,11 @@ namespace Starship.Flight.Segment.Config
 
 
         public FlightSegmentConfig(
-            float? takeoverVerticalVelocity,
-            float? takeoverVerticalVelocityTolerance,
-            float? takeoverYawAngle,
-            float? takeoverYawAngleTolerance,
-            float? takeoverRollAngle,
-            float? takeoverRollAngleTolerance,
-            float? takeoverPitchAngle,
-            float? takeoverPitchAngleTolerance,
-            float? takeoverAltitude,
-            float? takeoverAltitudeTolerance,
+            int? takeoverVerticalVelocity,
+            int? takeoverYawAngle,
+            int? takeoverRollAngle,
+            int? takeoverPitchAngle,
+            int? takeoverAltitude,
             float desiredVerticalVelocityInMetrePerSecond,
             float mainEnginesThrottleProportionalGain,
             float mainEnginesThrottleIntegralGain,
@@ -92,15 +78,10 @@ namespace Starship.Flight.Segment.Config
             bool legsActuationExtendedState)
         {
             TakeoverVerticalVelocity = takeoverVerticalVelocity;
-            TakeoverVerticalVelocityTolerance = takeoverVerticalVelocityTolerance;
             TakeoverYawAngle = takeoverYawAngle;
-            TakeoverYawAngleTolerance = takeoverYawAngleTolerance;
             TakeoverRollAngle = takeoverRollAngle;
-            TakeoverRollAngleTolerance = takeoverRollAngleTolerance;
             TakeoverPitchAngle = takeoverPitchAngle;
-            TakeoverPitchAngleTolerance = takeoverPitchAngleTolerance;
             TakeoverAltitude = takeoverAltitude;
-            TakeoverAltitudeTolerance = takeoverAltitudeTolerance;
             DesiredVerticalVelocityInMetrePerSecond = desiredVerticalVelocityInMetrePerSecond;
             MainEnginesThrottleProportionalGain = mainEnginesThrottleProportionalGain;
             MainEnginesThrottleIntegralGain = mainEnginesThrottleIntegralGain;
@@ -130,15 +111,10 @@ namespace Starship.Flight.Segment.Config
         public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>
         {
             new TelemetryMessage($"TakeoverVerticalVelocity:{TakeoverVerticalVelocity}"),
-            new TelemetryMessage($"TakeoverVerticalVelocityTolerance:{TakeoverVerticalVelocityTolerance}"),
             new TelemetryMessage($"TakeoverYawAngle:{TakeoverYawAngle}"),
-            new TelemetryMessage($"TakeoverYawAngleTolerance:{TakeoverYawAngleTolerance}"),
             new TelemetryMessage($"TakeoverRollAngle:{TakeoverRollAngle}"),
-            new TelemetryMessage($"TakeoverRollAngleTolerance:{TakeoverRollAngleTolerance}"),
             new TelemetryMessage($"TakeoverPitchAngle:{TakeoverPitchAngle}"),
-            new TelemetryMessage($"TakeoverPitchAngleTolerance:{TakeoverPitchAngleTolerance}"),
             new TelemetryMessage($"TakeoverAltitude:{TakeoverAltitude}"),
-            new TelemetryMessage($"TakeoverAltitudeTolerance:{TakeoverAltitudeTolerance}"),
             new TelemetryMessage($"DesiredVerticalVelocityInMetrePerSecond:{DesiredVerticalVelocityInMetrePerSecond}"),
             new TelemetryMessage($"MainEnginesThrottleProportionalGain:{MainEnginesThrottleProportionalGain}"),
             new TelemetryMessage($"MainEnginesThrottleIntegralGain:{MainEnginesThrottleIntegralGain}"),

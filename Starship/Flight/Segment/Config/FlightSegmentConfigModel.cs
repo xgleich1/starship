@@ -2,25 +2,11 @@ namespace Starship.Flight.Segment.Config
 {
     public sealed class FlightSegmentConfigModel
     {
-        
-        
-        
-        public float? TakeoverVerticalVelocity;
-        public float? TakeoverVerticalVelocityTolerance;
-
-        public float? TakeoverYawAngle;
-        public float? TakeoverYawAngleTolerance;
-
-        public float? TakeoverRollAngle;
-        public float? TakeoverRollAngleTolerance;
-
-        public float? TakeoverPitchAngle;
-        public float? TakeoverPitchAngleTolerance;
-
-        
-        
-        public float? TakeoverAltitude;
-        public float? TakeoverAltitudeTolerance;
+        public int? TakeoverVerticalVelocity;
+        public int? TakeoverYawAngle;
+        public int? TakeoverRollAngle;
+        public int? TakeoverPitchAngle;
+        public int? TakeoverAltitude;
 
         public float DesiredVerticalVelocityInMetrePerSecond;
 

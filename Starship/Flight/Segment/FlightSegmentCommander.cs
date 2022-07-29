@@ -56,52 +56,26 @@ namespace Starship.Flight.Segment
             // Ist Wert zwischen altem und neuen Sensorwert, kann es hier zu misses kommen? Aber man könnte nie drann kommen wegen regulator
             // Auf Int Runden, weil Kommawerte egal?
             // horizontalvelocity raus nehmen über desired pitch angle manipulation (uff :D )
-            // Nicht takeover , sondern Abgabe
-            var isResponsibleForCurrentVerticalVelocity = true;
-            var isResponsibleForCurrentYawAngle = true;
-            var isResponsibleForCurrentRollAngle = true;
-            var isResponsibleForCurrentPitchAngle = true;
-            var isResponsibleForCurrentAltitude = true;
-
+            // Nicht takeover , sondern handover (!)
+            
+            
+            // Letzter Commander hat kein Handover -
             var takeoverVerticalVelocity = _flightSegmentConfig.TakeoverVerticalVelocity;
-            var takeoverVerticalVelocityTolerance = _flightSegmentConfig.TakeoverVerticalVelocityTolerance;
-            if (takeoverVerticalVelocity.HasValue && takeoverVerticalVelocityTolerance.HasValue)
-            {
-                isResponsibleForCurrentVerticalVelocity = sensorSuite.VerticalVelocityInMetrePerSecond
-                    .ApproximatelyEquals(takeoverVerticalVelocity.Value, takeoverVerticalVelocityTolerance.Value);
-            }
-
             var takeoverYawAngle = _flightSegmentConfig.TakeoverYawAngle;
-            var takeoverYawAngleTolerance = _flightSegmentConfig.TakeoverYawAngleTolerance;
-            if (takeoverYawAngle.HasValue && takeoverYawAngleTolerance.HasValue)
-            {
-                isResponsibleForCurrentYawAngle = sensorSuite.YawAngleInDegrees
-                    .ApproximatelyEquals(takeoverYawAngle.Value, takeoverYawAngleTolerance.Value);
-            }
-
             var takeoverRollAngle = _flightSegmentConfig.TakeoverRollAngle;
-            var takeoverRollAngleTolerance = _flightSegmentConfig.TakeoverRollAngleTolerance;
-            if (takeoverRollAngle.HasValue && takeoverRollAngleTolerance.HasValue)
-            {
-                isResponsibleForCurrentRollAngle = sensorSuite.RollAngleInDegrees
-                    .ApproximatelyEquals(takeoverRollAngle.Value, takeoverRollAngleTolerance.Value);
-            }
-
             var takeoverPitchAngle = _flightSegmentConfig.TakeoverPitchAngle;
-            var takeoverPitchAngleTolerance = _flightSegmentConfig.TakeoverPitchAngleTolerance;
-            if (takeoverPitchAngle.HasValue && takeoverPitchAngleTolerance.HasValue)
-            {
-                isResponsibleForCurrentPitchAngle = sensorSuite.PitchAngleInDegrees
-                    .ApproximatelyEquals(takeoverPitchAngle.Value, takeoverPitchAngleTolerance.Value);
-            }
-
             var takeoverAltitude = _flightSegmentConfig.TakeoverAltitude;
-            var takeoverAltitudeTolerance = _flightSegmentConfig.TakeoverAltitudeTolerance;
-            if (takeoverAltitude.HasValue && takeoverAltitudeTolerance.HasValue)
-            {
-                isResponsibleForCurrentAltitude = sensorSuite.AltitudeInMeters
-                    .ApproximatelyEquals(takeoverAltitude.Value, takeoverAltitudeTolerance.Value);
-            }
+
+            var isResponsibleForCurrentVerticalVelocity =
+                !takeoverVerticalVelocity.HasValue || takeoverVerticalVelocity.Value == (int)sensorSuite.VerticalVelocityInMetrePerSecond;
+            var isResponsibleForCurrentYawAngle =
+                !takeoverYawAngle.HasValue || takeoverYawAngle.Value == (int)sensorSuite.YawAngleInDegrees;
+            var isResponsibleForCurrentRollAngle =
+                !takeoverRollAngle.HasValue || takeoverRollAngle.Value == (int)sensorSuite.RollAngleInDegrees;
+            var isResponsibleForCurrentPitchAngle =
+                !takeoverPitchAngle.HasValue || takeoverPitchAngle.Value == (int)sensorSuite.PitchAngleInDegrees;
+            var isResponsibleForCurrentAltitude =
+                !takeoverAltitude.HasValue || takeoverAltitude.Value == (int)sensorSuite.AltitudeInMeters;
 
             return isResponsibleForCurrentVerticalVelocity
                    && isResponsibleForCurrentYawAngle
