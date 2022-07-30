@@ -33,11 +33,16 @@ namespace Starship.Flight.Segment.Config
         private static IFlightSegmentConfig MapFlightSegmentModelToConfig(
             FlightSegmentConfigModel flightSegmentConfigModel
         ) => new FlightSegmentConfig(
-            flightSegmentConfigModel.TakeoverVerticalVelocity,
-            flightSegmentConfigModel.TakeoverYawAngle,
-            flightSegmentConfigModel.TakeoverRollAngle,
-            flightSegmentConfigModel.TakeoverPitchAngle,
-            flightSegmentConfigModel.TakeoverAltitude,
+            flightSegmentConfigModel.HandoverVerticalVelocityInMetrePerSecondEqualOrOver,
+            flightSegmentConfigModel.HandoverVerticalVelocityInMetrePerSecondEqualOrUnder,
+            flightSegmentConfigModel.HandoverYawAngleInDegreesEqualOrOver,
+            flightSegmentConfigModel.HandoverYawAngleInDegreesEqualOrUnder,
+            flightSegmentConfigModel.HandoverRollAngleInDegreesEqualOrOver,
+            flightSegmentConfigModel.HandoverRollAngleInDegreesEqualOrUnder,
+            flightSegmentConfigModel.HandoverPitchAngleInDegreesEqualOrOver,
+            flightSegmentConfigModel.HandoverPitchAngleInDegreesEqualOrUnder,
+            flightSegmentConfigModel.HandoverAltitudeInMetersEqualOrOver,
+            flightSegmentConfigModel.HandoverAltitudeInMetersEqualOrUnder,
             flightSegmentConfigModel.DesiredVerticalVelocityInMetrePerSecond,
             flightSegmentConfigModel.MainEnginesThrottleProportionalGain,
             flightSegmentConfigModel.MainEnginesThrottleIntegralGain,

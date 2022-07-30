@@ -6,8 +6,8 @@ namespace Starship.Flight.Segment
 {
     public interface IFlightSegmentCommander : ITelemetryProvider
     {
-        bool CanTakeover(ISensorSuite sensorSuite);
-        
+        bool CanHandover(ISensorSuite sensorSuite);
+
         ICommandSuite CommandFlight(ISensorSuite sensorSuite);
     }
 }

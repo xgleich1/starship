@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Moq;
 using NUnit.Framework;
 using Starship.Flight.Segment;
@@ -39,6 +40,24 @@ namespace StarshipUnitTests.Flight.Segment
             _sensorSuiteWithAltitude50 = new Mock<ISensorSuite>();
             _sensorSuiteWithAltitude100 = new Mock<ISensorSuite>();
         }
+        
+        
+         public bool CanHandover()
+        {
+            var handoverConditions = new List<bool>();
+
+            handoverConditions.Add(true);
+            
+            return handoverConditions.Count != 0 && handoverConditions.Aggregate(
+                (allConditions, nextCondition) => allConditions && nextCondition);
+        }
+         
+         [Test]
+         public void check()
+         {
+             Assert.That(CanHandover(), Is.EqualTo(false));
+         }
+        
 
         [Test]
         public void Should_get_the_current_flight_segment_commander_when_there_is_only_one()
@@ -75,16 +94,16 @@ namespace StarshipUnitTests.Flight.Segment
             // C true
             // D true
             _flightSegmentCommanderA.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude0.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude0.Object)
             ).Returns(true);
             _flightSegmentCommanderB.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude0.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude0.Object)
             ).Returns(false);
             _flightSegmentCommanderC.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude0.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude0.Object)
             ).Returns(true);
             _flightSegmentCommanderD.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude0.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude0.Object)
             ).Returns(true);
 
             // alt 100
@@ -93,16 +112,16 @@ namespace StarshipUnitTests.Flight.Segment
             // C false
             // D false
             _flightSegmentCommanderA.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude100.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude100.Object)
             ).Returns(true);
             _flightSegmentCommanderB.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude100.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude100.Object)
             ).Returns(true);
             _flightSegmentCommanderC.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude100.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude100.Object)
             ).Returns(false);
             _flightSegmentCommanderD.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude100.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude100.Object)
             ).Returns(false);
             
             // alt 50
@@ -111,16 +130,16 @@ namespace StarshipUnitTests.Flight.Segment
             // C true
             // D false
             _flightSegmentCommanderA.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude50.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude50.Object)
             ).Returns(true);
             _flightSegmentCommanderB.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude50.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude50.Object)
             ).Returns(false);
             _flightSegmentCommanderC.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude50.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude50.Object)
             ).Returns(true);
             _flightSegmentCommanderD.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude50.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude50.Object)
             ).Returns(false);
             
             // alt 1
@@ -129,16 +148,16 @@ namespace StarshipUnitTests.Flight.Segment
             // C true
             // D true
             _flightSegmentCommanderA.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude1.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude1.Object)
             ).Returns(true);
             _flightSegmentCommanderB.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude1.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude1.Object)
             ).Returns(false);
             _flightSegmentCommanderC.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude1.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude1.Object)
             ).Returns(true);
             _flightSegmentCommanderD.Setup(
-                mock => mock.CanTakeover(_sensorSuiteWithAltitude1.Object)
+                mock => mock.CanHandover(_sensorSuiteWithAltitude1.Object)
             ).Returns(true);
             
             _flightSegmentCommandersLoader.Setup(mock => mock.LoadFlightSegmentCommanders())

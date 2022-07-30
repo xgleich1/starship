@@ -9,15 +9,12 @@ namespace Starship.Flight.Segment
         private readonly IFlightSegmentConfigsLoader _flightSegmentConfigsLoader;
 
 
-        public FlightSegmentCommandersLoader(IFlightSegmentConfigsLoader flightSegmentConfigsLoader)
-        {
+        public FlightSegmentCommandersLoader(IFlightSegmentConfigsLoader flightSegmentConfigsLoader) =>
             _flightSegmentConfigsLoader = flightSegmentConfigsLoader;
-        }
 
-        public List<IFlightSegmentCommander> LoadFlightSegmentCommanders() =>
-            _flightSegmentConfigsLoader
-                .LoadFlightSegmentConfigs()
-                .Select(config => new FlightSegmentCommander(config) as IFlightSegmentCommander)
-                .ToList();
+        public List<IFlightSegmentCommander> LoadFlightSegmentCommanders() => _flightSegmentConfigsLoader
+            .LoadFlightSegmentConfigs()
+            .Select(config => new FlightSegmentCommander(config) as IFlightSegmentCommander)
+            .ToList();
     }
 }

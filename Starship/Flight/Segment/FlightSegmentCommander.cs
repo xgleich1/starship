@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Starship.Flight.Command;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
@@ -51,37 +52,93 @@ namespace Starship.Flight.Segment
                 _flightSegmentConfig.DesiredPitchAngleInDegrees);
         }
 
-        public bool CanTakeover(ISensorSuite sensorSuite)
+        public bool CanHandover(ISensorSuite sensorSuite)
         {
-            // Ist Wert zwischen altem und neuen Sensorwert, kann es hier zu misses kommen? Aber man könnte nie drann kommen wegen regulator
-            // Auf Int Runden, weil Kommawerte egal?
-            // horizontalvelocity raus nehmen über desired pitch angle manipulation (uff :D )
-            // Nicht takeover , sondern handover (!)
-            
-            
-            // Letzter Commander hat kein Handover -
-            var takeoverVerticalVelocity = _flightSegmentConfig.TakeoverVerticalVelocity;
-            var takeoverYawAngle = _flightSegmentConfig.TakeoverYawAngle;
-            var takeoverRollAngle = _flightSegmentConfig.TakeoverRollAngle;
-            var takeoverPitchAngle = _flightSegmentConfig.TakeoverPitchAngle;
-            var takeoverAltitude = _flightSegmentConfig.TakeoverAltitude;
+            var handoverConditions = new List<bool>();
 
-            var isResponsibleForCurrentVerticalVelocity =
-                !takeoverVerticalVelocity.HasValue || takeoverVerticalVelocity.Value == (int)sensorSuite.VerticalVelocityInMetrePerSecond;
-            var isResponsibleForCurrentYawAngle =
-                !takeoverYawAngle.HasValue || takeoverYawAngle.Value == (int)sensorSuite.YawAngleInDegrees;
-            var isResponsibleForCurrentRollAngle =
-                !takeoverRollAngle.HasValue || takeoverRollAngle.Value == (int)sensorSuite.RollAngleInDegrees;
-            var isResponsibleForCurrentPitchAngle =
-                !takeoverPitchAngle.HasValue || takeoverPitchAngle.Value == (int)sensorSuite.PitchAngleInDegrees;
-            var isResponsibleForCurrentAltitude =
-                !takeoverAltitude.HasValue || takeoverAltitude.Value == (int)sensorSuite.AltitudeInMeters;
+            var handoverVerticalVelocityInMetrePerSecondEqualOrOver =
+                _flightSegmentConfig.HandoverVerticalVelocityInMetrePerSecondEqualOrOver;
+            var handoverVerticalVelocityInMetrePerSecondEqualOrUnder =
+                _flightSegmentConfig.HandoverVerticalVelocityInMetrePerSecondEqualOrUnder;
+            var handoverYawAngleInDegreesEqualOrOver =
+                _flightSegmentConfig.HandoverYawAngleInDegreesEqualOrOver;
+            var handoverYawAngleInDegreesEqualOrUnder =
+                _flightSegmentConfig.HandoverYawAngleInDegreesEqualOrUnder;
+            var handoverRollAngleInDegreesEqualOrOver =
+                _flightSegmentConfig.HandoverRollAngleInDegreesEqualOrOver;
+            var handoverRollAngleInDegreesEqualOrUnder =
+                _flightSegmentConfig.HandoverRollAngleInDegreesEqualOrUnder;
+            var handoverPitchAngleInDegreesEqualOrOver =
+                _flightSegmentConfig.HandoverPitchAngleInDegreesEqualOrOver;
+            var handoverPitchAngleInDegreesEqualOrUnder =
+                _flightSegmentConfig.HandoverPitchAngleInDegreesEqualOrUnder;
+            var handoverAltitudeInMetersEqualOrOver =
+                _flightSegmentConfig.HandoverAltitudeInMetersEqualOrOver;
+            var handoverAltitudeInMetersEqualOrUnder =
+                _flightSegmentConfig.HandoverAltitudeInMetersEqualOrUnder;
 
-            return isResponsibleForCurrentVerticalVelocity
-                   && isResponsibleForCurrentYawAngle
-                   && isResponsibleForCurrentRollAngle
-                   && isResponsibleForCurrentPitchAngle
-                   && isResponsibleForCurrentAltitude;
+            if (handoverVerticalVelocityInMetrePerSecondEqualOrOver.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.VerticalVelocityInMetrePerSecond >= handoverVerticalVelocityInMetrePerSecondEqualOrOver.Value);
+            }
+
+            if (handoverVerticalVelocityInMetrePerSecondEqualOrUnder.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.VerticalVelocityInMetrePerSecond <= handoverVerticalVelocityInMetrePerSecondEqualOrUnder.Value);
+            }
+
+            if (handoverYawAngleInDegreesEqualOrOver.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.YawAngleInDegrees >= handoverYawAngleInDegreesEqualOrOver.Value);
+            }
+
+            if (handoverYawAngleInDegreesEqualOrUnder.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.YawAngleInDegrees <= handoverYawAngleInDegreesEqualOrUnder.Value);
+            }
+
+            if (handoverRollAngleInDegreesEqualOrOver.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.RollAngleInDegrees >= handoverRollAngleInDegreesEqualOrOver.Value);
+            }
+
+            if (handoverRollAngleInDegreesEqualOrUnder.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.RollAngleInDegrees <= handoverRollAngleInDegreesEqualOrUnder.Value);
+            }
+
+            if (handoverPitchAngleInDegreesEqualOrOver.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.PitchAngleInDegrees >= handoverPitchAngleInDegreesEqualOrOver.Value);
+            }
+
+            if (handoverPitchAngleInDegreesEqualOrUnder.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.PitchAngleInDegrees <= handoverPitchAngleInDegreesEqualOrUnder.Value);
+            }
+
+            if (handoverAltitudeInMetersEqualOrOver.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.AltitudeInMeters >= handoverAltitudeInMetersEqualOrOver.Value);
+            }
+
+            if (handoverAltitudeInMetersEqualOrUnder.HasValue)
+            {
+                handoverConditions.Add(
+                    sensorSuite.AltitudeInMeters <= handoverAltitudeInMetersEqualOrUnder.Value);
+            }
+
+            return handoverConditions.Count != 0 && handoverConditions.Aggregate(
+                (allConditions, nextCondition) => allConditions && nextCondition);
         }
 
         public ICommandSuite CommandFlight(ISensorSuite sensorSuite)

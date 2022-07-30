@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Starship.Flight.Segment.Config;
-using Starship.Mission;
 using Starship.Sensor;
 
 namespace Starship.Flight.Segment
@@ -10,32 +8,18 @@ namespace Starship.Flight.Segment
     {
         private readonly List<IFlightSegmentCommander> _flightSegmentCommanders;
 
-        private IFlightSegmentCommander _currentFlightSegmentCommander;
 
-
-        public FlightSegmentCommanders(IFlightSegmentCommandersLoader flightSegmentCommandersLoader)
-        {
-            _flightSegmentCommanders = flightSegmentCommandersLoader
-                .LoadFlightSegmentCommanders();
-
-            _currentFlightSegmentCommander = _flightSegmentCommanders.First();
-
-            // Test for when this line is missing
-            _flightSegmentCommanders.Remove(_currentFlightSegmentCommander);
-        }
+        public FlightSegmentCommanders(IFlightSegmentCommandersLoader flightSegmentCommandersLoader) =>
+            _flightSegmentCommanders = flightSegmentCommandersLoader.LoadFlightSegmentCommanders();
 
         public IFlightSegmentCommander GetCurrentFlightSegmentCommander(ISensorSuite sensorSuite)
         {
-            var nextFlightSegmentCommander = _flightSegmentCommanders.FirstOrDefault();
-
-            if (nextFlightSegmentCommander?.CanTakeover(sensorSuite) == true)
+            if (_flightSegmentCommanders.First().CanHandover(sensorSuite))
             {
-                _flightSegmentCommanders.Remove(nextFlightSegmentCommander);
-
-                _currentFlightSegmentCommander = nextFlightSegmentCommander;
+                _flightSegmentCommanders.RemoveAt(0);
             }
 
-            return _currentFlightSegmentCommander;
+            return _flightSegmentCommanders.First();
         }
     }
 }

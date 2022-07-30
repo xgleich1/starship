@@ -6,11 +6,20 @@ namespace Starship.Flight.Segment.Config
     // Currently under development
     public readonly struct FlightSegmentConfig : IFlightSegmentConfig
     {
-        public int? TakeoverVerticalVelocity { get; }
-        public int? TakeoverYawAngle { get; }
-        public int? TakeoverRollAngle { get; }
-        public int? TakeoverPitchAngle { get; }
-        public int? TakeoverAltitude { get; }
+        public float? HandoverVerticalVelocityInMetrePerSecondEqualOrOver { get; }
+        public float? HandoverVerticalVelocityInMetrePerSecondEqualOrUnder { get; }
+
+        public float? HandoverYawAngleInDegreesEqualOrOver { get; }
+        public float? HandoverYawAngleInDegreesEqualOrUnder { get; }
+
+        public float? HandoverRollAngleInDegreesEqualOrOver { get; }
+        public float? HandoverRollAngleInDegreesEqualOrUnder { get; }
+
+        public float? HandoverPitchAngleInDegreesEqualOrOver { get; }
+        public float? HandoverPitchAngleInDegreesEqualOrUnder { get; }
+
+        public float? HandoverAltitudeInMetersEqualOrOver { get; }
+        public float? HandoverAltitudeInMetersEqualOrUnder { get; }
 
         public float DesiredVerticalVelocityInMetrePerSecond { get; }
 
@@ -47,11 +56,16 @@ namespace Starship.Flight.Segment.Config
 
 
         public FlightSegmentConfig(
-            int? takeoverVerticalVelocity,
-            int? takeoverYawAngle,
-            int? takeoverRollAngle,
-            int? takeoverPitchAngle,
-            int? takeoverAltitude,
+            float? handoverVerticalVelocityInMetrePerSecondEqualOrOver,
+            float? handoverVerticalVelocityInMetrePerSecondEqualOrUnder,
+            float? handoverYawAngleInDegreesEqualOrOver,
+            float? handoverYawAngleInDegreesEqualOrUnder,
+            float? handoverRollAngleInDegreesEqualOrOver,
+            float? handoverRollAngleInDegreesEqualOrUnder,
+            float? handoverPitchAngleInDegreesEqualOrOver,
+            float? handoverPitchAngleInDegreesEqualOrUnder,
+            float? handoverAltitudeInMetersEqualOrOver,
+            float? handoverAltitudeInMetersEqualOrUnder,
             float desiredVerticalVelocityInMetrePerSecond,
             float mainEnginesThrottleProportionalGain,
             float mainEnginesThrottleIntegralGain,
@@ -77,11 +91,16 @@ namespace Starship.Flight.Segment.Config
             float? bottomRightFlapDeployPercentOverwrite,
             bool legsActuationExtendedState)
         {
-            TakeoverVerticalVelocity = takeoverVerticalVelocity;
-            TakeoverYawAngle = takeoverYawAngle;
-            TakeoverRollAngle = takeoverRollAngle;
-            TakeoverPitchAngle = takeoverPitchAngle;
-            TakeoverAltitude = takeoverAltitude;
+            HandoverVerticalVelocityInMetrePerSecondEqualOrOver = handoverVerticalVelocityInMetrePerSecondEqualOrOver;
+            HandoverVerticalVelocityInMetrePerSecondEqualOrUnder = handoverVerticalVelocityInMetrePerSecondEqualOrUnder;
+            HandoverYawAngleInDegreesEqualOrOver = handoverYawAngleInDegreesEqualOrOver;
+            HandoverYawAngleInDegreesEqualOrUnder = handoverYawAngleInDegreesEqualOrUnder;
+            HandoverRollAngleInDegreesEqualOrOver = handoverRollAngleInDegreesEqualOrOver;
+            HandoverRollAngleInDegreesEqualOrUnder = handoverRollAngleInDegreesEqualOrUnder;
+            HandoverPitchAngleInDegreesEqualOrOver = handoverPitchAngleInDegreesEqualOrOver;
+            HandoverPitchAngleInDegreesEqualOrUnder = handoverPitchAngleInDegreesEqualOrUnder;
+            HandoverAltitudeInMetersEqualOrOver = handoverAltitudeInMetersEqualOrOver;
+            HandoverAltitudeInMetersEqualOrUnder = handoverAltitudeInMetersEqualOrUnder;
             DesiredVerticalVelocityInMetrePerSecond = desiredVerticalVelocityInMetrePerSecond;
             MainEnginesThrottleProportionalGain = mainEnginesThrottleProportionalGain;
             MainEnginesThrottleIntegralGain = mainEnginesThrottleIntegralGain;
@@ -110,11 +129,16 @@ namespace Starship.Flight.Segment.Config
 
         public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>
         {
-            new TelemetryMessage($"TakeoverVerticalVelocity:{TakeoverVerticalVelocity}"),
-            new TelemetryMessage($"TakeoverYawAngle:{TakeoverYawAngle}"),
-            new TelemetryMessage($"TakeoverRollAngle:{TakeoverRollAngle}"),
-            new TelemetryMessage($"TakeoverPitchAngle:{TakeoverPitchAngle}"),
-            new TelemetryMessage($"TakeoverAltitude:{TakeoverAltitude}"),
+            new TelemetryMessage($"HandoverVerticalVelocityInMetrePerSecondEqualOrOver:{HandoverVerticalVelocityInMetrePerSecondEqualOrOver}"),
+            new TelemetryMessage($"HandoverVerticalVelocityInMetrePerSecondEqualOrUnder:{HandoverVerticalVelocityInMetrePerSecondEqualOrUnder}"),
+            new TelemetryMessage($"HandoverYawAngleInDegreesEqualOrOver:{HandoverYawAngleInDegreesEqualOrOver}"),
+            new TelemetryMessage($"HandoverYawAngleInDegreesEqualOrUnder:{HandoverYawAngleInDegreesEqualOrUnder}"),
+            new TelemetryMessage($"HandoverRollAngleInDegreesEqualOrOver:{HandoverRollAngleInDegreesEqualOrOver}"),
+            new TelemetryMessage($"HandoverRollAngleInDegreesEqualOrUnder:{HandoverRollAngleInDegreesEqualOrUnder}"),
+            new TelemetryMessage($"HandoverPitchAngleInDegreesEqualOrOver:{HandoverPitchAngleInDegreesEqualOrOver}"),
+            new TelemetryMessage($"HandoverPitchAngleInDegreesEqualOrUnder:{HandoverPitchAngleInDegreesEqualOrUnder}"),
+            new TelemetryMessage($"HandoverAltitudeInMetersEqualOrOver:{HandoverAltitudeInMetersEqualOrOver}"),
+            new TelemetryMessage($"HandoverAltitudeInMetersEqualOrUnder:{HandoverAltitudeInMetersEqualOrUnder}"),
             new TelemetryMessage($"DesiredVerticalVelocityInMetrePerSecond:{DesiredVerticalVelocityInMetrePerSecond}"),
             new TelemetryMessage($"MainEnginesThrottleProportionalGain:{MainEnginesThrottleProportionalGain}"),
             new TelemetryMessage($"MainEnginesThrottleIntegralGain:{MainEnginesThrottleIntegralGain}"),
