@@ -81,14 +81,23 @@ namespace Starship
                 ScreenMessages.RemoveMessage(_screenMessage);
                 _screenMessage = ScreenMessages.PostScreenMessage(
                     $"vertical velocity:{(int)sensorSuite.VelocitySensor.VerticalVelocityInMetrePerSecond}," +
-                    $"\nvessel.srf_velocity.x:{(int)Convert.ToSingle(vessel.srf_velocity.x)}," +
-                    $"\nvessel.srf_velocity.y:{(int)Convert.ToSingle(vessel.srf_velocity.y)}," + // y sieht gut aus
-                    $"\nvessel.srf_velocity.z:{(int)Convert.ToSingle(vessel.srf_velocity.z)}," +
+                    $"\nvessel.horizontalSrfSpeed:{(int)Convert.ToSingle(vessel.horizontalSrfSpeed)}," +
                     $"\nyaw angle:{(int)sensorSuite.AttitudeSensor.YawAngleInDegrees}," +
                     $"\nroll angle:{(int)sensorSuite.AttitudeSensor.RollAngleInDegrees}," +
                     $"\npitch angle:{(int)sensorSuite.AttitudeSensor.PitchAngleInDegrees}," +
                     $"\naltitude:{(int)sensorSuite.AltitudeSensor.AltitudeInMeters},",
-                    float.MaxValue, ScreenMessageStyle.UPPER_LEFT);
+                    16.7F, ScreenMessageStyle.UPPER_LEFT);
+                
+                // _screenMessage = ScreenMessages.PostScreenMessage(
+                //     $"vertical velocity:{(int)sensorSuite.VelocitySensor.VerticalVelocityInMetrePerSecond}," +
+                //     $"\nvessel.srf_velocity.x:{(int)Convert.ToSingle(vessel.srf_velocity.x)}," +
+                //     $"\nvessel.srf_velocity.y:{(int)Convert.ToSingle(vessel.srf_velocity.y)}," + // y sieht gut aus
+                //     $"\nvessel.srf_velocity.z:{(int)Convert.ToSingle(vessel.srf_velocity.z)}," +
+                //     $"\nyaw angle:{(int)sensorSuite.AttitudeSensor.YawAngleInDegrees}," +
+                //     $"\nroll angle:{(int)sensorSuite.AttitudeSensor.RollAngleInDegrees}," +
+                //     $"\npitch angle:{(int)sensorSuite.AttitudeSensor.PitchAngleInDegrees}," +
+                //     $"\naltitude:{(int)sensorSuite.AltitudeSensor.AltitudeInMeters},",
+                //     float.MaxValue, ScreenMessageStyle.UPPER_LEFT);
             };
         }
 
