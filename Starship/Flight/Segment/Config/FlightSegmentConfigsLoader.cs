@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using Starship.Flight.Segment.Config.Path;
-using Starship.Utility.Timing.Units;
 
 namespace Starship.Flight.Segment.Config
 {
@@ -13,12 +11,10 @@ namespace Starship.Flight.Segment.Config
         private readonly IFlightSegmentConfigsPath _flightSegmentConfigsPath;
 
 
-        public FlightSegmentConfigsLoader(IFlightSegmentConfigsPath flightSegmentConfigsPath)
-        {
+        public FlightSegmentConfigsLoader(IFlightSegmentConfigsPath flightSegmentConfigsPath) =>
             _flightSegmentConfigsPath = flightSegmentConfigsPath;
-        }
 
-        public IEnumerable<IFlightSegmentConfig> LoadFlightSegmentConfigs()
+        public IEnumerable<FlightSegmentConfig> LoadFlightSegmentConfigs()
         {
             using (var flightSegmentConfigsFile = File.OpenRead(_flightSegmentConfigsPath.RawPath))
             {
@@ -27,36 +23,59 @@ namespace Starship.Flight.Segment.Config
                 var flightSegmentConfigModels = xmlSerializer
                     .Deserialize(flightSegmentConfigsFile) as List<FlightSegmentConfigModel>;
 
-                return flightSegmentConfigModels.Select(MapFlightSegmentModelToConfig);
+                return flightSegmentConfigModels.Select(MapFlightSegmentModelToConfig).ToList();
             }
         }
 
-        private static IFlightSegmentConfig MapFlightSegmentModelToConfig(
+        private static FlightSegmentConfig MapFlightSegmentModelToConfig(
             FlightSegmentConfigModel flightSegmentConfigModel
         ) => new FlightSegmentConfig(
-            new Seconds(flightSegmentConfigModel.TakeoverSecondsInMission),
-            flightSegmentConfigModel.DesiredVerticalVelocityInMetrePerSecond,
-            flightSegmentConfigModel.MainEnginesThrottleProportionalGain,
-            flightSegmentConfigModel.MainEnginesThrottleIntegralGain,
-            flightSegmentConfigModel.MainEnginesThrottleDerivativeGain,
-            flightSegmentConfigModel.TopMainEngineThrottlePercentOverwrite,
-            flightSegmentConfigModel.BottomLeftMainEngineThrottlePercentOverwrite,
-            flightSegmentConfigModel.BottomRightMainEngineThrottlePercentOverwrite,
+            flightSegmentConfigModel.HandoverYawAngleInDegreesEqualOrOver,
+            flightSegmentConfigModel.HandoverYawAngleInDegreesEqualOrUnder,
+            flightSegmentConfigModel.HandoverRollAngleInDegreesEqualOrOver,
+            flightSegmentConfigModel.HandoverRollAngleInDegreesEqualOrUnder,
+            flightSegmentConfigModel.HandoverPitchAngleInDegreesEqualOrOver,
+            flightSegmentConfigModel.HandoverPitchAngleInDegreesEqualOrUnder,
+            flightSegmentConfigModel.HandoverAltitudeAboveTerrainInMetersEqualOrOver,
+            flightSegmentConfigModel.HandoverAltitudeAboveTerrainInMetersEqualOrUnder,
+            flightSegmentConfigModel.HandoverLateralVelocityInMetrePerSecondEqualOrOver,
+            flightSegmentConfigModel.HandoverLateralVelocityInMetrePerSecondEqualOrUnder,
+            flightSegmentConfigModel.HandoverVerticalVelocityInMetrePerSecondEqualOrOver,
+            flightSegmentConfigModel.HandoverVerticalVelocityInMetrePerSecondEqualOrUnder,
+            flightSegmentConfigModel.HandoverHorizontalVelocityInMetrePerSecondEqualOrOver,
+            flightSegmentConfigModel.HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder,
+            flightSegmentConfigModel.DesiredLegsExtendedState,
             flightSegmentConfigModel.DesiredYawAngleInDegrees,
             flightSegmentConfigModel.DesiredRollAngleInDegrees,
             flightSegmentConfigModel.DesiredPitchAngleInDegrees,
-            flightSegmentConfigModel.MainEnginesGimbalProportionalGain,
-            flightSegmentConfigModel.MainEnginesGimbalIntegralGain,
-            flightSegmentConfigModel.MainEnginesGimbalDerivativeGain,
-            flightSegmentConfigModel.MainEnginesYawPercentOverwrite,
-            flightSegmentConfigModel.MainEnginesRollPercentOverwrite,
-            flightSegmentConfigModel.MainEnginesPitchPercentOverwrite,
-            flightSegmentConfigModel.FlapsActuationProportionalGain,
-            flightSegmentConfigModel.FlapsActuationIntegralGain,
-            flightSegmentConfigModel.FlapsActuationDerivativeGain,
+            flightSegmentConfigModel.DesiredLateralVelocityInMetrePerSecond,
+            flightSegmentConfigModel.DesiredVerticalVelocityInMetrePerSecond,
+            flightSegmentConfigModel.DesiredHorizontalVelocityInMetrePerSecond,
             flightSegmentConfigModel.TopLeftFlapDeployPercentOverwrite,
             flightSegmentConfigModel.TopRightFlapDeployPercentOverwrite,
             flightSegmentConfigModel.BottomLeftFlapDeployPercentOverwrite,
-            flightSegmentConfigModel.BottomRightFlapDeployPercentOverwrite);
+            flightSegmentConfigModel.BottomRightFlapDeployPercentOverwrite,
+            flightSegmentConfigModel.MainEnginesYawPercentOverwrite,
+            flightSegmentConfigModel.MainEnginesRollPercentOverwrite,
+            flightSegmentConfigModel.MainEnginesPitchPercentOverwrite,
+            flightSegmentConfigModel.TopMainEngineThrottlePercentOverwrite,
+            flightSegmentConfigModel.BottomLeftMainEngineThrottlePercentOverwrite,
+            flightSegmentConfigModel.BottomRightMainEngineThrottlePercentOverwrite,
+            flightSegmentConfigModel.FlapsActuationPidRegulatorProportionalGain,
+            flightSegmentConfigModel.FlapsActuationPidRegulatorIntegralGain,
+            flightSegmentConfigModel.FlapsActuationPidRegulatorDerivativeGain,
+            flightSegmentConfigModel.MainEnginesGimbalPidRegulatorProportionalGain,
+            flightSegmentConfigModel.MainEnginesGimbalPidRegulatorIntegralGain,
+            flightSegmentConfigModel.MainEnginesGimbalPidRegulatorDerivativeGain,
+            flightSegmentConfigModel.LateralVelocityOffsetPidRegulatorProportionalGain,
+            flightSegmentConfigModel.LateralVelocityOffsetPidRegulatorIntegralGain,
+            flightSegmentConfigModel.LateralVelocityOffsetPidRegulatorDerivativeGain,
+            flightSegmentConfigModel.MainEnginesThrottlePidRegulatorProportionalGain,
+            flightSegmentConfigModel.MainEnginesThrottlePidRegulatorIntegralGain,
+            flightSegmentConfigModel.MainEnginesThrottlePidRegulatorDerivativeGain,
+            flightSegmentConfigModel.HorizontalVelocityOffsetPidRegulatorProportionalGain,
+            flightSegmentConfigModel.HorizontalVelocityOffsetPidRegulatorIntegralGain,
+            flightSegmentConfigModel.HorizontalVelocityOffsetPidRegulatorDerivativeGain
+        );
     }
 }

@@ -2,13 +2,14 @@
 using Starship.Control;
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
+using Starship.Control.Actuation.Leg;
 using Starship.Control.Throttle.Main;
 using Starship.Flight;
 using Starship.Flight.Segment;
 using Starship.Flight.Segment.Config;
-using Starship.Flight.Segment.Config.Path;
 using Starship.Mission;
 using Starship.Sensor;
+using Starship.Sensor.Altitude;
 using Starship.Sensor.Attitude;
 using Starship.Sensor.Velocity;
 using Starship.Telemetry;
@@ -20,15 +21,18 @@ namespace Starship
 {
     public sealed class FlightComputer : PartModule
     {
-        private readonly Lazy<VelocitySensor> _velocitySensor = new Lazy<VelocitySensor>();
         private readonly Lazy<AttitudeSensor> _attitudeSensor = new Lazy<AttitudeSensor>();
+        private readonly Lazy<AltitudeSensor> _altitudeSensor = new Lazy<AltitudeSensor>();
+        private readonly Lazy<VelocitySensor> _velocitySensor = new Lazy<VelocitySensor>();
 
-        private readonly Lazy<MainEnginesThrottleControl> _mainEnginesThrottleControl =
-            new Lazy<MainEnginesThrottleControl>();
-        private readonly Lazy<MainEnginesGimbalControl> _mainEnginesGimbalControl =
-            new Lazy<MainEnginesGimbalControl>();
+        private readonly Lazy<LegsActuationControl> _legsActuationControl =
+            new Lazy<LegsActuationControl>();
         private readonly Lazy<FlapsActuationControl> _flapsActuationControl =
             new Lazy<FlapsActuationControl>();
+        private readonly Lazy<MainEnginesGimbalControl> _mainEnginesGimbalControl =
+            new Lazy<MainEnginesGimbalControl>();
+        private readonly Lazy<MainEnginesThrottleControl> _mainEnginesThrottleControl =
+            new Lazy<MainEnginesThrottleControl>();
 
         private readonly Lazy<FlightCommander> _flightCommander =
             new Lazy<FlightCommander>(BuildFlightCommander);
@@ -48,21 +52,25 @@ namespace Starship
                     return;
                 }
 
-                _velocitySensor.Value.Update(vessel);
                 _attitudeSensor.Value.Update(vessel);
+                _altitudeSensor.Value.Update(vessel);
+                _velocitySensor.Value.Update(vessel);
 
                 var sensorSuite = new SensorSuite(
-                    _velocitySensor.Value,
-                    _attitudeSensor.Value);
+                    _attitudeSensor.Value,
+                    _altitudeSensor.Value,
+                    _velocitySensor.Value);
 
-                _mainEnginesThrottleControl.Value.Bind(vessel);
-                _mainEnginesGimbalControl.Value.Bind(vessel);
+                _legsActuationControl.Value.Bind(vessel);
                 _flapsActuationControl.Value.Bind(vessel);
+                _mainEnginesGimbalControl.Value.Bind(vessel);
+                _mainEnginesThrottleControl.Value.Bind(vessel);
 
                 var controlSuite = new ControlSuite(
-                    _mainEnginesThrottleControl.Value,
+                    _legsActuationControl.Value,
+                    _flapsActuationControl.Value,
                     _mainEnginesGimbalControl.Value,
-                    _flapsActuationControl.Value);
+                    _mainEnginesThrottleControl.Value);
 
                 _flightCommander.Value.CommandFlight(
                     sensorSuite,
@@ -83,9 +91,9 @@ namespace Starship
 
             var flightSegmentCommanders =
                 new FlightSegmentCommanders(
-                    missionTimer,
-                    new FlightSegmentConfigsLoader(
-                        new FlightSegmentConfigsPath()));
+                    new FlightSegmentCommandersLoader(
+                        new FlightSegmentConfigsLoader(
+                            new FlightSegmentConfigsPath())));
 
             return new FlightCommander(
                 missionTimer,

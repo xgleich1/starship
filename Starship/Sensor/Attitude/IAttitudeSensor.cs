@@ -5,21 +5,18 @@ namespace Starship.Sensor.Attitude
     public interface IAttitudeSensor : ITelemetryProvider
     {
         /**
-         * Yaw angle starts with 0.
-         * Positive yaw: To the right with yaw angle getting more.
-         * Negative yaw: To The left with yaw angle getting less.
+         * More yaw: To the right.
+         * Less yaw: To the left.
          */
         float YawAngleInDegrees { get; }
         /**
-         * Roll angle starts with 0.
-         * Positive roll: With the clock (right), roll angle getting more.
-         * Negative roll: Against the clock (left), roll angle getting less.
+         * More roll: With the clock (right).
+         * Less roll: Against the clock (left).
          */
         float RollAngleInDegrees { get; }
         /**
-         * Pitch angle starts with 0.
-         * Positive pitch: To the back, pitch angle getting more.
-         * Negative pitch: To the front, pitch angle getting less.
+         * More pitch: To the back.
+         * Less pitch: To the front.
          */
         float PitchAngleInDegrees { get; }
     }

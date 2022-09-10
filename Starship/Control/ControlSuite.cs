@@ -1,5 +1,6 @@
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
+using Starship.Control.Actuation.Leg;
 using Starship.Control.Throttle.Main;
 using Starship.Flight.Command;
 
@@ -7,38 +8,44 @@ namespace Starship.Control
 {
     public sealed class ControlSuite : IControlSuite
     {
-        private readonly IMainEnginesThrottleControl _mainEnginesThrottleControl;
-        private readonly IMainEnginesGimbalControl _mainEnginesGimbalControl;
+        private readonly ILegsActuationControl _legsActuationControl;
         private readonly IFlapsActuationControl _flapsActuationControl;
+        private readonly IMainEnginesGimbalControl _mainEnginesGimbalControl;
+        private readonly IMainEnginesThrottleControl _mainEnginesThrottleControl;
 
 
         public ControlSuite(
-            IMainEnginesThrottleControl mainEnginesThrottleControl,
+            ILegsActuationControl legsActuationControl,
+            IFlapsActuationControl flapsActuationControl,
             IMainEnginesGimbalControl mainEnginesGimbalControl,
-            IFlapsActuationControl flapsActuationControl)
+            IMainEnginesThrottleControl mainEnginesThrottleControl)
         {
-            _mainEnginesThrottleControl = mainEnginesThrottleControl;
-            _mainEnginesGimbalControl = mainEnginesGimbalControl;
+            _legsActuationControl = legsActuationControl;
             _flapsActuationControl = flapsActuationControl;
+            _mainEnginesGimbalControl = mainEnginesGimbalControl;
+            _mainEnginesThrottleControl = mainEnginesThrottleControl;
         }
 
         public void ExertControl(ICommandSuite commandSuite)
         {
-            _mainEnginesThrottleControl.ThrottleMainEngines(
-                commandSuite.ThrottleTopMainEngineCommand,
-                commandSuite.ThrottleBottomLeftMainEngineCommand,
-                commandSuite.ThrottleBottomRightMainEngineCommand);
-
-            _mainEnginesGimbalControl.GimbalMainEngines(
-                commandSuite.YawMainEnginesCommand,
-                commandSuite.RollMainEnginesCommand,
-                commandSuite.PitchMainEnginesCommand);
+            _legsActuationControl.ActuateLegs(
+                commandSuite.LegsActuationCommand);
 
             _flapsActuationControl.ActuateFlaps(
-                commandSuite.ActuateTopLeftFlapCommand,
-                commandSuite.ActuateTopRightFlapCommand,
-                commandSuite.ActuateBottomLeftFlapCommand,
-                commandSuite.ActuateBottomRightFlapCommand);
+                commandSuite.TopLeftFlapActuationCommand,
+                commandSuite.TopRightFlapActuationCommand,
+                commandSuite.BottomLeftFlapActuationCommand,
+                commandSuite.BottomRightFlapActuationCommand);
+
+            _mainEnginesGimbalControl.GimbalMainEngines(
+                commandSuite.MainEnginesYawCommand,
+                commandSuite.MainEnginesRollCommand,
+                commandSuite.MainEnginesPitchCommand);
+
+            _mainEnginesThrottleControl.ThrottleMainEngines(
+                commandSuite.TopMainEngineThrottleCommand,
+                commandSuite.BottomLeftMainEngineThrottleCommand,
+                commandSuite.BottomRightMainEngineThrottleCommand);
         }
     }
 }

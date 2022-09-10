@@ -17,14 +17,11 @@ namespace Starship.Telemetry
             _missionTimer = missionTimer;
         }
 
-        public void EmitTelemetry(TelemetryMessage telemetryMessage) =>
-            _unityLogger.Log(LogType.Log, CreateLogMessage(telemetryMessage));
-
         public void EmitTelemetry(ITelemetryProvider telemetryProvider)
         {
             foreach (var telemetryMessage in telemetryProvider.ProvideTelemetry())
             {
-                EmitTelemetry(telemetryMessage);
+                _unityLogger.Log(LogType.Log, CreateLogMessage(telemetryMessage));
             }
         }
 

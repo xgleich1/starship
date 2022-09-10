@@ -13,13 +13,13 @@ namespace Starship.Control.Actuation.Engine
         }
 
         public void GimbalMainEngines(
-            YawMainEnginesCommand yawMainEnginesCommand,
-            RollMainEnginesCommand rollMainEnginesCommand,
-            PitchMainEnginesCommand pitchMainEnginesCommand)
+            MainEnginesYawCommand mainEnginesYawCommand,
+            MainEnginesRollCommand mainEnginesRollCommand,
+            MainEnginesPitchCommand mainEnginesPitchCommand)
         {
-            _flightControlState.yaw = yawMainEnginesCommand.YawPercent;
-            _flightControlState.roll = rollMainEnginesCommand.RollPercent;
-            _flightControlState.pitch = pitchMainEnginesCommand.PitchPercent;
+            _flightControlState.yaw = mainEnginesYawCommand.YawPercent;
+            _flightControlState.roll = mainEnginesRollCommand.RollPercent;
+            _flightControlState.pitch = mainEnginesPitchCommand.PitchPercent;
         }
     }
 }

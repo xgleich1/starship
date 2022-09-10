@@ -5,9 +5,9 @@ namespace Starship.Control.Actuation.Flap
     public interface IFlapsActuationControl
     {
         void ActuateFlaps(
-            ActuateTopLeftFlapCommand actuateTopLeftFlapCommand,
-            ActuateTopRightFlapCommand actuateTopRightFlapCommand,
-            ActuateBottomLeftFlapCommand actuateBottomLeftFlapCommand,
-            ActuateBottomRightFlapCommand actuateBottomRightFlapCommand);
+            TopLeftFlapActuationCommand topLeftFlapActuationCommand,
+            TopRightFlapActuationCommand topRightFlapActuationCommand,
+            BottomLeftFlapActuationCommand bottomLeftFlapActuationCommand,
+            BottomRightFlapActuationCommand bottomRightFlapActuationCommand);
     }
 }

@@ -3,40 +3,42 @@ using NUnit.Framework;
 using Starship.Control;
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
+using Starship.Control.Actuation.Leg;
 using Starship.Control.Throttle.Main;
 using Starship.Flight.Command;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
+using Starship.Flight.Command.Actuation.Leg;
 using Starship.Flight.Command.Throttle.Main;
 
 namespace StarshipUnitTests.Control
 {
     public sealed class ControlSuiteTest
     {
-        private Mock<IMainEnginesThrottleControl> _mainEnginesThrottleControl;
-        private Mock<IMainEnginesGimbalControl> _mainEnginesGimbalControl;
+        private Mock<ILegsActuationControl> _legsActuationControl;
         private Mock<IFlapsActuationControl> _flapsActuationControl;
+        private Mock<IMainEnginesGimbalControl> _mainEnginesGimbalControl;
+        private Mock<IMainEnginesThrottleControl> _mainEnginesThrottleControl;
         private ControlSuite _controlSuite;
 
 
         [SetUp]
         public void Setup()
         {
-            _mainEnginesThrottleControl =
-                new Mock<IMainEnginesThrottleControl>();
-            _mainEnginesGimbalControl =
-                new Mock<IMainEnginesGimbalControl>();
-            _flapsActuationControl =
-                new Mock<IFlapsActuationControl>();
+            _legsActuationControl = new Mock<ILegsActuationControl>();
+            _flapsActuationControl = new Mock<IFlapsActuationControl>();
+            _mainEnginesGimbalControl = new Mock<IMainEnginesGimbalControl>();
+            _mainEnginesThrottleControl = new Mock<IMainEnginesThrottleControl>();
 
             _controlSuite = new ControlSuite(
-                _mainEnginesThrottleControl.Object,
+                _legsActuationControl.Object,
+                _flapsActuationControl.Object,
                 _mainEnginesGimbalControl.Object,
-                _flapsActuationControl.Object);
+                _mainEnginesThrottleControl.Object);
         }
 
         [Test]
-        public void Should_throttle_the_main_engines()
+        public void Should_actuate_the_legs()
         {
             // GIVEN
             var commandSuite = CreateCommandSuite();
@@ -45,28 +47,8 @@ namespace StarshipUnitTests.Control
             _controlSuite.ExertControl(commandSuite);
 
             // THEN
-            _mainEnginesThrottleControl.Verify(mock =>
-                mock.ThrottleMainEngines(
-                    commandSuite.ThrottleTopMainEngineCommand,
-                    commandSuite.ThrottleBottomLeftMainEngineCommand,
-                    commandSuite.ThrottleBottomRightMainEngineCommand));
-        }
-
-        [Test]
-        public void Should_gimbal_the_main_engines()
-        {
-            // GIVEN
-            var commandSuite = CreateCommandSuite();
-
-            // WHEN
-            _controlSuite.ExertControl(commandSuite);
-
-            // THEN
-            _mainEnginesGimbalControl.Verify(mock =>
-                mock.GimbalMainEngines(
-                    commandSuite.YawMainEnginesCommand,
-                    commandSuite.RollMainEnginesCommand,
-                    commandSuite.PitchMainEnginesCommand));
+            _legsActuationControl.Verify(mock =>
+                mock.ActuateLegs(commandSuite.LegsActuationCommand));
         }
 
         [Test]
@@ -81,23 +63,57 @@ namespace StarshipUnitTests.Control
             // THEN
             _flapsActuationControl.Verify(mock =>
                 mock.ActuateFlaps(
-                    commandSuite.ActuateTopLeftFlapCommand,
-                    commandSuite.ActuateTopRightFlapCommand,
-                    commandSuite.ActuateBottomLeftFlapCommand,
-                    commandSuite.ActuateBottomRightFlapCommand));
+                    commandSuite.TopLeftFlapActuationCommand,
+                    commandSuite.TopRightFlapActuationCommand,
+                    commandSuite.BottomLeftFlapActuationCommand,
+                    commandSuite.BottomRightFlapActuationCommand));
         }
 
-        private static CommandSuite CreateCommandSuite() =>
-            new CommandSuite(
-                new ThrottleTopMainEngineCommand(0.0F),
-                new ThrottleBottomLeftMainEngineCommand(0.0F),
-                new ThrottleBottomRightMainEngineCommand(0.0F),
-                new YawMainEnginesCommand(0.0F),
-                new RollMainEnginesCommand(0.0F),
-                new PitchMainEnginesCommand(0.0F),
-                new ActuateTopLeftFlapCommand(0.0F),
-                new ActuateTopRightFlapCommand(0.0F),
-                new ActuateBottomLeftFlapCommand(0.0F),
-                new ActuateBottomRightFlapCommand(0.0F));
+        [Test]
+        public void Should_gimbal_the_main_engines()
+        {
+            // GIVEN
+            var commandSuite = CreateCommandSuite();
+
+            // WHEN
+            _controlSuite.ExertControl(commandSuite);
+
+            // THEN
+            _mainEnginesGimbalControl.Verify(mock =>
+                mock.GimbalMainEngines(
+                    commandSuite.MainEnginesYawCommand,
+                    commandSuite.MainEnginesRollCommand,
+                    commandSuite.MainEnginesPitchCommand));
+        }
+
+        [Test]
+        public void Should_throttle_the_main_engines()
+        {
+            // GIVEN
+            var commandSuite = CreateCommandSuite();
+
+            // WHEN
+            _controlSuite.ExertControl(commandSuite);
+
+            // THEN
+            _mainEnginesThrottleControl.Verify(mock =>
+                mock.ThrottleMainEngines(
+                    commandSuite.TopMainEngineThrottleCommand,
+                    commandSuite.BottomLeftMainEngineThrottleCommand,
+                    commandSuite.BottomRightMainEngineThrottleCommand));
+        }
+
+        private static CommandSuite CreateCommandSuite() => new CommandSuite(
+            new LegsActuationCommand(false),
+            new TopLeftFlapActuationCommand(0.0F),
+            new TopRightFlapActuationCommand(0.0F),
+            new BottomLeftFlapActuationCommand(0.0F),
+            new BottomRightFlapActuationCommand(0.0F),
+            new MainEnginesYawCommand(0.0F),
+            new MainEnginesRollCommand(0.0F),
+            new MainEnginesPitchCommand(0.0F),
+            new TopMainEngineThrottleCommand(0.0F),
+            new BottomLeftMainEngineThrottleCommand(0.0F),
+            new BottomRightMainEngineThrottleCommand(0.0F));
     }
 }

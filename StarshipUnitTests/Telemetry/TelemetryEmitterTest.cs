@@ -30,20 +30,6 @@ namespace StarshipUnitTests.Telemetry
         }
 
         [Test]
-        public void Should_emit_a_single_telemetry_message()
-        {
-            // GIVEN
-            _missionTimer.Setup(mock => mock.GetElapsedSeconds())
-                .Returns(new Seconds(1));
-
-            // WHEN
-            _telemetryEmitter.EmitTelemetry(new TelemetryMessage("Yaw:0"));
-
-            // THEN
-            _unityLogger.Verify(mock => mock.Log(LogType.Log, "1:Yaw:0"));
-        }
-
-        [Test]
         public void Should_emit_the_provided_telemetry_messages()
         {
             // GIVEN

@@ -45,7 +45,7 @@ namespace Starship.Flight
         private ICommandSuite CommandFlight(ISensorSuite sensorSuite)
         {
             var currentFlightSegmentCommander = _flightSegmentCommanders
-                .GetCurrentFlightSegmentCommander();
+                .GetCurrentFlightSegmentCommander(sensorSuite);
 
             _telemetryEmitter.EmitTelemetry(currentFlightSegmentCommander);
 

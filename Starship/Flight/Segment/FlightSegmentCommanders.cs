@@ -1,34 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
-using Starship.Flight.Segment.Config;
-using Starship.Mission;
+using Starship.Sensor;
 
 namespace Starship.Flight.Segment
 {
+    // Currently under development
     public sealed class FlightSegmentCommanders : IFlightSegmentCommanders
     {
-        private readonly IMissionTimer _missionTimer;
-        private readonly List<FlightSegmentCommander> _flightSegmentCommanders;
+        private readonly List<IFlightSegmentCommander> _flightSegmentCommanders;
 
 
-        public FlightSegmentCommanders(
-            IMissionTimer missionTimer,
-            IFlightSegmentConfigsLoader flightSegmentConfigsLoader)
+        public FlightSegmentCommanders(IFlightSegmentCommandersLoader flightSegmentCommandersLoader) =>
+            _flightSegmentCommanders = flightSegmentCommandersLoader.LoadFlightSegmentCommanders();
+
+        public IFlightSegmentCommander GetCurrentFlightSegmentCommander(ISensorSuite sensorSuite)
         {
-            _missionTimer = missionTimer;
+            if (_flightSegmentCommanders.First().CanHandover(sensorSuite))
+            {
+                _flightSegmentCommanders.RemoveAt(0);
+            }
 
-            _flightSegmentCommanders = flightSegmentConfigsLoader
-                .LoadFlightSegmentConfigs()
-                .Select(config => new FlightSegmentCommander(config))
-                .ToList();
-        }
-
-        public IFlightSegmentCommander GetCurrentFlightSegmentCommander()
-        {
-            var elapsedSecondsInMission = _missionTimer.GetElapsedSeconds();
-
-            return _flightSegmentCommanders.Last(commander =>
-                commander.TakeoverSecondsInMission <= elapsedSecondsInMission);
+            return _flightSegmentCommanders.First();
         }
     }
 }

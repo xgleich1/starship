@@ -23,15 +23,15 @@ namespace Starship.Control.Actuation.Flap
         }
 
         public void ActuateFlaps(
-            ActuateTopLeftFlapCommand actuateTopLeftFlapCommand,
-            ActuateTopRightFlapCommand actuateTopRightFlapCommand,
-            ActuateBottomLeftFlapCommand actuateBottomLeftFlapCommand,
-            ActuateBottomRightFlapCommand actuateBottomRightFlapCommand)
+            TopLeftFlapActuationCommand topLeftFlapActuationCommand,
+            TopRightFlapActuationCommand topRightFlapActuationCommand,
+            BottomLeftFlapActuationCommand bottomLeftFlapActuationCommand,
+            BottomRightFlapActuationCommand bottomRightFlapActuationCommand)
         {
-            ActuateFlap(_topLeftFlap, actuateTopLeftFlapCommand.DeployPercent);
-            ActuateFlap(_topRightFlap, actuateTopRightFlapCommand.DeployPercent);
-            ActuateFlap(_bottomLeftFlap, actuateBottomLeftFlapCommand.DeployPercent);
-            ActuateFlap(_bottomRightFlap, actuateBottomRightFlapCommand.DeployPercent);
+            ActuateFlap(_topLeftFlap, topLeftFlapActuationCommand.DeployPercent);
+            ActuateFlap(_topRightFlap, topRightFlapActuationCommand.DeployPercent);
+            ActuateFlap(_bottomLeftFlap, bottomLeftFlapActuationCommand.DeployPercent);
+            ActuateFlap(_bottomRightFlap, bottomRightFlapActuationCommand.DeployPercent);
         }
 
         private static void ActuateFlap(ModuleRoboticServoHinge flap, float deployPercent)
@@ -39,8 +39,7 @@ namespace Starship.Control.Actuation.Flap
             var minimumAngle = flap.softMinMaxAngles.x;
             var maximumAngle = flap.softMinMaxAngles.y;
 
-            var deployedAngle =
-                (maximumAngle - minimumAngle) * deployPercent;
+            var deployedAngle = (maximumAngle - minimumAngle) * deployPercent;
 
             flap.targetAngle = minimumAngle + deployedAngle;
         }

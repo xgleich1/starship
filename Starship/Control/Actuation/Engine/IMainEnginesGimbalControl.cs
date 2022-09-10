@@ -5,8 +5,8 @@ namespace Starship.Control.Actuation.Engine
     public interface IMainEnginesGimbalControl
     {
         void GimbalMainEngines(
-            YawMainEnginesCommand yawMainEnginesCommand,
-            RollMainEnginesCommand rollMainEnginesCommand,
-            PitchMainEnginesCommand pitchMainEnginesCommand);
+            MainEnginesYawCommand mainEnginesYawCommand,
+            MainEnginesRollCommand mainEnginesRollCommand,
+            MainEnginesPitchCommand mainEnginesPitchCommand);
     }
 }

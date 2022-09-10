@@ -22,13 +22,13 @@ namespace Starship.Control.Throttle.Main
         }
 
         public void ThrottleMainEngines(
-            ThrottleTopMainEngineCommand throttleTopMainEngineCommand,
-            ThrottleBottomLeftMainEngineCommand throttleBottomLeftMainEngineCommand,
-            ThrottleBottomRightMainEngineCommand throttleBottomRightMainEngineCommand)
+            TopMainEngineThrottleCommand topMainEngineThrottleCommand,
+            BottomLeftMainEngineThrottleCommand bottomLeftMainEngineThrottleCommand,
+            BottomRightMainEngineThrottleCommand bottomRightMainEngineThrottleCommand)
         {
-            _topMainEngine.currentThrottle = throttleTopMainEngineCommand.ThrottlePercent;
-            _bottomLeftMainEngine.currentThrottle = throttleBottomLeftMainEngineCommand.ThrottlePercent;
-            _bottomRightMainEngine.currentThrottle = throttleBottomRightMainEngineCommand.ThrottlePercent;
+            _topMainEngine.currentThrottle = topMainEngineThrottleCommand.ThrottlePercent;
+            _bottomLeftMainEngine.currentThrottle = bottomLeftMainEngineThrottleCommand.ThrottlePercent;
+            _bottomRightMainEngine.currentThrottle = bottomRightMainEngineThrottleCommand.ThrottlePercent;
         }
 
         private void EnableIndependentEngineControl()
