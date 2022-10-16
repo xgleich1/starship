@@ -7,7 +7,7 @@ using Starship.Telemetry;
 
 namespace Starship.Flight.Command
 {
-    public sealed class CommandSuite : ICommandSuite
+    public readonly struct CommandSuite : ICommandSuite
     {
         public LegsActuationCommand LegsActuationCommand { get; }
         public TopLeftFlapActuationCommand TopLeftFlapActuationCommand { get; }

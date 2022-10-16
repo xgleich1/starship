@@ -46,5 +46,53 @@ namespace StarshipUnitTests.Flight.Command
 
             Assert.That(commandSuite.ProvideTelemetry(), Is.EqualTo(expectedTelemetry));
         }
+
+        [Test]
+        public void Should_provide_a_equality_by_value_method()
+        {
+            // GIVEN
+            var commandSuiteA = new CommandSuite(
+                new LegsActuationCommand(false),
+                new TopLeftFlapActuationCommand(0.0F),
+                new TopRightFlapActuationCommand(0.0F),
+                new BottomLeftFlapActuationCommand(0.0F),
+                new BottomRightFlapActuationCommand(0.0F),
+                new MainEnginesYawCommand(0.0F),
+                new MainEnginesRollCommand(0.0F),
+                new MainEnginesPitchCommand(0.0F),
+                new TopMainEngineThrottleCommand(0.0F),
+                new BottomLeftMainEngineThrottleCommand(0.0F),
+                new BottomRightMainEngineThrottleCommand(0.0F));
+
+            var commandSuiteB = new CommandSuite(
+                new LegsActuationCommand(false),
+                new TopLeftFlapActuationCommand(0.0F),
+                new TopRightFlapActuationCommand(0.0F),
+                new BottomLeftFlapActuationCommand(0.0F),
+                new BottomRightFlapActuationCommand(0.0F),
+                new MainEnginesYawCommand(0.0F),
+                new MainEnginesRollCommand(0.0F),
+                new MainEnginesPitchCommand(0.0F),
+                new TopMainEngineThrottleCommand(0.0F),
+                new BottomLeftMainEngineThrottleCommand(0.0F),
+                new BottomRightMainEngineThrottleCommand(0.0F));
+
+            var commandSuiteC = new CommandSuite(
+                new LegsActuationCommand(true),
+                new TopLeftFlapActuationCommand(0.0F),
+                new TopRightFlapActuationCommand(0.0F),
+                new BottomLeftFlapActuationCommand(0.0F),
+                new BottomRightFlapActuationCommand(0.0F),
+                new MainEnginesYawCommand(0.0F),
+                new MainEnginesRollCommand(0.0F),
+                new MainEnginesPitchCommand(0.0F),
+                new TopMainEngineThrottleCommand(0.0F),
+                new BottomLeftMainEngineThrottleCommand(0.0F),
+                new BottomRightMainEngineThrottleCommand(0.0F));
+
+            // THEN
+            Assert.That(commandSuiteA.Equals(commandSuiteB), Is.True);
+            Assert.That(commandSuiteA.Equals(commandSuiteC), Is.False);
+        }
     }
 }

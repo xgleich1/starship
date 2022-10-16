@@ -34,10 +34,10 @@ namespace Starship.Flight.Segment.Actuation.Engine
         public MainEnginesGimbalSegmentCommands CommandMainEnginesGimbal(ISensorSuite sensorSuite)
         {
             var regulatedLateralVelocityOffset =
-                RegulateLateralVelocityOffset(sensorSuite) ?? 0.0F;
+                RegulateLateralVelocityOffset(sensorSuite);
 
             var regulatedHorizontalVelocityOffset =
-                RegulateHorizontalVelocityOffset(sensorSuite) ?? 0.0F;
+                RegulateHorizontalVelocityOffset(sensorSuite);
 
             var regulatedMainEnginesYawPercent =
                 RegulateMainEnginesYawPercent(sensorSuite, regulatedLateralVelocityOffset);
@@ -58,42 +58,85 @@ namespace Starship.Flight.Segment.Actuation.Engine
                 .MainEnginesPitchPercentOverwrite ?? regulatedMainEnginesPitchPercent;
 
             return new MainEnginesGimbalSegmentCommands(
-                new MainEnginesYawCommand(mainEnginesYawPercent.Clamp(-1.0F, 1.0F)),
-                new MainEnginesRollCommand(mainEnginesRollPercent.Clamp(-1.0F, 1.0F)),
-                new MainEnginesPitchCommand(mainEnginesPitchPercent.Clamp(-1.0F, 1.0F)));
+                new MainEnginesYawCommand(mainEnginesYawPercent),
+                new MainEnginesRollCommand(mainEnginesRollPercent),
+                new MainEnginesPitchCommand(mainEnginesPitchPercent));
         }
 
-        public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>();
+        public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>
+        {
+            new TelemetryMessage(
+                "--- Main Engines Gimbal Segment Commander Config ---"),
+            new TelemetryMessage(
+                $"DesiredYawAngleInDegrees:{_flightSegmentConfig.DesiredYawAngleInDegrees}"),
+            new TelemetryMessage(
+                $"DesiredRollAngleInDegrees:{_flightSegmentConfig.DesiredRollAngleInDegrees}"),
+            new TelemetryMessage(
+                $"DesiredPitchAngleInDegrees:{_flightSegmentConfig.DesiredPitchAngleInDegrees}"),
+            new TelemetryMessage(
+                $"DesiredLateralVelocityInMetrePerSecond:{_flightSegmentConfig.DesiredLateralVelocityInMetrePerSecond}"),
+            new TelemetryMessage(
+                $"DesiredHorizontalVelocityInMetrePerSecond:{_flightSegmentConfig.DesiredHorizontalVelocityInMetrePerSecond}"),
+            new TelemetryMessage(
+                $"MainEnginesYawPercentOverwrite:{_flightSegmentConfig.MainEnginesYawPercentOverwrite}"),
+            new TelemetryMessage(
+                $"MainEnginesRollPercentOverwrite:{_flightSegmentConfig.MainEnginesRollPercentOverwrite}"),
+            new TelemetryMessage(
+                $"MainEnginesPitchPercentOverwrite:{_flightSegmentConfig.MainEnginesPitchPercentOverwrite}"),
+            new TelemetryMessage(
+                $"MainEnginesGimbalPidRegulatorProportionalGain:{_flightSegmentConfig.MainEnginesGimbalPidRegulatorProportionalGain}"),
+            new TelemetryMessage(
+                $"MainEnginesGimbalPidRegulatorIntegralGain:{_flightSegmentConfig.MainEnginesGimbalPidRegulatorIntegralGain}"),
+            new TelemetryMessage(
+                $"MainEnginesGimbalPidRegulatorDerivativeGain:{_flightSegmentConfig.MainEnginesGimbalPidRegulatorDerivativeGain}"),
+            new TelemetryMessage(
+                $"LateralVelocityOffsetPidRegulatorProportionalGain:{_flightSegmentConfig.LateralVelocityOffsetPidRegulatorProportionalGain}"),
+            new TelemetryMessage(
+                $"LateralVelocityOffsetPidRegulatorIntegralGain:{_flightSegmentConfig.LateralVelocityOffsetPidRegulatorIntegralGain}"),
+            new TelemetryMessage(
+                $"LateralVelocityOffsetPidRegulatorDerivativeGain:{_flightSegmentConfig.LateralVelocityOffsetPidRegulatorDerivativeGain}"),
+            new TelemetryMessage(
+                $"HorizontalVelocityOffsetPidRegulatorProportionalGain:{_flightSegmentConfig.HorizontalVelocityOffsetPidRegulatorProportionalGain}"),
+            new TelemetryMessage(
+                $"HorizontalVelocityOffsetPidRegulatorIntegralGain:{_flightSegmentConfig.HorizontalVelocityOffsetPidRegulatorIntegralGain}"),
+            new TelemetryMessage(
+                $"HorizontalVelocityOffsetPidRegulatorDerivativeGain:{_flightSegmentConfig.HorizontalVelocityOffsetPidRegulatorDerivativeGain}"),
+            new TelemetryMessage(
+                "----------------------------------------------------")
+        };
 
-        private PidRegulator CreateLateralVelocityOffsetPidRegulator() =>
-            new PidRegulator(
-                -15.0F,
-                +15.0F,
-                _flightSegmentConfig.LateralVelocityOffsetPidRegulatorProportionalGain ?? 0.0F,
-                _flightSegmentConfig.LateralVelocityOffsetPidRegulatorIntegralGain ?? 0.0F,
-                _flightSegmentConfig.LateralVelocityOffsetPidRegulatorDerivativeGain ?? 0.0F);
+        public override bool Equals(object obj) =>
+            ReferenceEquals(this, obj) || obj is MainEnginesGimbalSegmentCommander other
+            && _flightSegmentConfig.Equals(other._flightSegmentConfig);
 
-        private PidRegulator CreateHorizontalVelocityOffsetPidRegulator() =>
-            new PidRegulator(
-                -15.0F,
-                +15.0F,
-                _flightSegmentConfig.HorizontalVelocityOffsetPidRegulatorProportionalGain ?? 0.0F,
-                _flightSegmentConfig.HorizontalVelocityOffsetPidRegulatorIntegralGain ?? 0.0F,
-                _flightSegmentConfig.HorizontalVelocityOffsetPidRegulatorDerivativeGain ?? 0.0F);
+        public override int GetHashCode() => _flightSegmentConfig.GetHashCode();
 
-        private PidRegulator CreateMainEnginesGimbalPidRegulator() =>
-            new PidRegulator(
-                -1.0F,
-                +1.0F,
-                _flightSegmentConfig.MainEnginesGimbalPidRegulatorProportionalGain ?? 0.0F,
-                _flightSegmentConfig.MainEnginesGimbalPidRegulatorIntegralGain ?? 0.0F,
-                _flightSegmentConfig.MainEnginesGimbalPidRegulatorDerivativeGain ?? 0.0F);
+        private PidRegulator CreateLateralVelocityOffsetPidRegulator() => new PidRegulator(
+            minimumOutput: -15.0F,
+            maximumOutput: +15.0F,
+            _flightSegmentConfig.LateralVelocityOffsetPidRegulatorProportionalGain ?? 0.0F,
+            _flightSegmentConfig.LateralVelocityOffsetPidRegulatorIntegralGain ?? 0.0F,
+            _flightSegmentConfig.LateralVelocityOffsetPidRegulatorDerivativeGain ?? 0.0F);
 
-        private float? RegulateLateralVelocityOffset(ISensorSuite sensorSuite)
+        private PidRegulator CreateHorizontalVelocityOffsetPidRegulator() => new PidRegulator(
+            minimumOutput: -15.0F,
+            maximumOutput: +15.0F,
+            _flightSegmentConfig.HorizontalVelocityOffsetPidRegulatorProportionalGain ?? 0.0F,
+            _flightSegmentConfig.HorizontalVelocityOffsetPidRegulatorIntegralGain ?? 0.0F,
+            _flightSegmentConfig.HorizontalVelocityOffsetPidRegulatorDerivativeGain ?? 0.0F);
+
+        private PidRegulator CreateMainEnginesGimbalPidRegulator() => new PidRegulator(
+            minimumOutput: -1.0F,
+            maximumOutput: +1.0F,
+            _flightSegmentConfig.MainEnginesGimbalPidRegulatorProportionalGain ?? 0.0F,
+            _flightSegmentConfig.MainEnginesGimbalPidRegulatorIntegralGain ?? 0.0F,
+            _flightSegmentConfig.MainEnginesGimbalPidRegulatorDerivativeGain ?? 0.0F);
+
+        private float RegulateLateralVelocityOffset(ISensorSuite sensorSuite)
         {
             if (!_flightSegmentConfig.DesiredLateralVelocityInMetrePerSecond.HasValue)
             {
-                return null;
+                return 0.0F;
             }
 
             return _lateralVelocityOffsetPidRegulator.RegulateValue(
@@ -101,11 +144,11 @@ namespace Starship.Flight.Segment.Actuation.Engine
                 sensorSuite.VelocitySensor.LateralVelocityInMetrePerSecond);
         }
 
-        private float? RegulateHorizontalVelocityOffset(ISensorSuite sensorSuite)
+        private float RegulateHorizontalVelocityOffset(ISensorSuite sensorSuite)
         {
             if (!_flightSegmentConfig.DesiredHorizontalVelocityInMetrePerSecond.HasValue)
             {
-                return null;
+                return 0.0F;
             }
 
             return _horizontalVelocityOffsetPidRegulator.RegulateValue(

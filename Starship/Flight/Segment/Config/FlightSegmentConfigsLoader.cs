@@ -5,7 +5,6 @@ using System.Xml.Serialization;
 
 namespace Starship.Flight.Segment.Config
 {
-    // Currently under development
     public sealed class FlightSegmentConfigsLoader : IFlightSegmentConfigsLoader
     {
         private readonly IFlightSegmentConfigsPath _flightSegmentConfigsPath;

@@ -7,7 +7,6 @@ using Starship.Utility.Math;
 
 namespace Starship.Flight.Segment.Actuation.Flap
 {
-    // Currently under development
     public sealed class FlapsActuationSegmentCommander : IFlapsActuationSegmentCommander
     {
         private readonly FlightSegmentConfig _flightSegmentConfig;
@@ -57,17 +56,49 @@ namespace Starship.Flight.Segment.Actuation.Flap
                                                    - regulatedFlapsPitchPercent;
 
             return new FlapsActuationSegmentCommands(
-                new TopLeftFlapActuationCommand(topLeftFlapDeployPercent.Clamp(0.0F, 1.0F)),
-                new TopRightFlapActuationCommand(topRightFlapDeployPercent.Clamp(0.0F, 1.0F)),
-                new BottomLeftFlapActuationCommand(bottomLeftFlapDeployPercent.Clamp(0.0F, 1.0F)),
-                new BottomRightFlapActuationCommand(bottomRightLeftFlapDeployPercent.Clamp(0.0F, 1.0F)));
+                new TopLeftFlapActuationCommand(topLeftFlapDeployPercent),
+                new TopRightFlapActuationCommand(topRightFlapDeployPercent),
+                new BottomLeftFlapActuationCommand(bottomLeftFlapDeployPercent),
+                new BottomRightFlapActuationCommand(bottomRightLeftFlapDeployPercent));
         }
 
-        public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>();
+        public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>
+        {
+            new TelemetryMessage(
+                "--- Flaps Actuation Segment Commander Config ---"),
+            new TelemetryMessage(
+                $"DesiredYawAngleInDegrees:{_flightSegmentConfig.DesiredYawAngleInDegrees}"),
+            new TelemetryMessage(
+                $"DesiredRollAngleInDegrees:{_flightSegmentConfig.DesiredRollAngleInDegrees}"),
+            new TelemetryMessage(
+                $"DesiredPitchAngleInDegrees:{_flightSegmentConfig.DesiredPitchAngleInDegrees}"),
+            new TelemetryMessage(
+                $"TopLeftFlapDeployPercentOverwrite:{_flightSegmentConfig.TopLeftFlapDeployPercentOverwrite}"),
+            new TelemetryMessage(
+                $"TopRightFlapDeployPercentOverwrite:{_flightSegmentConfig.TopRightFlapDeployPercentOverwrite}"),
+            new TelemetryMessage(
+                $"BottomLeftFlapDeployPercentOverwrite:{_flightSegmentConfig.BottomLeftFlapDeployPercentOverwrite}"),
+            new TelemetryMessage(
+                $"BottomRightFlapDeployPercentOverwrite:{_flightSegmentConfig.BottomRightFlapDeployPercentOverwrite}"),
+            new TelemetryMessage(
+                $"FlapsActuationPidRegulatorProportionalGain:{_flightSegmentConfig.FlapsActuationPidRegulatorProportionalGain}"),
+            new TelemetryMessage(
+                $"FlapsActuationPidRegulatorIntegralGain:{_flightSegmentConfig.FlapsActuationPidRegulatorIntegralGain}"),
+            new TelemetryMessage(
+                $"FlapsActuationPidRegulatorDerivativeGain:{_flightSegmentConfig.FlapsActuationPidRegulatorDerivativeGain}"),
+            new TelemetryMessage(
+                "------------------------------------------------")
+        };
+
+        public override bool Equals(object obj) =>
+            ReferenceEquals(this, obj) || obj is FlapsActuationSegmentCommander other
+            && _flightSegmentConfig.Equals(other._flightSegmentConfig);
+
+        public override int GetHashCode() => _flightSegmentConfig.GetHashCode();
 
         private PidRegulator CreateFlapsActuationPidRegulator() => new PidRegulator(
-            -0.5F / 3.0F,
-            +0.5F / 3.0F,
+            minimumOutput: -0.5F / 3.0F,
+            maximumOutput: +0.5F / 3.0F,
             _flightSegmentConfig.FlapsActuationPidRegulatorProportionalGain ?? 0.0F,
             _flightSegmentConfig.FlapsActuationPidRegulatorIntegralGain ?? 0.0F,
             _flightSegmentConfig.FlapsActuationPidRegulatorDerivativeGain ?? 0.0F);

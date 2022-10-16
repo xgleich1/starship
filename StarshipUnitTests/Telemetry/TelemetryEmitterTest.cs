@@ -3,7 +3,7 @@ using Moq;
 using NUnit.Framework;
 using Starship.Mission;
 using Starship.Telemetry;
-using Starship.Utility.Timing.Units;
+using Starship.Utility.Time.Units;
 using UnityEngine;
 
 namespace StarshipUnitTests.Telemetry
@@ -34,9 +34,7 @@ namespace StarshipUnitTests.Telemetry
         {
             // GIVEN
             _missionTimer.SetupSequence(mock => mock.GetElapsedSeconds())
-                .Returns(new Seconds(1))
-                .Returns(new Seconds(2))
-                .Returns(new Seconds(3));
+                .Returns(new Seconds(1));
 
             _telemetryProvider.Setup(mock => mock.ProvideTelemetry())
                 .Returns(new List<TelemetryMessage>
@@ -51,8 +49,8 @@ namespace StarshipUnitTests.Telemetry
 
             // THEN
             _unityLogger.Verify(mock => mock.Log(LogType.Log, "1:Yaw:0"));
-            _unityLogger.Verify(mock => mock.Log(LogType.Log, "2:Roll:0"));
-            _unityLogger.Verify(mock => mock.Log(LogType.Log, "3:Pitch:0"));
+            _unityLogger.Verify(mock => mock.Log(LogType.Log, "1:Roll:0"));
+            _unityLogger.Verify(mock => mock.Log(LogType.Log, "1:Pitch:0"));
         }
     }
 }

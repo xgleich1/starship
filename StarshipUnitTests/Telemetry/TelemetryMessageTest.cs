@@ -21,20 +21,21 @@ namespace StarshipUnitTests.Telemetry
             // GIVEN
             var telemetryMessageA = new TelemetryMessage("Yaw:0");
             var telemetryMessageB = new TelemetryMessage("Yaw:0");
+            var telemetryMessageC = new TelemetryMessage("Yaw:1");
 
             // THEN
-            Assert.That(telemetryMessageA, Is.EqualTo(telemetryMessageB));
+            Assert.That(telemetryMessageA.Equals(telemetryMessageB), Is.True);
+            Assert.That(telemetryMessageA.Equals(telemetryMessageC), Is.False);
         }
 
         [Test]
-        public void Should_convert_a_telemetry_message_to_a_string()
+        public void Should_provide_a_readable_to_string_method()
         {
             // GIVEN
             var telemetryMessage = new TelemetryMessage("Yaw:0");
 
             // THEN
-            Assert.That(telemetryMessage.ToString(),
-                Is.EqualTo("TelemetryMessage(Yaw:0)"));
+            Assert.That(telemetryMessage.ToString(), Is.EqualTo("TelemetryMessage(Yaw:0)"));
         }
     }
 }

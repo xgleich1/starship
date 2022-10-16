@@ -11,8 +11,7 @@ namespace Starship.Control.Throttle.Main
 
         public void Bind(Vessel vessel)
         {
-            var engines = vessel
-                .FindPartModulesImplementing<ModuleEngines>();
+            var engines = vessel.FindPartModulesImplementing<ModuleEngines>();
 
             _topMainEngine = engines[0];
             _bottomLeftMainEngine = engines[1];

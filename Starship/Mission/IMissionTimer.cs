@@ -1,4 +1,4 @@
-using Starship.Utility.Timing.Units;
+using Starship.Utility.Time.Units;
 
 namespace Starship.Mission
 {

@@ -7,10 +7,7 @@ namespace Starship.Control.Actuation.Engine
         private FlightCtrlState _flightControlState;
 
 
-        public void Bind(Vessel vessel)
-        {
-            _flightControlState = vessel.ctrlState;
-        }
+        public void Bind(Vessel vessel) => _flightControlState = vessel.ctrlState;
 
         public void GimbalMainEngines(
             MainEnginesYawCommand mainEnginesYawCommand,

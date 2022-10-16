@@ -1,15 +1,13 @@
-using System.Collections.Generic;
-using Starship.Telemetry;
-
 namespace Starship.Flight.Segment.Config
 {
-    // Currently under development
-    public readonly struct FlightSegmentConfig : ITelemetryProvider
+    public readonly struct FlightSegmentConfig
     {
         public float? HandoverYawAngleInDegreesEqualOrOver { get; }
         public float? HandoverYawAngleInDegreesEqualOrUnder { get; }
+
         public float? HandoverRollAngleInDegreesEqualOrOver { get; }
         public float? HandoverRollAngleInDegreesEqualOrUnder { get; }
+
         public float? HandoverPitchAngleInDegreesEqualOrOver { get; }
         public float? HandoverPitchAngleInDegreesEqualOrUnder { get; }
 
@@ -18,8 +16,10 @@ namespace Starship.Flight.Segment.Config
 
         public float? HandoverLateralVelocityInMetrePerSecondEqualOrOver { get; }
         public float? HandoverLateralVelocityInMetrePerSecondEqualOrUnder { get; }
+
         public float? HandoverVerticalVelocityInMetrePerSecondEqualOrOver { get; }
         public float? HandoverVerticalVelocityInMetrePerSecondEqualOrUnder { get; }
+
         public float? HandoverHorizontalVelocityInMetrePerSecondEqualOrOver { get; }
         public float? HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder { get; }
 
@@ -162,55 +162,5 @@ namespace Starship.Flight.Segment.Config
             HorizontalVelocityOffsetPidRegulatorIntegralGain = horizontalVelocityOffsetPidRegulatorIntegralGain;
             HorizontalVelocityOffsetPidRegulatorDerivativeGain = horizontalVelocityOffsetPidRegulatorDerivativeGain;
         }
-
-        public IEnumerable<TelemetryMessage> ProvideTelemetry() => new List<TelemetryMessage>
-        {
-            new TelemetryMessage($"HandoverYawAngleInDegreesEqualOrOver:{HandoverYawAngleInDegreesEqualOrOver}"),
-            new TelemetryMessage($"HandoverYawAngleInDegreesEqualOrUnder:{HandoverYawAngleInDegreesEqualOrUnder}"),
-            new TelemetryMessage($"HandoverRollAngleInDegreesEqualOrOver:{HandoverRollAngleInDegreesEqualOrOver}"),
-            new TelemetryMessage($"HandoverRollAngleInDegreesEqualOrUnder:{HandoverRollAngleInDegreesEqualOrUnder}"),
-            new TelemetryMessage($"HandoverPitchAngleInDegreesEqualOrOver:{HandoverPitchAngleInDegreesEqualOrOver}"),
-            new TelemetryMessage($"HandoverPitchAngleInDegreesEqualOrUnder:{HandoverPitchAngleInDegreesEqualOrUnder}"),
-            new TelemetryMessage($"HandoverAltitudeAboveTerrainInMetersEqualOrOver:{HandoverAltitudeAboveTerrainInMetersEqualOrOver}"),
-            new TelemetryMessage($"HandoverAltitudeAboveTerrainInMetersEqualOrUnder:{HandoverAltitudeAboveTerrainInMetersEqualOrUnder}"),
-            new TelemetryMessage($"HandoverLateralVelocityInMetrePerSecondEqualOrOver:{HandoverLateralVelocityInMetrePerSecondEqualOrOver}"),
-            new TelemetryMessage($"HandoverLateralVelocityInMetrePerSecondEqualOrUnder:{HandoverLateralVelocityInMetrePerSecondEqualOrUnder}"),
-            new TelemetryMessage($"HandoverVerticalVelocityInMetrePerSecondEqualOrOver:{HandoverVerticalVelocityInMetrePerSecondEqualOrOver}"),
-            new TelemetryMessage($"HandoverVerticalVelocityInMetrePerSecondEqualOrUnder:{HandoverVerticalVelocityInMetrePerSecondEqualOrUnder}"),
-            new TelemetryMessage($"HandoverHorizontalVelocityInMetrePerSecondEqualOrOver:{HandoverHorizontalVelocityInMetrePerSecondEqualOrOver}"),
-            new TelemetryMessage($"HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder:{HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder}"),
-            new TelemetryMessage($"DesiredLegsExtendedState:{DesiredLegsExtendedState}"),
-            new TelemetryMessage($"DesiredYawAngleInDegrees:{DesiredYawAngleInDegrees}"),
-            new TelemetryMessage($"DesiredRollAngleInDegrees:{DesiredRollAngleInDegrees}"),
-            new TelemetryMessage($"DesiredPitchAngleInDegrees:{DesiredPitchAngleInDegrees}"),
-            new TelemetryMessage($"DesiredLateralVelocityInMetrePerSecond:{DesiredLateralVelocityInMetrePerSecond}"),
-            new TelemetryMessage($"DesiredVerticalVelocityInMetrePerSecond:{DesiredVerticalVelocityInMetrePerSecond}"),
-            new TelemetryMessage($"DesiredHorizontalVelocityInMetrePerSecond:{DesiredHorizontalVelocityInMetrePerSecond}"),
-            new TelemetryMessage($"TopLeftFlapDeployPercentOverwrite:{TopLeftFlapDeployPercentOverwrite}"),
-            new TelemetryMessage($"TopRightFlapDeployPercentOverwrite:{TopRightFlapDeployPercentOverwrite}"),
-            new TelemetryMessage($"BottomLeftFlapDeployPercentOverwrite:{BottomLeftFlapDeployPercentOverwrite}"),
-            new TelemetryMessage($"BottomRightFlapDeployPercentOverwrite:{BottomRightFlapDeployPercentOverwrite}"),
-            new TelemetryMessage($"MainEnginesYawPercentOverwrite:{MainEnginesYawPercentOverwrite}"),
-            new TelemetryMessage($"MainEnginesRollPercentOverwrite:{MainEnginesRollPercentOverwrite}"),
-            new TelemetryMessage($"MainEnginesPitchPercentOverwrite:{MainEnginesPitchPercentOverwrite}"),
-            new TelemetryMessage($"TopMainEngineThrottlePercentOverwrite:{TopMainEngineThrottlePercentOverwrite}"),
-            new TelemetryMessage($"BottomLeftMainEngineThrottlePercentOverwrite:{BottomLeftMainEngineThrottlePercentOverwrite}"),
-            new TelemetryMessage($"BottomRightMainEngineThrottlePercentOverwrite:{BottomRightMainEngineThrottlePercentOverwrite}"),
-            new TelemetryMessage($"FlapsActuationPidRegulatorProportionalGain:{FlapsActuationPidRegulatorProportionalGain}"),
-            new TelemetryMessage($"FlapsActuationPidRegulatorIntegralGain:{FlapsActuationPidRegulatorIntegralGain}"),
-            new TelemetryMessage($"FlapsActuationPidRegulatorDerivativeGain:{FlapsActuationPidRegulatorDerivativeGain}"),
-            new TelemetryMessage($"MainEnginesGimbalPidRegulatorProportionalGain:{MainEnginesGimbalPidRegulatorProportionalGain}"),
-            new TelemetryMessage($"MainEnginesGimbalPidRegulatorIntegralGain:{MainEnginesGimbalPidRegulatorIntegralGain}"),
-            new TelemetryMessage($"MainEnginesGimbalPidRegulatorDerivativeGain:{MainEnginesGimbalPidRegulatorDerivativeGain}"),
-            new TelemetryMessage($"LateralVelocityOffsetPidRegulatorProportionalGain:{LateralVelocityOffsetPidRegulatorProportionalGain}"),
-            new TelemetryMessage($"LateralVelocityOffsetPidRegulatorIntegralGain:{LateralVelocityOffsetPidRegulatorIntegralGain}"),
-            new TelemetryMessage($"LateralVelocityOffsetPidRegulatorDerivativeGain:{LateralVelocityOffsetPidRegulatorDerivativeGain}"),
-            new TelemetryMessage($"MainEnginesThrottlePidRegulatorProportionalGain:{MainEnginesThrottlePidRegulatorProportionalGain}"),
-            new TelemetryMessage($"MainEnginesThrottlePidRegulatorIntegralGain:{MainEnginesThrottlePidRegulatorIntegralGain}"),
-            new TelemetryMessage($"MainEnginesThrottlePidRegulatorDerivativeGain:{MainEnginesThrottlePidRegulatorDerivativeGain}"),
-            new TelemetryMessage($"HorizontalVelocityOffsetPidRegulatorProportionalGain:{HorizontalVelocityOffsetPidRegulatorProportionalGain}"),
-            new TelemetryMessage($"HorizontalVelocityOffsetPidRegulatorIntegralGain:{HorizontalVelocityOffsetPidRegulatorIntegralGain}"),
-            new TelemetryMessage($"HorizontalVelocityOffsetPidRegulatorDerivativeGain:{HorizontalVelocityOffsetPidRegulatorDerivativeGain}")
-        };
     }
 }

@@ -13,7 +13,7 @@ using Starship.Sensor.Altitude;
 using Starship.Sensor.Attitude;
 using Starship.Sensor.Velocity;
 using Starship.Telemetry;
-using Starship.Utility.Timing;
+using Starship.Utility.Time;
 using static UnityEngine.Debug;
 using static Vessel.Situations;
 
@@ -91,9 +91,8 @@ namespace Starship
 
             var flightSegmentCommanders =
                 new FlightSegmentCommanders(
-                    new FlightSegmentCommandersLoader(
-                        new FlightSegmentConfigsLoader(
-                            new FlightSegmentConfigsPath())));
+                    new FlightSegmentConfigsLoader(
+                        new FlightSegmentConfigsPath()));
 
             return new FlightCommander(
                 missionTimer,

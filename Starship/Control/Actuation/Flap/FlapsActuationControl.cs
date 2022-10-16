@@ -13,8 +13,7 @@ namespace Starship.Control.Actuation.Flap
 
         public void Bind(Vessel vessel)
         {
-            var flaps = vessel
-                .FindPartModulesImplementing<ModuleRoboticServoHinge>();
+            var flaps = vessel.FindPartModulesImplementing<ModuleRoboticServoHinge>();
 
             _topLeftFlap = flaps[0];
             _topRightFlap = flaps[1];

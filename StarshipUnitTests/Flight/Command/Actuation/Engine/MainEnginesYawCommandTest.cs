@@ -8,13 +8,36 @@ namespace StarshipUnitTests.Flight.Command.Actuation.Engine
     public sealed class MainEnginesYawCommandTest
     {
         [Test]
-        public void Should_expose_the_commanded_yaw_percent()
+        public void Should_clamp_and_expose_the_commanded_yaw_percent()
         {
             // GIVEN
-            var command = new MainEnginesYawCommand(0.5F);
+            var commandA = new MainEnginesYawCommand(-1.1F);
+            var commandB = new MainEnginesYawCommand(-1.0F);
+            var commandC = new MainEnginesYawCommand(0.0F);
+            var commandD = new MainEnginesYawCommand(1.0F);
+            var commandE = new MainEnginesYawCommand(1.1F);
 
             // THEN
-            Assert.That(command.YawPercent, Is.EqualTo(0.5F));
+            Assert.That(commandA.YawPercent, Is.EqualTo(-1.0F));
+            Assert.That(commandB.YawPercent, Is.EqualTo(-1.0F));
+            Assert.That(commandC.YawPercent, Is.EqualTo(0.0F));
+            Assert.That(commandD.YawPercent, Is.EqualTo(1.0F));
+            Assert.That(commandE.YawPercent, Is.EqualTo(1.0F));
+        }
+
+        [Test]
+        public void Should_provide_telemetry_with_the_unclamped_yaw_percent()
+        {
+            // GIVEN
+            var command = new MainEnginesYawCommand(1.1F);
+
+            // THEN
+            var expectedTelemetry = new List<TelemetryMessage>
+            {
+                new TelemetryMessage("MainEnginesYawPercent:1,1")
+            };
+
+            Assert.That(command.ProvideTelemetry(), Is.EqualTo(expectedTelemetry));
         }
 
         [Test]
@@ -28,21 +51,6 @@ namespace StarshipUnitTests.Flight.Command.Actuation.Engine
             // THEN
             Assert.That(commandA.Equals(commandB), Is.True);
             Assert.That(commandA.Equals(commandC), Is.False);
-        }
-
-        [Test]
-        public void Should_provide_telemetry_containing_the_yaw_percent()
-        {
-            // GIVEN
-            var command = new MainEnginesYawCommand(0.5F);
-
-            // THEN
-            var expectedTelemetry = new List<TelemetryMessage>
-            {
-                new TelemetryMessage("MainEnginesYawPercent:0,5")
-            };
-
-            Assert.That(command.ProvideTelemetry(), Is.EqualTo(expectedTelemetry));
         }
     }
 }

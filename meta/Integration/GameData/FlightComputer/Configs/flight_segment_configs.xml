@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFlightSegmentConfigModel>
+    <FlightSegmentConfigModel>
+
+        <HandoverAltitudeAboveTerrainInMetersEqualOrOver>1000</HandoverAltitudeAboveTerrainInMetersEqualOrOver>
+
+        <DesiredLegsExtendedState>false</DesiredLegsExtendedState>
+
+        <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+
+        <DesiredVerticalVelocityInMetrePerSecond>100</DesiredVerticalVelocityInMetrePerSecond>
+
+        <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>1</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>1</BottomRightFlapDeployPercentOverwrite>
+
+        <MainEnginesGimbalPidRegulatorProportionalGain>0.15</MainEnginesGimbalPidRegulatorProportionalGain>
+        <MainEnginesGimbalPidRegulatorIntegralGain>0.0005</MainEnginesGimbalPidRegulatorIntegralGain>
+        <MainEnginesGimbalPidRegulatorDerivativeGain>0.075</MainEnginesGimbalPidRegulatorDerivativeGain>
+
+        <MainEnginesThrottlePidRegulatorProportionalGain>1</MainEnginesThrottlePidRegulatorProportionalGain>
+        <MainEnginesThrottlePidRegulatorIntegralGain>0</MainEnginesThrottlePidRegulatorIntegralGain>
+        <MainEnginesThrottlePidRegulatorDerivativeGain>0</MainEnginesThrottlePidRegulatorDerivativeGain>
+
+    </FlightSegmentConfigModel>
+
+    <FlightSegmentConfigModel>
+
+        <HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>0</HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>
+
+        <DesiredLegsExtendedState>false</DesiredLegsExtendedState>
+
+        <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+
+        <DesiredVerticalVelocityInMetrePerSecond>0</DesiredVerticalVelocityInMetrePerSecond>
+
+        <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>1</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>1</BottomRightFlapDeployPercentOverwrite>
+
+        <MainEnginesGimbalPidRegulatorProportionalGain>0.15</MainEnginesGimbalPidRegulatorProportionalGain>
+        <MainEnginesGimbalPidRegulatorIntegralGain>0.0005</MainEnginesGimbalPidRegulatorIntegralGain>
+        <MainEnginesGimbalPidRegulatorDerivativeGain>0.075</MainEnginesGimbalPidRegulatorDerivativeGain>
+
+        <MainEnginesThrottlePidRegulatorProportionalGain>1</MainEnginesThrottlePidRegulatorProportionalGain>
+        <MainEnginesThrottlePidRegulatorIntegralGain>0</MainEnginesThrottlePidRegulatorIntegralGain>
+        <MainEnginesThrottlePidRegulatorDerivativeGain>0</MainEnginesThrottlePidRegulatorDerivativeGain>
+
+    </FlightSegmentConfigModel>
+
+    <FlightSegmentConfigModel>
+
+        <HandoverPitchAngleInDegreesEqualOrUnder>-15</HandoverPitchAngleInDegreesEqualOrUnder>
+
+        <DesiredLegsExtendedState>false</DesiredLegsExtendedState>
+
+        <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>-15</DesiredPitchAngleInDegrees>
+
+        <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>0</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>0</BottomRightFlapDeployPercentOverwrite>
+
+        <MainEnginesYawPercentOverwrite>0</MainEnginesYawPercentOverwrite>
+        <MainEnginesRollPercentOverwrite>0</MainEnginesRollPercentOverwrite>
+        <MainEnginesPitchPercentOverwrite>-1</MainEnginesPitchPercentOverwrite>
+
+        <TopMainEngineThrottlePercentOverwrite>0.25</TopMainEngineThrottlePercentOverwrite>
+        <BottomLeftMainEngineThrottlePercentOverwrite>0.25</BottomLeftMainEngineThrottlePercentOverwrite>
+        <BottomRightMainEngineThrottlePercentOverwrite>0.25</BottomRightMainEngineThrottlePercentOverwrite>
+
+    </FlightSegmentConfigModel>
+
+    <FlightSegmentConfigModel>
+
+        <HandoverAltitudeAboveTerrainInMetersEqualOrUnder>300</HandoverAltitudeAboveTerrainInMetersEqualOrUnder>
+
+        <DesiredLegsExtendedState>false</DesiredLegsExtendedState>
+
+        <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>-70</DesiredPitchAngleInDegrees>
+
+        <FlapsActuationPidRegulatorProportionalGain>0.035</FlapsActuationPidRegulatorProportionalGain>
+        <FlapsActuationPidRegulatorIntegralGain>0.00001</FlapsActuationPidRegulatorIntegralGain>
+        <FlapsActuationPidRegulatorDerivativeGain>0.0035</FlapsActuationPidRegulatorDerivativeGain>
+
+    </FlightSegmentConfigModel>
+
+    <FlightSegmentConfigModel>
+
+        <HandoverVerticalVelocityInMetrePerSecondEqualOrOver>-1</HandoverVerticalVelocityInMetrePerSecondEqualOrOver>
+        <HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>1</HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>
+
+        <DesiredLegsExtendedState>false</DesiredLegsExtendedState>
+
+        <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+
+        <DesiredLateralVelocityInMetrePerSecond>0</DesiredLateralVelocityInMetrePerSecond>
+        <DesiredVerticalVelocityInMetrePerSecond>0</DesiredVerticalVelocityInMetrePerSecond>
+        <DesiredHorizontalVelocityInMetrePerSecond>0</DesiredHorizontalVelocityInMetrePerSecond>
+
+        <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>0</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>0</BottomRightFlapDeployPercentOverwrite>
+
+        <MainEnginesGimbalPidRegulatorProportionalGain>0.15</MainEnginesGimbalPidRegulatorProportionalGain>
+        <MainEnginesGimbalPidRegulatorIntegralGain>0</MainEnginesGimbalPidRegulatorIntegralGain>
+        <MainEnginesGimbalPidRegulatorDerivativeGain>0.25</MainEnginesGimbalPidRegulatorDerivativeGain>
+
+        <LateralVelocityOffsetPidRegulatorProportionalGain>1.75</LateralVelocityOffsetPidRegulatorProportionalGain>
+        <LateralVelocityOffsetPidRegulatorIntegralGain>0.001</LateralVelocityOffsetPidRegulatorIntegralGain>
+        <LateralVelocityOffsetPidRegulatorDerivativeGain>0</LateralVelocityOffsetPidRegulatorDerivativeGain>
+
+        <MainEnginesThrottlePidRegulatorProportionalGain>0.5</MainEnginesThrottlePidRegulatorProportionalGain>
+        <MainEnginesThrottlePidRegulatorIntegralGain>0.001</MainEnginesThrottlePidRegulatorIntegralGain>
+        <MainEnginesThrottlePidRegulatorDerivativeGain>0</MainEnginesThrottlePidRegulatorDerivativeGain>
+
+        <HorizontalVelocityOffsetPidRegulatorProportionalGain>1.75</HorizontalVelocityOffsetPidRegulatorProportionalGain>
+        <HorizontalVelocityOffsetPidRegulatorIntegralGain>0.001</HorizontalVelocityOffsetPidRegulatorIntegralGain>
+        <HorizontalVelocityOffsetPidRegulatorDerivativeGain>0</HorizontalVelocityOffsetPidRegulatorDerivativeGain>
+
+    </FlightSegmentConfigModel>
+
+    <FlightSegmentConfigModel>
+
+        <HandoverAltitudeAboveTerrainInMetersEqualOrUnder>50</HandoverAltitudeAboveTerrainInMetersEqualOrUnder>
+
+        <DesiredLegsExtendedState>false</DesiredLegsExtendedState>
+
+        <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+
+        <DesiredLateralVelocityInMetrePerSecond>0</DesiredLateralVelocityInMetrePerSecond>
+        <DesiredVerticalVelocityInMetrePerSecond>-10</DesiredVerticalVelocityInMetrePerSecond>
+        <DesiredHorizontalVelocityInMetrePerSecond>0</DesiredHorizontalVelocityInMetrePerSecond>
+
+        <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>0</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>0</BottomRightFlapDeployPercentOverwrite>
+
+        <MainEnginesGimbalPidRegulatorProportionalGain>0.15</MainEnginesGimbalPidRegulatorProportionalGain>
+        <MainEnginesGimbalPidRegulatorIntegralGain>0</MainEnginesGimbalPidRegulatorIntegralGain>
+        <MainEnginesGimbalPidRegulatorDerivativeGain>0.25</MainEnginesGimbalPidRegulatorDerivativeGain>
+
+        <LateralVelocityOffsetPidRegulatorProportionalGain>1.75</LateralVelocityOffsetPidRegulatorProportionalGain>
+        <LateralVelocityOffsetPidRegulatorIntegralGain>0.001</LateralVelocityOffsetPidRegulatorIntegralGain>
+        <LateralVelocityOffsetPidRegulatorDerivativeGain>0</LateralVelocityOffsetPidRegulatorDerivativeGain>
+
+        <MainEnginesThrottlePidRegulatorProportionalGain>0.5</MainEnginesThrottlePidRegulatorProportionalGain>
+        <MainEnginesThrottlePidRegulatorIntegralGain>0.001</MainEnginesThrottlePidRegulatorIntegralGain>
+        <MainEnginesThrottlePidRegulatorDerivativeGain>0</MainEnginesThrottlePidRegulatorDerivativeGain>
+
+        <HorizontalVelocityOffsetPidRegulatorProportionalGain>1.75</HorizontalVelocityOffsetPidRegulatorProportionalGain>
+        <HorizontalVelocityOffsetPidRegulatorIntegralGain>0.001</HorizontalVelocityOffsetPidRegulatorIntegralGain>
+        <HorizontalVelocityOffsetPidRegulatorDerivativeGain>0</HorizontalVelocityOffsetPidRegulatorDerivativeGain>
+
+    </FlightSegmentConfigModel>
+
+    <FlightSegmentConfigModel>
+
+        <HandoverAltitudeAboveTerrainInMetersEqualOrUnder>3</HandoverAltitudeAboveTerrainInMetersEqualOrUnder>
+
+        <DesiredLegsExtendedState>true</DesiredLegsExtendedState>
+
+        <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+
+        <DesiredLateralVelocityInMetrePerSecond>0</DesiredLateralVelocityInMetrePerSecond>
+        <DesiredVerticalVelocityInMetrePerSecond>-10</DesiredVerticalVelocityInMetrePerSecond>
+        <DesiredHorizontalVelocityInMetrePerSecond>0</DesiredHorizontalVelocityInMetrePerSecond>
+
+        <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>0</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>0</BottomRightFlapDeployPercentOverwrite>
+
+        <MainEnginesGimbalPidRegulatorProportionalGain>0.15</MainEnginesGimbalPidRegulatorProportionalGain>
+        <MainEnginesGimbalPidRegulatorIntegralGain>0</MainEnginesGimbalPidRegulatorIntegralGain>
+        <MainEnginesGimbalPidRegulatorDerivativeGain>0.25</MainEnginesGimbalPidRegulatorDerivativeGain>
+
+        <LateralVelocityOffsetPidRegulatorProportionalGain>1.75</LateralVelocityOffsetPidRegulatorProportionalGain>
+        <LateralVelocityOffsetPidRegulatorIntegralGain>0.001</LateralVelocityOffsetPidRegulatorIntegralGain>
+        <LateralVelocityOffsetPidRegulatorDerivativeGain>0</LateralVelocityOffsetPidRegulatorDerivativeGain>
+
+        <MainEnginesThrottlePidRegulatorProportionalGain>0.5</MainEnginesThrottlePidRegulatorProportionalGain>
+        <MainEnginesThrottlePidRegulatorIntegralGain>0.001</MainEnginesThrottlePidRegulatorIntegralGain>
+        <MainEnginesThrottlePidRegulatorDerivativeGain>0</MainEnginesThrottlePidRegulatorDerivativeGain>
+
+        <HorizontalVelocityOffsetPidRegulatorProportionalGain>1.75</HorizontalVelocityOffsetPidRegulatorProportionalGain>
+        <HorizontalVelocityOffsetPidRegulatorIntegralGain>0.001</HorizontalVelocityOffsetPidRegulatorIntegralGain>
+        <HorizontalVelocityOffsetPidRegulatorDerivativeGain>0</HorizontalVelocityOffsetPidRegulatorDerivativeGain>
+
+    </FlightSegmentConfigModel>
+
+    <FlightSegmentConfigModel>
+
+        <HandoverAltitudeAboveTerrainInMetersEqualOrUnder>0.25</HandoverAltitudeAboveTerrainInMetersEqualOrUnder>
+
+        <DesiredLegsExtendedState>true</DesiredLegsExtendedState>
+
+        <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+
+        <DesiredLateralVelocityInMetrePerSecond>0</DesiredLateralVelocityInMetrePerSecond>
+        <DesiredVerticalVelocityInMetrePerSecond>-1</DesiredVerticalVelocityInMetrePerSecond>
+        <DesiredHorizontalVelocityInMetrePerSecond>0</DesiredHorizontalVelocityInMetrePerSecond>
+
+        <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>0</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>0</BottomRightFlapDeployPercentOverwrite>
+
+        <MainEnginesGimbalPidRegulatorProportionalGain>0.15</MainEnginesGimbalPidRegulatorProportionalGain>
+        <MainEnginesGimbalPidRegulatorIntegralGain>0</MainEnginesGimbalPidRegulatorIntegralGain>
+        <MainEnginesGimbalPidRegulatorDerivativeGain>0.25</MainEnginesGimbalPidRegulatorDerivativeGain>
+
+        <LateralVelocityOffsetPidRegulatorProportionalGain>1.75</LateralVelocityOffsetPidRegulatorProportionalGain>
+        <LateralVelocityOffsetPidRegulatorIntegralGain>0.001</LateralVelocityOffsetPidRegulatorIntegralGain>
+        <LateralVelocityOffsetPidRegulatorDerivativeGain>0</LateralVelocityOffsetPidRegulatorDerivativeGain>
+
+        <MainEnginesThrottlePidRegulatorProportionalGain>0.5</MainEnginesThrottlePidRegulatorProportionalGain>
+        <MainEnginesThrottlePidRegulatorIntegralGain>0.001</MainEnginesThrottlePidRegulatorIntegralGain>
+        <MainEnginesThrottlePidRegulatorDerivativeGain>0</MainEnginesThrottlePidRegulatorDerivativeGain>
+
+        <HorizontalVelocityOffsetPidRegulatorProportionalGain>1.75</HorizontalVelocityOffsetPidRegulatorProportionalGain>
+        <HorizontalVelocityOffsetPidRegulatorIntegralGain>0.001</HorizontalVelocityOffsetPidRegulatorIntegralGain>
+        <HorizontalVelocityOffsetPidRegulatorDerivativeGain>0</HorizontalVelocityOffsetPidRegulatorDerivativeGain>
+
+    </FlightSegmentConfigModel>
+
+    <FlightSegmentConfigModel>
+
+        <DesiredLegsExtendedState>true</DesiredLegsExtendedState>
+
+        <DesiredYawAngleInDegrees>0</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>0</DesiredPitchAngleInDegrees>
+
+        <TopLeftFlapDeployPercentOverwrite>1</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>1</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>0</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>0</BottomRightFlapDeployPercentOverwrite>
+
+        <TopMainEngineThrottlePercentOverwrite>0</TopMainEngineThrottlePercentOverwrite>
+        <BottomLeftMainEngineThrottlePercentOverwrite>0</BottomLeftMainEngineThrottlePercentOverwrite>
+        <BottomRightMainEngineThrottlePercentOverwrite>0</BottomRightMainEngineThrottlePercentOverwrite>
+
+    </FlightSegmentConfigModel>
+
+</ArrayOfFlightSegmentConfigModel>

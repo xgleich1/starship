@@ -2,7 +2,6 @@ using System;
 
 namespace Starship.Utility.Math
 {
-    // Currently under development
     public sealed class PidRegulator
     {
         private readonly float _minimumOutput;
@@ -56,8 +55,7 @@ namespace Starship.Utility.Math
             _previousRegulateTime = _currentRegulateTime;
             _previousProcessValue = _currentProcessValue;
 
-            return outputToReduceError
-                .Clamp(_minimumOutput, _maximumOutput);
+            return outputToReduceError.Clamp(_minimumOutput, _maximumOutput);
         }
 
         private float CalculateProportionalTerm()

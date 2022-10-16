@@ -1,4 +1,4 @@
-namespace Starship.Utility.Timing
+namespace Starship.Utility.Time
 {
     public sealed class Stopwatch : IStopwatch
     {

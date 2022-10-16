@@ -4,8 +4,10 @@ namespace Starship.Flight.Segment.Config
     {
         public float? HandoverYawAngleInDegreesEqualOrOver;
         public float? HandoverYawAngleInDegreesEqualOrUnder;
+
         public float? HandoverRollAngleInDegreesEqualOrOver;
         public float? HandoverRollAngleInDegreesEqualOrUnder;
+
         public float? HandoverPitchAngleInDegreesEqualOrOver;
         public float? HandoverPitchAngleInDegreesEqualOrUnder;
 
@@ -14,8 +16,10 @@ namespace Starship.Flight.Segment.Config
 
         public float? HandoverLateralVelocityInMetrePerSecondEqualOrOver;
         public float? HandoverLateralVelocityInMetrePerSecondEqualOrUnder;
+
         public float? HandoverVerticalVelocityInMetrePerSecondEqualOrOver;
         public float? HandoverVerticalVelocityInMetrePerSecondEqualOrUnder;
+
         public float? HandoverHorizontalVelocityInMetrePerSecondEqualOrOver;
         public float? HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder;
 

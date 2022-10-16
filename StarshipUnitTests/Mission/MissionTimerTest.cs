@@ -1,8 +1,8 @@
 using Moq;
 using NUnit.Framework;
 using Starship.Mission;
-using Starship.Utility.Timing;
-using Starship.Utility.Timing.Units;
+using Starship.Utility.Time;
+using Starship.Utility.Time.Units;
 
 namespace StarshipUnitTests.Mission
 {

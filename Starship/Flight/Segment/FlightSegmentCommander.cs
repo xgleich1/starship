@@ -10,7 +10,6 @@ using Starship.Telemetry;
 
 namespace Starship.Flight.Segment
 {
-    // Currently under development
     public sealed class FlightSegmentCommander : IFlightSegmentCommander
     {
         private readonly IFlightSegmentHandoverDecider _flightSegmentHandoverDecider;
@@ -76,6 +75,26 @@ namespace Starship.Flight.Segment
             telemetry.AddRange(_mainEnginesThrottleSegmentCommander.ProvideTelemetry());
 
             return telemetry;
+        }
+
+        public override bool Equals(object obj) =>
+            ReferenceEquals(this, obj) || obj is FlightSegmentCommander other
+            && _flightSegmentHandoverDecider.Equals(other._flightSegmentHandoverDecider)
+            && _legsActuationSegmentCommander.Equals(other._legsActuationSegmentCommander)
+            && _flapsActuationSegmentCommander.Equals(other._flapsActuationSegmentCommander)
+            && _mainEnginesGimbalSegmentCommander.Equals(other._mainEnginesGimbalSegmentCommander)
+            && _mainEnginesThrottleSegmentCommander.Equals(other._mainEnginesThrottleSegmentCommander);
+
+        public override int GetHashCode()
+        {
+            var hashCode = _flightSegmentHandoverDecider.GetHashCode();
+
+            hashCode = (hashCode * 397) ^ _legsActuationSegmentCommander.GetHashCode();
+            hashCode = (hashCode * 397) ^ _flapsActuationSegmentCommander.GetHashCode();
+            hashCode = (hashCode * 397) ^ _mainEnginesGimbalSegmentCommander.GetHashCode();
+            hashCode = (hashCode * 397) ^ _mainEnginesThrottleSegmentCommander.GetHashCode();
+
+            return hashCode;
         }
     }
 }

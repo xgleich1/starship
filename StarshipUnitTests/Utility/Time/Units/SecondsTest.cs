@@ -1,7 +1,7 @@
 using NUnit.Framework;
-using Starship.Utility.Timing.Units;
+using Starship.Utility.Time.Units;
 
-namespace StarshipUnitTests.Utility.Timing.Units
+namespace StarshipUnitTests.Utility.Time.Units
 {
     public sealed class SecondsTest
     {
@@ -26,16 +26,6 @@ namespace StarshipUnitTests.Utility.Timing.Units
             // THEN
             Assert.That(secondsA.Equals(secondsB), Is.True);
             Assert.That(secondsA.Equals(secondsC), Is.False);
-        }
-
-        [Test]
-        public void Should_provide_a_readable_to_string_method()
-        {
-            // GIVEN
-            var seconds = new Seconds(1L);
-
-            // THEN
-            Assert.That(seconds.ToString(), Is.EqualTo("Seconds(1)"));
         }
 
         [Test]

@@ -2,7 +2,7 @@ using Starship.Flight.Command.Throttle.Main;
 
 namespace Starship.Flight.Segment.Throttle.Main
 {
-    public sealed class MainEnginesThrottleSegmentCommands
+    public readonly struct MainEnginesThrottleSegmentCommands
     {
         public TopMainEngineThrottleCommand TopMainEngineThrottleCommand { get; }
         public BottomLeftMainEngineThrottleCommand BottomLeftMainEngineThrottleCommand { get; }

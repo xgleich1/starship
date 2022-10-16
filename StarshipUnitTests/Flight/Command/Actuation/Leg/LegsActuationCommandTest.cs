@@ -11,23 +11,12 @@ namespace StarshipUnitTests.Flight.Command.Actuation.Leg
         public void Should_expose_the_commanded_extended_state()
         {
             // GIVEN
-            var command = new LegsActuationCommand(true);
-
-            // THEN
-            Assert.That(command.Extended, Is.EqualTo(true));
-        }
-
-        [Test]
-        public void Should_provide_a_equality_by_value_method()
-        {
-            // GIVEN
             var commandA = new LegsActuationCommand(true);
-            var commandB = new LegsActuationCommand(true);
-            var commandC = new LegsActuationCommand(false);
+            var commandB = new LegsActuationCommand(false);
 
             // THEN
-            Assert.That(commandA.Equals(commandB), Is.True);
-            Assert.That(commandA.Equals(commandC), Is.False);
+            Assert.That(commandA.Extended, Is.EqualTo(true));
+            Assert.That(commandB.Extended, Is.EqualTo(false));
         }
 
         [Test]
@@ -43,6 +32,19 @@ namespace StarshipUnitTests.Flight.Command.Actuation.Leg
             };
 
             Assert.That(command.ProvideTelemetry(), Is.EqualTo(expectedTelemetry));
+        }
+
+        [Test]
+        public void Should_provide_a_equality_by_value_method()
+        {
+            // GIVEN
+            var commandA = new LegsActuationCommand(true);
+            var commandB = new LegsActuationCommand(true);
+            var commandC = new LegsActuationCommand(false);
+
+            // THEN
+            Assert.That(commandA.Equals(commandB), Is.True);
+            Assert.That(commandA.Equals(commandC), Is.False);
         }
     }
 }

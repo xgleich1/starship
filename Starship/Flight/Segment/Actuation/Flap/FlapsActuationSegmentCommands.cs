@@ -2,7 +2,7 @@ using Starship.Flight.Command.Actuation.Flap;
 
 namespace Starship.Flight.Segment.Actuation.Flap
 {
-    public sealed class FlapsActuationSegmentCommands
+    public readonly struct FlapsActuationSegmentCommands
     {
         public TopLeftFlapActuationCommand TopLeftFlapActuationCommand { get; }
         public TopRightFlapActuationCommand TopRightFlapActuationCommand { get; }

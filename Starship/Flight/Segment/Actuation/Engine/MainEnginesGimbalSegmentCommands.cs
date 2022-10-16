@@ -2,7 +2,7 @@ using Starship.Flight.Command.Actuation.Engine;
 
 namespace Starship.Flight.Segment.Actuation.Engine
 {
-    public sealed class MainEnginesGimbalSegmentCommands
+    public readonly struct MainEnginesGimbalSegmentCommands
     {
         public MainEnginesYawCommand MainEnginesYawCommand { get; }
         public MainEnginesRollCommand MainEnginesRollCommand { get; }

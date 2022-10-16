@@ -24,9 +24,7 @@ namespace Starship.Flight
             _flightSegmentCommanders = flightSegmentCommanders;
         }
 
-        public void CommandFlight(
-            ISensorSuite sensorSuite,
-            IControlSuite controlSuite)
+        public void CommandFlight(ISensorSuite sensorSuite, IControlSuite controlSuite)
         {
             if (!_missionTimer.IsRunning)
             {
