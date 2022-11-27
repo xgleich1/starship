@@ -1,3 +1,4 @@
+using Starship.Control.Activation.Rcs;
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
 using Starship.Control.Actuation.Leg;
@@ -8,6 +9,7 @@ namespace Starship.Control
 {
     public sealed class ControlSuite : IControlSuite
     {
+        private readonly IRcsActivationControl _rcsActivationControl;
         private readonly ILegsActuationControl _legsActuationControl;
         private readonly IFlapsActuationControl _flapsActuationControl;
         private readonly IMainEnginesGimbalControl _mainEnginesGimbalControl;
@@ -15,11 +17,13 @@ namespace Starship.Control
 
 
         public ControlSuite(
+            IRcsActivationControl rcsActivationControl,
             ILegsActuationControl legsActuationControl,
             IFlapsActuationControl flapsActuationControl,
             IMainEnginesGimbalControl mainEnginesGimbalControl,
             IMainEnginesThrottleControl mainEnginesThrottleControl)
         {
+            _rcsActivationControl = rcsActivationControl;
             _legsActuationControl = legsActuationControl;
             _flapsActuationControl = flapsActuationControl;
             _mainEnginesGimbalControl = mainEnginesGimbalControl;
@@ -28,6 +32,12 @@ namespace Starship.Control
 
         public void ExertControl(ICommandSuite commandSuite)
         {
+            _rcsActivationControl.ActivateRcs(
+                commandSuite.TopLeftRcsActivationCommand,
+                commandSuite.TopRightRcsActivationCommand,
+                commandSuite.BottomLeftRcsActivationCommand,
+                commandSuite.BottomRightRcsActivationCommand);
+
             _legsActuationControl.ActuateLegs(
                 commandSuite.LegsActuationCommand);
 

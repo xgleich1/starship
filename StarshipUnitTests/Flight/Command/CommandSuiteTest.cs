@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Starship.Flight.Command;
+using Starship.Flight.Command.Activation.Rcs;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
 using Starship.Flight.Command.Actuation.Leg;
@@ -16,6 +17,10 @@ namespace StarshipUnitTests.Flight.Command
         {
             // GIVEN
             var commandSuite = new CommandSuite(
+                new TopLeftRcsActivationCommand(false),
+                new TopRightRcsActivationCommand(false),
+                new BottomLeftRcsActivationCommand(false),
+                new BottomRightRcsActivationCommand(false),
                 new LegsActuationCommand(false),
                 new TopLeftFlapActuationCommand(0.0F),
                 new TopRightFlapActuationCommand(0.0F),
@@ -31,6 +36,10 @@ namespace StarshipUnitTests.Flight.Command
             // THEN
             var expectedTelemetry = new List<TelemetryMessage>
             {
+                new TelemetryMessage("TopLeftRcsActivated:False"),
+                new TelemetryMessage("TopRightRcsActivated:False"),
+                new TelemetryMessage("BottomLeftRcsActivated:False"),
+                new TelemetryMessage("BottomRightRcsActivated:False"),
                 new TelemetryMessage("LegsExtended:False"),
                 new TelemetryMessage("TopLeftFlapDeployPercent:0"),
                 new TelemetryMessage("TopRightFlapDeployPercent:0"),
@@ -52,6 +61,10 @@ namespace StarshipUnitTests.Flight.Command
         {
             // GIVEN
             var commandSuiteA = new CommandSuite(
+                new TopLeftRcsActivationCommand(false),
+                new TopRightRcsActivationCommand(false),
+                new BottomLeftRcsActivationCommand(false),
+                new BottomRightRcsActivationCommand(false),
                 new LegsActuationCommand(false),
                 new TopLeftFlapActuationCommand(0.0F),
                 new TopRightFlapActuationCommand(0.0F),
@@ -65,6 +78,10 @@ namespace StarshipUnitTests.Flight.Command
                 new BottomRightMainEngineThrottleCommand(0.0F));
 
             var commandSuiteB = new CommandSuite(
+                new TopLeftRcsActivationCommand(false),
+                new TopRightRcsActivationCommand(false),
+                new BottomLeftRcsActivationCommand(false),
+                new BottomRightRcsActivationCommand(false),
                 new LegsActuationCommand(false),
                 new TopLeftFlapActuationCommand(0.0F),
                 new TopRightFlapActuationCommand(0.0F),
@@ -78,7 +95,11 @@ namespace StarshipUnitTests.Flight.Command
                 new BottomRightMainEngineThrottleCommand(0.0F));
 
             var commandSuiteC = new CommandSuite(
-                new LegsActuationCommand(true),
+                new TopLeftRcsActivationCommand(true),
+                new TopRightRcsActivationCommand(false),
+                new BottomLeftRcsActivationCommand(true),
+                new BottomRightRcsActivationCommand(false),
+                new LegsActuationCommand(false),
                 new TopLeftFlapActuationCommand(0.0F),
                 new TopRightFlapActuationCommand(0.0F),
                 new BottomLeftFlapActuationCommand(0.0F),

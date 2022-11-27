@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Starship.Flight.Segment.Activation.Rcs;
 using Starship.Flight.Segment.Actuation.Engine;
 using Starship.Flight.Segment.Actuation.Flap;
 using Starship.Flight.Segment.Actuation.Leg;
@@ -34,6 +35,7 @@ namespace Starship.Flight.Segment
         private static IFlightSegmentCommander CreateFlightSegmentCommander(FlightSegmentConfig config) =>
             new FlightSegmentCommander(
                 new FlightSegmentHandoverDecider(config),
+                new RcsActivationSegmentCommander(config),
                 new LegsActuationSegmentCommander(config),
                 new FlapsActuationSegmentCommander(config),
                 new MainEnginesGimbalSegmentCommander(config),

@@ -69,7 +69,7 @@ namespace Starship.Flight.Segment.Throttle.Main
         public override int GetHashCode() => _flightSegmentConfig.GetHashCode();
 
         private PidRegulator CreateMainEnginesThrottlePidRegulator() => new PidRegulator(
-            minimumOutput: 0.4F,
+            minimumOutput: 0.20F,
             maximumOutput: 1.0F,
             _flightSegmentConfig.MainEnginesThrottlePidRegulatorProportionalGain ?? 0.0F,
             _flightSegmentConfig.MainEnginesThrottlePidRegulatorIntegralGain ?? 0.0F,

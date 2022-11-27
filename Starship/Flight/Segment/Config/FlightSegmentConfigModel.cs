@@ -33,6 +33,11 @@ namespace Starship.Flight.Segment.Config
         public float? DesiredVerticalVelocityInMetrePerSecond;
         public float? DesiredHorizontalVelocityInMetrePerSecond;
 
+        public bool? TopLeftRcsActivatedStateOverwrite;
+        public bool? TopRightRcsActivatedStateOverwrite;
+        public bool? BottomLeftRcsActivatedStateOverwrite;
+        public bool? BottomRightRcsActivatedStateOverwrite;
+
         public float? TopLeftFlapDeployPercentOverwrite;
         public float? TopRightFlapDeployPercentOverwrite;
         public float? BottomLeftFlapDeployPercentOverwrite;
@@ -46,9 +51,21 @@ namespace Starship.Flight.Segment.Config
         public float? BottomLeftMainEngineThrottlePercentOverwrite;
         public float? BottomRightMainEngineThrottlePercentOverwrite;
 
-        public float? FlapsActuationPidRegulatorProportionalGain;
-        public float? FlapsActuationPidRegulatorIntegralGain;
-        public float? FlapsActuationPidRegulatorDerivativeGain;
+        public float? RcsActivationPidRegulatorProportionalGain;
+        public float? RcsActivationPidRegulatorIntegralGain;
+        public float? RcsActivationPidRegulatorDerivativeGain;
+
+        public float? FlapsYawPidRegulatorProportionalGain;
+        public float? FlapsYawPidRegulatorIntegralGain;
+        public float? FlapsYawPidRegulatorDerivativeGain;
+
+        public float? FlapsRollPidRegulatorProportionalGain;
+        public float? FlapsRollPidRegulatorIntegralGain;
+        public float? FlapsRollPidRegulatorDerivativeGain;
+
+        public float? FlapsPitchPidRegulatorProportionalGain;
+        public float? FlapsPitchPidRegulatorIntegralGain;
+        public float? FlapsPitchPidRegulatorDerivativeGain;
 
         public float? MainEnginesGimbalPidRegulatorProportionalGain;
         public float? MainEnginesGimbalPidRegulatorIntegralGain;

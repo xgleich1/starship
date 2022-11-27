@@ -1,3 +1,4 @@
+using Starship.Flight.Command.Activation.Rcs;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
 using Starship.Flight.Command.Actuation.Leg;
@@ -8,6 +9,10 @@ namespace Starship.Flight.Command
 {
     public interface ICommandSuite : ITelemetryProvider
     {
+        TopLeftRcsActivationCommand TopLeftRcsActivationCommand { get; }
+        TopRightRcsActivationCommand TopRightRcsActivationCommand { get; }
+        BottomLeftRcsActivationCommand BottomLeftRcsActivationCommand { get; }
+        BottomRightRcsActivationCommand BottomRightRcsActivationCommand { get; }
         LegsActuationCommand LegsActuationCommand { get; }
         TopLeftFlapActuationCommand TopLeftFlapActuationCommand { get; }
         TopRightFlapActuationCommand TopRightFlapActuationCommand { get; }

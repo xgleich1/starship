@@ -10,8 +10,8 @@ namespace Starship.Sensor.Attitude
          */
         float YawAngleInDegrees { get; }
         /**
-         * More roll angle: With the clock (right).
-         * Less roll angle: Against the clock (left).
+         * More roll angle: With the clock, seen from below.
+         * Less roll angle: Against the clock, seen from below.
          */
         float RollAngleInDegrees { get; }
         /**

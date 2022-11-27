@@ -1,5 +1,6 @@
 ﻿using System;
 using Starship.Control;
+using Starship.Control.Activation.Rcs;
 using Starship.Control.Actuation.Engine;
 using Starship.Control.Actuation.Flap;
 using Starship.Control.Actuation.Leg;
@@ -25,6 +26,8 @@ namespace Starship
         private readonly Lazy<AltitudeSensor> _altitudeSensor = new Lazy<AltitudeSensor>();
         private readonly Lazy<VelocitySensor> _velocitySensor = new Lazy<VelocitySensor>();
 
+        private readonly Lazy<RcsActivationControl> _rcsActivationControl =
+            new Lazy<RcsActivationControl>();
         private readonly Lazy<LegsActuationControl> _legsActuationControl =
             new Lazy<LegsActuationControl>();
         private readonly Lazy<FlapsActuationControl> _flapsActuationControl =
@@ -61,12 +64,14 @@ namespace Starship
                     _altitudeSensor.Value,
                     _velocitySensor.Value);
 
+                _rcsActivationControl.Value.Bind(vessel);
                 _legsActuationControl.Value.Bind(vessel);
                 _flapsActuationControl.Value.Bind(vessel);
                 _mainEnginesGimbalControl.Value.Bind(vessel);
                 _mainEnginesThrottleControl.Value.Bind(vessel);
 
                 var controlSuite = new ControlSuite(
+                    _rcsActivationControl.Value,
                     _legsActuationControl.Value,
                     _flapsActuationControl.Value,
                     _mainEnginesGimbalControl.Value,

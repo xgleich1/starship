@@ -15,3 +15,11 @@ Finally a few important points in general:
   
 * I am an android developer by trade and have no idea
   how C# works. Would love lot's of feedback to improve!
+  
+---------- The goal was achieved after 1,5 years ----------
+
+Starship was controlled to follow a flight inspired by SN10's.
+
+/Controlled Flight Viewed From The Back.mp4
+/Controlled Flight Viewed From The Top.mp4.mp4
+/Controlled Flight Viewed From The Bottom.mp4.mp4

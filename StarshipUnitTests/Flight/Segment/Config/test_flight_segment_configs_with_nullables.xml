@@ -2,137 +2,171 @@
 <ArrayOfFlightSegmentConfigModel>
     <FlightSegmentConfigModel>
 
-        <HandoverYawAngleInDegreesEqualOrOver>0.01</HandoverYawAngleInDegreesEqualOrOver>
-        <HandoverYawAngleInDegreesEqualOrUnder>0.02</HandoverYawAngleInDegreesEqualOrUnder>
+        <HandoverYawAngleInDegreesEqualOrOver>0.001</HandoverYawAngleInDegreesEqualOrOver>
+        <HandoverYawAngleInDegreesEqualOrUnder>0.002</HandoverYawAngleInDegreesEqualOrUnder>
 
-        <HandoverRollAngleInDegreesEqualOrOver>0.03</HandoverRollAngleInDegreesEqualOrOver>
-        <HandoverRollAngleInDegreesEqualOrUnder>0.04</HandoverRollAngleInDegreesEqualOrUnder>
+        <HandoverRollAngleInDegreesEqualOrOver>0.003</HandoverRollAngleInDegreesEqualOrOver>
+        <HandoverRollAngleInDegreesEqualOrUnder>0.004</HandoverRollAngleInDegreesEqualOrUnder>
 
-        <HandoverPitchAngleInDegreesEqualOrOver>0.05</HandoverPitchAngleInDegreesEqualOrOver>
-        <HandoverPitchAngleInDegreesEqualOrUnder>0.06</HandoverPitchAngleInDegreesEqualOrUnder>
+        <HandoverPitchAngleInDegreesEqualOrOver>0.005</HandoverPitchAngleInDegreesEqualOrOver>
+        <HandoverPitchAngleInDegreesEqualOrUnder>0.006</HandoverPitchAngleInDegreesEqualOrUnder>
 
-        <HandoverAltitudeAboveTerrainInMetersEqualOrOver>0.07</HandoverAltitudeAboveTerrainInMetersEqualOrOver>
-        <HandoverAltitudeAboveTerrainInMetersEqualOrUnder>0.08</HandoverAltitudeAboveTerrainInMetersEqualOrUnder>
+        <HandoverAltitudeAboveTerrainInMetersEqualOrOver>0.007</HandoverAltitudeAboveTerrainInMetersEqualOrOver>
+        <HandoverAltitudeAboveTerrainInMetersEqualOrUnder>0.008</HandoverAltitudeAboveTerrainInMetersEqualOrUnder>
 
-        <HandoverLateralVelocityInMetrePerSecondEqualOrOver>0.09</HandoverLateralVelocityInMetrePerSecondEqualOrOver>
-        <HandoverLateralVelocityInMetrePerSecondEqualOrUnder>0.10</HandoverLateralVelocityInMetrePerSecondEqualOrUnder>
+        <HandoverLateralVelocityInMetrePerSecondEqualOrOver>0.009</HandoverLateralVelocityInMetrePerSecondEqualOrOver>
+        <HandoverLateralVelocityInMetrePerSecondEqualOrUnder>0.010</HandoverLateralVelocityInMetrePerSecondEqualOrUnder>
 
-        <HandoverVerticalVelocityInMetrePerSecondEqualOrOver>0.11</HandoverVerticalVelocityInMetrePerSecondEqualOrOver>
-        <HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>0.12</HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>
+        <HandoverVerticalVelocityInMetrePerSecondEqualOrOver>0.011</HandoverVerticalVelocityInMetrePerSecondEqualOrOver>
+        <HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>0.012</HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>
 
-        <HandoverHorizontalVelocityInMetrePerSecondEqualOrOver>0.13</HandoverHorizontalVelocityInMetrePerSecondEqualOrOver>
-        <HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder>0.14</HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder>
+        <HandoverHorizontalVelocityInMetrePerSecondEqualOrOver>0.013</HandoverHorizontalVelocityInMetrePerSecondEqualOrOver>
+        <HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder>0.014</HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder>
 
         <DesiredLegsExtendedState>false</DesiredLegsExtendedState>
 
-        <DesiredYawAngleInDegrees>0.15</DesiredYawAngleInDegrees>
-        <DesiredRollAngleInDegrees>0.16</DesiredRollAngleInDegrees>
-        <DesiredPitchAngleInDegrees>0.17</DesiredPitchAngleInDegrees>
+        <DesiredYawAngleInDegrees>0.015</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0.016</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>0.017</DesiredPitchAngleInDegrees>
 
-        <DesiredLateralVelocityInMetrePerSecond>0.18</DesiredLateralVelocityInMetrePerSecond>
-        <DesiredVerticalVelocityInMetrePerSecond>0.19</DesiredVerticalVelocityInMetrePerSecond>
-        <DesiredHorizontalVelocityInMetrePerSecond>0.20</DesiredHorizontalVelocityInMetrePerSecond>
+        <DesiredLateralVelocityInMetrePerSecond>0.018</DesiredLateralVelocityInMetrePerSecond>
+        <DesiredVerticalVelocityInMetrePerSecond>0.019</DesiredVerticalVelocityInMetrePerSecond>
+        <DesiredHorizontalVelocityInMetrePerSecond>0.020</DesiredHorizontalVelocityInMetrePerSecond>
 
-        <TopLeftFlapDeployPercentOverwrite>0.21</TopLeftFlapDeployPercentOverwrite>
-        <TopRightFlapDeployPercentOverwrite>0.22</TopRightFlapDeployPercentOverwrite>
-        <BottomLeftFlapDeployPercentOverwrite>0.23</BottomLeftFlapDeployPercentOverwrite>
-        <BottomRightFlapDeployPercentOverwrite>0.24</BottomRightFlapDeployPercentOverwrite>
+        <TopLeftRcsActivatedStateOverwrite>false</TopLeftRcsActivatedStateOverwrite>
+        <TopRightRcsActivatedStateOverwrite>false</TopRightRcsActivatedStateOverwrite>
+        <BottomLeftRcsActivatedStateOverwrite>false</BottomLeftRcsActivatedStateOverwrite>
+        <BottomRightRcsActivatedStateOverwrite>false</BottomRightRcsActivatedStateOverwrite>
+        
+        <TopLeftFlapDeployPercentOverwrite>0.021</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>0.022</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>0.023</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>0.024</BottomRightFlapDeployPercentOverwrite>
 
-        <MainEnginesYawPercentOverwrite>0.25</MainEnginesYawPercentOverwrite>
-        <MainEnginesRollPercentOverwrite>0.26</MainEnginesRollPercentOverwrite>
-        <MainEnginesPitchPercentOverwrite>0.27</MainEnginesPitchPercentOverwrite>
+        <MainEnginesYawPercentOverwrite>0.025</MainEnginesYawPercentOverwrite>
+        <MainEnginesRollPercentOverwrite>0.026</MainEnginesRollPercentOverwrite>
+        <MainEnginesPitchPercentOverwrite>0.027</MainEnginesPitchPercentOverwrite>
 
-        <TopMainEngineThrottlePercentOverwrite>0.28</TopMainEngineThrottlePercentOverwrite>
-        <BottomLeftMainEngineThrottlePercentOverwrite>0.29</BottomLeftMainEngineThrottlePercentOverwrite>
-        <BottomRightMainEngineThrottlePercentOverwrite>0.30</BottomRightMainEngineThrottlePercentOverwrite>
+        <TopMainEngineThrottlePercentOverwrite>0.028</TopMainEngineThrottlePercentOverwrite>
+        <BottomLeftMainEngineThrottlePercentOverwrite>0.029</BottomLeftMainEngineThrottlePercentOverwrite>
+        <BottomRightMainEngineThrottlePercentOverwrite>0.030</BottomRightMainEngineThrottlePercentOverwrite>
+        
+        <RcsActivationPidRegulatorProportionalGain>0.031</RcsActivationPidRegulatorProportionalGain>
+        <RcsActivationPidRegulatorIntegralGain>0.032</RcsActivationPidRegulatorIntegralGain>
+        <RcsActivationPidRegulatorDerivativeGain>0.033</RcsActivationPidRegulatorDerivativeGain>
 
-        <FlapsActuationPidRegulatorProportionalGain>0.31</FlapsActuationPidRegulatorProportionalGain>
-        <FlapsActuationPidRegulatorIntegralGain>0.32</FlapsActuationPidRegulatorIntegralGain>
-        <FlapsActuationPidRegulatorDerivativeGain>0.33</FlapsActuationPidRegulatorDerivativeGain>
+        <FlapsYawPidRegulatorProportionalGain>0.034</FlapsYawPidRegulatorProportionalGain>
+        <FlapsYawPidRegulatorIntegralGain>0.035</FlapsYawPidRegulatorIntegralGain>
+        <FlapsYawPidRegulatorDerivativeGain>0.036</FlapsYawPidRegulatorDerivativeGain>
 
-        <MainEnginesGimbalPidRegulatorProportionalGain>0.34</MainEnginesGimbalPidRegulatorProportionalGain>
-        <MainEnginesGimbalPidRegulatorIntegralGain>0.35</MainEnginesGimbalPidRegulatorIntegralGain>
-        <MainEnginesGimbalPidRegulatorDerivativeGain>0.36</MainEnginesGimbalPidRegulatorDerivativeGain>
+        <FlapsRollPidRegulatorProportionalGain>0.037</FlapsRollPidRegulatorProportionalGain>
+        <FlapsRollPidRegulatorIntegralGain>0.038</FlapsRollPidRegulatorIntegralGain>
+        <FlapsRollPidRegulatorDerivativeGain>0.039</FlapsRollPidRegulatorDerivativeGain>
 
-        <LateralVelocityOffsetPidRegulatorProportionalGain>0.37</LateralVelocityOffsetPidRegulatorProportionalGain>
-        <LateralVelocityOffsetPidRegulatorIntegralGain>0.38</LateralVelocityOffsetPidRegulatorIntegralGain>
-        <LateralVelocityOffsetPidRegulatorDerivativeGain>0.39</LateralVelocityOffsetPidRegulatorDerivativeGain>
+        <FlapsPitchPidRegulatorProportionalGain>0.040</FlapsPitchPidRegulatorProportionalGain>
+        <FlapsPitchPidRegulatorIntegralGain>0.041</FlapsPitchPidRegulatorIntegralGain>
+        <FlapsPitchPidRegulatorDerivativeGain>0.042</FlapsPitchPidRegulatorDerivativeGain>
 
-        <MainEnginesThrottlePidRegulatorProportionalGain>0.40</MainEnginesThrottlePidRegulatorProportionalGain>
-        <MainEnginesThrottlePidRegulatorIntegralGain>0.41</MainEnginesThrottlePidRegulatorIntegralGain>
-        <MainEnginesThrottlePidRegulatorDerivativeGain>0.42</MainEnginesThrottlePidRegulatorDerivativeGain>
+        <MainEnginesGimbalPidRegulatorProportionalGain>0.043</MainEnginesGimbalPidRegulatorProportionalGain>
+        <MainEnginesGimbalPidRegulatorIntegralGain>0.044</MainEnginesGimbalPidRegulatorIntegralGain>
+        <MainEnginesGimbalPidRegulatorDerivativeGain>0.045</MainEnginesGimbalPidRegulatorDerivativeGain>
 
-        <HorizontalVelocityOffsetPidRegulatorProportionalGain>0.43</HorizontalVelocityOffsetPidRegulatorProportionalGain>
-        <HorizontalVelocityOffsetPidRegulatorIntegralGain>0.44</HorizontalVelocityOffsetPidRegulatorIntegralGain>
-        <HorizontalVelocityOffsetPidRegulatorDerivativeGain>0.45</HorizontalVelocityOffsetPidRegulatorDerivativeGain>
+        <LateralVelocityOffsetPidRegulatorProportionalGain>0.046</LateralVelocityOffsetPidRegulatorProportionalGain>
+        <LateralVelocityOffsetPidRegulatorIntegralGain>0.047</LateralVelocityOffsetPidRegulatorIntegralGain>
+        <LateralVelocityOffsetPidRegulatorDerivativeGain>0.048</LateralVelocityOffsetPidRegulatorDerivativeGain>
+
+        <MainEnginesThrottlePidRegulatorProportionalGain>0.049</MainEnginesThrottlePidRegulatorProportionalGain>
+        <MainEnginesThrottlePidRegulatorIntegralGain>0.050</MainEnginesThrottlePidRegulatorIntegralGain>
+        <MainEnginesThrottlePidRegulatorDerivativeGain>0.051</MainEnginesThrottlePidRegulatorDerivativeGain>
+
+        <HorizontalVelocityOffsetPidRegulatorProportionalGain>0.052</HorizontalVelocityOffsetPidRegulatorProportionalGain>
+        <HorizontalVelocityOffsetPidRegulatorIntegralGain>0.053</HorizontalVelocityOffsetPidRegulatorIntegralGain>
+        <HorizontalVelocityOffsetPidRegulatorDerivativeGain>0.054</HorizontalVelocityOffsetPidRegulatorDerivativeGain>
 
     </FlightSegmentConfigModel>
 
     <FlightSegmentConfigModel>
 
-        <HandoverYawAngleInDegreesEqualOrOver>0.46</HandoverYawAngleInDegreesEqualOrOver>
-        <HandoverYawAngleInDegreesEqualOrUnder>0.47</HandoverYawAngleInDegreesEqualOrUnder>
+        <HandoverYawAngleInDegreesEqualOrOver>0.055</HandoverYawAngleInDegreesEqualOrOver>
+        <HandoverYawAngleInDegreesEqualOrUnder>0.056</HandoverYawAngleInDegreesEqualOrUnder>
 
-        <HandoverRollAngleInDegreesEqualOrOver>0.48</HandoverRollAngleInDegreesEqualOrOver>
-        <HandoverRollAngleInDegreesEqualOrUnder>0.49</HandoverRollAngleInDegreesEqualOrUnder>
+        <HandoverRollAngleInDegreesEqualOrOver>0.057</HandoverRollAngleInDegreesEqualOrOver>
+        <HandoverRollAngleInDegreesEqualOrUnder>0.058</HandoverRollAngleInDegreesEqualOrUnder>
 
-        <HandoverPitchAngleInDegreesEqualOrOver>0.50</HandoverPitchAngleInDegreesEqualOrOver>
-        <HandoverPitchAngleInDegreesEqualOrUnder>0.51</HandoverPitchAngleInDegreesEqualOrUnder>
+        <HandoverPitchAngleInDegreesEqualOrOver>0.059</HandoverPitchAngleInDegreesEqualOrOver>
+        <HandoverPitchAngleInDegreesEqualOrUnder>0.060</HandoverPitchAngleInDegreesEqualOrUnder>
 
-        <HandoverAltitudeAboveTerrainInMetersEqualOrOver>0.52</HandoverAltitudeAboveTerrainInMetersEqualOrOver>
-        <HandoverAltitudeAboveTerrainInMetersEqualOrUnder>0.53</HandoverAltitudeAboveTerrainInMetersEqualOrUnder>
+        <HandoverAltitudeAboveTerrainInMetersEqualOrOver>0.061</HandoverAltitudeAboveTerrainInMetersEqualOrOver>
+        <HandoverAltitudeAboveTerrainInMetersEqualOrUnder>0.062</HandoverAltitudeAboveTerrainInMetersEqualOrUnder>
 
-        <HandoverLateralVelocityInMetrePerSecondEqualOrOver>0.54</HandoverLateralVelocityInMetrePerSecondEqualOrOver>
-        <HandoverLateralVelocityInMetrePerSecondEqualOrUnder>0.55</HandoverLateralVelocityInMetrePerSecondEqualOrUnder>
+        <HandoverLateralVelocityInMetrePerSecondEqualOrOver>0.063</HandoverLateralVelocityInMetrePerSecondEqualOrOver>
+        <HandoverLateralVelocityInMetrePerSecondEqualOrUnder>0.064</HandoverLateralVelocityInMetrePerSecondEqualOrUnder>
 
-        <HandoverVerticalVelocityInMetrePerSecondEqualOrOver>0.56</HandoverVerticalVelocityInMetrePerSecondEqualOrOver>
-        <HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>0.57</HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>
+        <HandoverVerticalVelocityInMetrePerSecondEqualOrOver>0.065</HandoverVerticalVelocityInMetrePerSecondEqualOrOver>
+        <HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>0.066</HandoverVerticalVelocityInMetrePerSecondEqualOrUnder>
 
-        <HandoverHorizontalVelocityInMetrePerSecondEqualOrOver>0.58</HandoverHorizontalVelocityInMetrePerSecondEqualOrOver>
-        <HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder>0.59</HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder>
+        <HandoverHorizontalVelocityInMetrePerSecondEqualOrOver>0.067</HandoverHorizontalVelocityInMetrePerSecondEqualOrOver>
+        <HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder>0.068</HandoverHorizontalVelocityInMetrePerSecondEqualOrUnder>
 
         <DesiredLegsExtendedState>true</DesiredLegsExtendedState>
 
-        <DesiredYawAngleInDegrees>0.60</DesiredYawAngleInDegrees>
-        <DesiredRollAngleInDegrees>0.61</DesiredRollAngleInDegrees>
-        <DesiredPitchAngleInDegrees>0.62</DesiredPitchAngleInDegrees>
+        <DesiredYawAngleInDegrees>0.069</DesiredYawAngleInDegrees>
+        <DesiredRollAngleInDegrees>0.070</DesiredRollAngleInDegrees>
+        <DesiredPitchAngleInDegrees>0.071</DesiredPitchAngleInDegrees>
 
-        <DesiredLateralVelocityInMetrePerSecond>0.63</DesiredLateralVelocityInMetrePerSecond>
-        <DesiredVerticalVelocityInMetrePerSecond>0.64</DesiredVerticalVelocityInMetrePerSecond>
-        <DesiredHorizontalVelocityInMetrePerSecond>0.65</DesiredHorizontalVelocityInMetrePerSecond>
+        <DesiredLateralVelocityInMetrePerSecond>0.072</DesiredLateralVelocityInMetrePerSecond>
+        <DesiredVerticalVelocityInMetrePerSecond>0.073</DesiredVerticalVelocityInMetrePerSecond>
+        <DesiredHorizontalVelocityInMetrePerSecond>0.074</DesiredHorizontalVelocityInMetrePerSecond>
 
-        <TopLeftFlapDeployPercentOverwrite>0.66</TopLeftFlapDeployPercentOverwrite>
-        <TopRightFlapDeployPercentOverwrite>0.67</TopRightFlapDeployPercentOverwrite>
-        <BottomLeftFlapDeployPercentOverwrite>0.68</BottomLeftFlapDeployPercentOverwrite>
-        <BottomRightFlapDeployPercentOverwrite>0.69</BottomRightFlapDeployPercentOverwrite>
+        <TopLeftRcsActivatedStateOverwrite>true</TopLeftRcsActivatedStateOverwrite>
+        <TopRightRcsActivatedStateOverwrite>true</TopRightRcsActivatedStateOverwrite>
+        <BottomLeftRcsActivatedStateOverwrite>true</BottomLeftRcsActivatedStateOverwrite>
+        <BottomRightRcsActivatedStateOverwrite>true</BottomRightRcsActivatedStateOverwrite>
 
-        <MainEnginesYawPercentOverwrite>0.70</MainEnginesYawPercentOverwrite>
-        <MainEnginesRollPercentOverwrite>0.71</MainEnginesRollPercentOverwrite>
-        <MainEnginesPitchPercentOverwrite>0.72</MainEnginesPitchPercentOverwrite>
+        <TopLeftFlapDeployPercentOverwrite>0.075</TopLeftFlapDeployPercentOverwrite>
+        <TopRightFlapDeployPercentOverwrite>0.076</TopRightFlapDeployPercentOverwrite>
+        <BottomLeftFlapDeployPercentOverwrite>0.077</BottomLeftFlapDeployPercentOverwrite>
+        <BottomRightFlapDeployPercentOverwrite>0.078</BottomRightFlapDeployPercentOverwrite>
 
-        <TopMainEngineThrottlePercentOverwrite>0.73</TopMainEngineThrottlePercentOverwrite>
-        <BottomLeftMainEngineThrottlePercentOverwrite>0.74</BottomLeftMainEngineThrottlePercentOverwrite>
-        <BottomRightMainEngineThrottlePercentOverwrite>0.75</BottomRightMainEngineThrottlePercentOverwrite>
+        <MainEnginesYawPercentOverwrite>0.079</MainEnginesYawPercentOverwrite>
+        <MainEnginesRollPercentOverwrite>0.080</MainEnginesRollPercentOverwrite>
+        <MainEnginesPitchPercentOverwrite>0.081</MainEnginesPitchPercentOverwrite>
 
-        <FlapsActuationPidRegulatorProportionalGain>0.76</FlapsActuationPidRegulatorProportionalGain>
-        <FlapsActuationPidRegulatorIntegralGain>0.77</FlapsActuationPidRegulatorIntegralGain>
-        <FlapsActuationPidRegulatorDerivativeGain>0.78</FlapsActuationPidRegulatorDerivativeGain>
+        <TopMainEngineThrottlePercentOverwrite>0.082</TopMainEngineThrottlePercentOverwrite>
+        <BottomLeftMainEngineThrottlePercentOverwrite>0.083</BottomLeftMainEngineThrottlePercentOverwrite>
+        <BottomRightMainEngineThrottlePercentOverwrite>0.084</BottomRightMainEngineThrottlePercentOverwrite>
+        
+        <RcsActivationPidRegulatorProportionalGain>0.085</RcsActivationPidRegulatorProportionalGain>
+        <RcsActivationPidRegulatorIntegralGain>0.086</RcsActivationPidRegulatorIntegralGain>
+        <RcsActivationPidRegulatorDerivativeGain>0.087</RcsActivationPidRegulatorDerivativeGain>
+        
+        <FlapsYawPidRegulatorProportionalGain>0.088</FlapsYawPidRegulatorProportionalGain>
+        <FlapsYawPidRegulatorIntegralGain>0.089</FlapsYawPidRegulatorIntegralGain>
+        <FlapsYawPidRegulatorDerivativeGain>0.090</FlapsYawPidRegulatorDerivativeGain>
 
-        <MainEnginesGimbalPidRegulatorProportionalGain>0.79</MainEnginesGimbalPidRegulatorProportionalGain>
-        <MainEnginesGimbalPidRegulatorIntegralGain>0.80</MainEnginesGimbalPidRegulatorIntegralGain>
-        <MainEnginesGimbalPidRegulatorDerivativeGain>0.81</MainEnginesGimbalPidRegulatorDerivativeGain>
+        <FlapsRollPidRegulatorProportionalGain>0.091</FlapsRollPidRegulatorProportionalGain>
+        <FlapsRollPidRegulatorIntegralGain>0.092</FlapsRollPidRegulatorIntegralGain>
+        <FlapsRollPidRegulatorDerivativeGain>0.093</FlapsRollPidRegulatorDerivativeGain>
 
-        <LateralVelocityOffsetPidRegulatorProportionalGain>0.82</LateralVelocityOffsetPidRegulatorProportionalGain>
-        <LateralVelocityOffsetPidRegulatorIntegralGain>0.83</LateralVelocityOffsetPidRegulatorIntegralGain>
-        <LateralVelocityOffsetPidRegulatorDerivativeGain>0.84</LateralVelocityOffsetPidRegulatorDerivativeGain>
+        <FlapsPitchPidRegulatorProportionalGain>0.094</FlapsPitchPidRegulatorProportionalGain>
+        <FlapsPitchPidRegulatorIntegralGain>0.095</FlapsPitchPidRegulatorIntegralGain>
+        <FlapsPitchPidRegulatorDerivativeGain>0.096</FlapsPitchPidRegulatorDerivativeGain>
+        
+        <MainEnginesGimbalPidRegulatorProportionalGain>0.097</MainEnginesGimbalPidRegulatorProportionalGain>
+        <MainEnginesGimbalPidRegulatorIntegralGain>0.098</MainEnginesGimbalPidRegulatorIntegralGain>
+        <MainEnginesGimbalPidRegulatorDerivativeGain>0.099</MainEnginesGimbalPidRegulatorDerivativeGain>
 
-        <MainEnginesThrottlePidRegulatorProportionalGain>0.85</MainEnginesThrottlePidRegulatorProportionalGain>
-        <MainEnginesThrottlePidRegulatorIntegralGain>0.86</MainEnginesThrottlePidRegulatorIntegralGain>
-        <MainEnginesThrottlePidRegulatorDerivativeGain>0.87</MainEnginesThrottlePidRegulatorDerivativeGain>
+        <LateralVelocityOffsetPidRegulatorProportionalGain>0.100</LateralVelocityOffsetPidRegulatorProportionalGain>
+        <LateralVelocityOffsetPidRegulatorIntegralGain>0.101</LateralVelocityOffsetPidRegulatorIntegralGain>
+        <LateralVelocityOffsetPidRegulatorDerivativeGain>0.102</LateralVelocityOffsetPidRegulatorDerivativeGain>
 
-        <HorizontalVelocityOffsetPidRegulatorProportionalGain>0.88</HorizontalVelocityOffsetPidRegulatorProportionalGain>
-        <HorizontalVelocityOffsetPidRegulatorIntegralGain>0.89</HorizontalVelocityOffsetPidRegulatorIntegralGain>
-        <HorizontalVelocityOffsetPidRegulatorDerivativeGain>0.90</HorizontalVelocityOffsetPidRegulatorDerivativeGain>
+        <MainEnginesThrottlePidRegulatorProportionalGain>0.103</MainEnginesThrottlePidRegulatorProportionalGain>
+        <MainEnginesThrottlePidRegulatorIntegralGain>0.104</MainEnginesThrottlePidRegulatorIntegralGain>
+        <MainEnginesThrottlePidRegulatorDerivativeGain>0.105</MainEnginesThrottlePidRegulatorDerivativeGain>
+
+        <HorizontalVelocityOffsetPidRegulatorProportionalGain>0.106</HorizontalVelocityOffsetPidRegulatorProportionalGain>
+        <HorizontalVelocityOffsetPidRegulatorIntegralGain>0.107</HorizontalVelocityOffsetPidRegulatorIntegralGain>
+        <HorizontalVelocityOffsetPidRegulatorDerivativeGain>0.108</HorizontalVelocityOffsetPidRegulatorDerivativeGain>
 
     </FlightSegmentConfigModel>
 

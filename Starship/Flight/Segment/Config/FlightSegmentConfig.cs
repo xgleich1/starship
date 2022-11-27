@@ -33,6 +33,11 @@ namespace Starship.Flight.Segment.Config
         public float? DesiredVerticalVelocityInMetrePerSecond { get; }
         public float? DesiredHorizontalVelocityInMetrePerSecond { get; }
 
+        public bool? TopLeftRcsActivatedStateOverwrite { get; }
+        public bool? TopRightRcsActivatedStateOverwrite { get; }
+        public bool? BottomLeftRcsActivatedStateOverwrite { get; }
+        public bool? BottomRightRcsActivatedStateOverwrite { get; }
+
         public float? TopLeftFlapDeployPercentOverwrite { get; }
         public float? TopRightFlapDeployPercentOverwrite { get; }
         public float? BottomLeftFlapDeployPercentOverwrite { get; }
@@ -46,9 +51,21 @@ namespace Starship.Flight.Segment.Config
         public float? BottomLeftMainEngineThrottlePercentOverwrite { get; }
         public float? BottomRightMainEngineThrottlePercentOverwrite { get; }
 
-        public float? FlapsActuationPidRegulatorProportionalGain { get; }
-        public float? FlapsActuationPidRegulatorIntegralGain { get; }
-        public float? FlapsActuationPidRegulatorDerivativeGain { get; }
+        public float? RcsActivationPidRegulatorProportionalGain { get; }
+        public float? RcsActivationPidRegulatorIntegralGain { get; }
+        public float? RcsActivationPidRegulatorDerivativeGain { get; }
+
+        public float? FlapsYawPidRegulatorProportionalGain { get; }
+        public float? FlapsYawPidRegulatorIntegralGain { get; }
+        public float? FlapsYawPidRegulatorDerivativeGain { get; }
+
+        public float? FlapsRollPidRegulatorProportionalGain { get; }
+        public float? FlapsRollPidRegulatorIntegralGain { get; }
+        public float? FlapsRollPidRegulatorDerivativeGain { get; }
+
+        public float? FlapsPitchPidRegulatorProportionalGain { get; }
+        public float? FlapsPitchPidRegulatorIntegralGain { get; }
+        public float? FlapsPitchPidRegulatorDerivativeGain { get; }
 
         public float? MainEnginesGimbalPidRegulatorProportionalGain { get; }
         public float? MainEnginesGimbalPidRegulatorIntegralGain { get; }
@@ -89,6 +106,10 @@ namespace Starship.Flight.Segment.Config
             float? desiredLateralVelocityInMetrePerSecond,
             float? desiredVerticalVelocityInMetrePerSecond,
             float? desiredHorizontalVelocityInMetrePerSecond,
+            bool? topLeftRcsActivatedStateOverwrite,
+            bool? topRightRcsActivatedStateOverwrite,
+            bool? bottomLeftRcsActivatedStateOverwrite,
+            bool? bottomRightRcsActivatedStateOverwrite,
             float? topLeftFlapDeployPercentOverwrite,
             float? topRightFlapDeployPercentOverwrite,
             float? bottomLeftFlapDeployPercentOverwrite,
@@ -99,9 +120,18 @@ namespace Starship.Flight.Segment.Config
             float? topMainEngineThrottlePercentOverwrite,
             float? bottomLeftMainEngineThrottlePercentOverwrite,
             float? bottomRightMainEngineThrottlePercentOverwrite,
-            float? flapsActuationPidRegulatorProportionalGain,
-            float? flapsActuationPidRegulatorIntegralGain,
-            float? flapsActuationPidRegulatorDerivativeGain,
+            float? rcsActivationPidRegulatorProportionalGain,
+            float? rcsActivationPidRegulatorIntegralGain,
+            float? rcsActivationPidRegulatorDerivativeGain,
+            float? flapsYawPidRegulatorProportionalGain,
+            float? flapsYawPidRegulatorIntegralGain,
+            float? flapsYawPidRegulatorDerivativeGain,
+            float? flapsRollPidRegulatorProportionalGain,
+            float? flapsRollPidRegulatorIntegralGain,
+            float? flapsRollPidRegulatorDerivativeGain,
+            float? flapsPitchPidRegulatorProportionalGain,
+            float? flapsPitchPidRegulatorIntegralGain,
+            float? flapsPitchPidRegulatorDerivativeGain,
             float? mainEnginesGimbalPidRegulatorProportionalGain,
             float? mainEnginesGimbalPidRegulatorIntegralGain,
             float? mainEnginesGimbalPidRegulatorDerivativeGain,
@@ -136,6 +166,10 @@ namespace Starship.Flight.Segment.Config
             DesiredLateralVelocityInMetrePerSecond = desiredLateralVelocityInMetrePerSecond;
             DesiredVerticalVelocityInMetrePerSecond = desiredVerticalVelocityInMetrePerSecond;
             DesiredHorizontalVelocityInMetrePerSecond = desiredHorizontalVelocityInMetrePerSecond;
+            TopLeftRcsActivatedStateOverwrite = topLeftRcsActivatedStateOverwrite;
+            TopRightRcsActivatedStateOverwrite = topRightRcsActivatedStateOverwrite;
+            BottomLeftRcsActivatedStateOverwrite = bottomLeftRcsActivatedStateOverwrite;
+            BottomRightRcsActivatedStateOverwrite = bottomRightRcsActivatedStateOverwrite;
             TopLeftFlapDeployPercentOverwrite = topLeftFlapDeployPercentOverwrite;
             TopRightFlapDeployPercentOverwrite = topRightFlapDeployPercentOverwrite;
             BottomLeftFlapDeployPercentOverwrite = bottomLeftFlapDeployPercentOverwrite;
@@ -146,9 +180,18 @@ namespace Starship.Flight.Segment.Config
             TopMainEngineThrottlePercentOverwrite = topMainEngineThrottlePercentOverwrite;
             BottomLeftMainEngineThrottlePercentOverwrite = bottomLeftMainEngineThrottlePercentOverwrite;
             BottomRightMainEngineThrottlePercentOverwrite = bottomRightMainEngineThrottlePercentOverwrite;
-            FlapsActuationPidRegulatorProportionalGain = flapsActuationPidRegulatorProportionalGain;
-            FlapsActuationPidRegulatorIntegralGain = flapsActuationPidRegulatorIntegralGain;
-            FlapsActuationPidRegulatorDerivativeGain = flapsActuationPidRegulatorDerivativeGain;
+            RcsActivationPidRegulatorProportionalGain = rcsActivationPidRegulatorProportionalGain;
+            RcsActivationPidRegulatorIntegralGain = rcsActivationPidRegulatorIntegralGain;
+            RcsActivationPidRegulatorDerivativeGain = rcsActivationPidRegulatorDerivativeGain;
+            FlapsYawPidRegulatorProportionalGain = flapsYawPidRegulatorProportionalGain;
+            FlapsYawPidRegulatorIntegralGain = flapsYawPidRegulatorIntegralGain;
+            FlapsYawPidRegulatorDerivativeGain = flapsYawPidRegulatorDerivativeGain;
+            FlapsRollPidRegulatorProportionalGain = flapsRollPidRegulatorProportionalGain;
+            FlapsRollPidRegulatorIntegralGain = flapsRollPidRegulatorIntegralGain;
+            FlapsRollPidRegulatorDerivativeGain = flapsRollPidRegulatorDerivativeGain;
+            FlapsPitchPidRegulatorProportionalGain = flapsPitchPidRegulatorProportionalGain;
+            FlapsPitchPidRegulatorIntegralGain = flapsPitchPidRegulatorIntegralGain;
+            FlapsPitchPidRegulatorDerivativeGain = flapsPitchPidRegulatorDerivativeGain;
             MainEnginesGimbalPidRegulatorProportionalGain = mainEnginesGimbalPidRegulatorProportionalGain;
             MainEnginesGimbalPidRegulatorIntegralGain = mainEnginesGimbalPidRegulatorIntegralGain;
             MainEnginesGimbalPidRegulatorDerivativeGain = mainEnginesGimbalPidRegulatorDerivativeGain;

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Starship.Flight.Segment;
+using Starship.Flight.Segment.Activation.Rcs;
 using Starship.Flight.Segment.Actuation.Engine;
 using Starship.Flight.Segment.Actuation.Flap;
 using Starship.Flight.Segment.Actuation.Leg;
@@ -95,9 +96,22 @@ namespace StarshipUnitTests.Flight.Segment
                 null,
                 null,
                 false,
-                0,
-                0,
-                0,
+                0.0F,
+                0.0F,
+                0.0F,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -130,6 +144,7 @@ namespace StarshipUnitTests.Flight.Segment
         private static FlightSegmentCommander CreateFlightSegmentCommander(FlightSegmentConfig flightSegmentConfig) =>
             new FlightSegmentCommander(
                 new FlightSegmentHandoverDecider(flightSegmentConfig),
+                new RcsActivationSegmentCommander(flightSegmentConfig),
                 new LegsActuationSegmentCommander(flightSegmentConfig),
                 new FlapsActuationSegmentCommander(flightSegmentConfig),
                 new MainEnginesGimbalSegmentCommander(flightSegmentConfig),

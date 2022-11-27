@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Starship.Flight.Command;
+using Starship.Flight.Command.Activation.Rcs;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
 using Starship.Flight.Command.Actuation.Leg;
 using Starship.Flight.Command.Throttle.Main;
 using Starship.Flight.Segment;
+using Starship.Flight.Segment.Activation.Rcs;
 using Starship.Flight.Segment.Actuation.Engine;
 using Starship.Flight.Segment.Actuation.Flap;
 using Starship.Flight.Segment.Actuation.Leg;
@@ -20,6 +22,7 @@ namespace StarshipUnitTests.Flight.Segment
     public sealed class FlightSegmentCommanderTest
     {
         private Mock<IFlightSegmentHandoverDecider> _flightSegmentHandoverDecider;
+        private Mock<IRcsActivationSegmentCommander> _rcsActivationSegmentCommander;
         private Mock<ILegsActuationSegmentCommander> _legsActuationSegmentCommander;
         private Mock<IFlapsActuationSegmentCommander> _flapsActuationSegmentCommander;
         private Mock<IMainEnginesGimbalSegmentCommander> _mainEnginesGimbalSegmentCommander;
@@ -33,12 +36,14 @@ namespace StarshipUnitTests.Flight.Segment
         public void Setup()
         {
             _flightSegmentHandoverDecider = new Mock<IFlightSegmentHandoverDecider>();
+            _rcsActivationSegmentCommander = new Mock<IRcsActivationSegmentCommander>();
             _legsActuationSegmentCommander = new Mock<ILegsActuationSegmentCommander>();
             _flapsActuationSegmentCommander = new Mock<IFlapsActuationSegmentCommander>();
             _mainEnginesGimbalSegmentCommander = new Mock<IMainEnginesGimbalSegmentCommander>();
             _mainEnginesThrottleSegmentCommander = new Mock<IMainEnginesThrottleSegmentCommander>();
             _flightSegmentCommander = new FlightSegmentCommander(
                 _flightSegmentHandoverDecider.Object,
+                _rcsActivationSegmentCommander.Object,
                 _legsActuationSegmentCommander.Object,
                 _flapsActuationSegmentCommander.Object,
                 _mainEnginesGimbalSegmentCommander.Object,
@@ -65,6 +70,10 @@ namespace StarshipUnitTests.Flight.Segment
         public void Should_command_the_flight_segment_using_the_current_sensor_output()
         {
             // GIVEN
+            var topLeftRcsActivationCommand = new TopLeftRcsActivationCommand(false);
+            var topRightRcsActivationCommand = new TopRightRcsActivationCommand(false);
+            var bottomLeftRcsActivationCommand = new BottomLeftRcsActivationCommand(false);
+            var bottomRightRcsActivationCommand = new BottomRightRcsActivationCommand(false);
             var legsActuationCommand = new LegsActuationCommand(false);
             var topLeftFlapActuationCommand = new TopLeftFlapActuationCommand(1.0F);
             var topRightFlapActuationCommand = new TopRightFlapActuationCommand(1.0F);
@@ -76,6 +85,13 @@ namespace StarshipUnitTests.Flight.Segment
             var topMainEngineThrottleCommand = new TopMainEngineThrottleCommand(1.0F);
             var bottomLeftMainEngineThrottleCommand = new BottomLeftMainEngineThrottleCommand(1.0F);
             var bottomRightMainEngineThrottleCommand = new BottomRightMainEngineThrottleCommand(1.0F);
+
+            _rcsActivationSegmentCommander.Setup(mock => mock.CommandRcsActivation(_sensorSuite.Object))
+                .Returns(new RcsActivationSegmentCommands(
+                    topLeftRcsActivationCommand,
+                    topRightRcsActivationCommand,
+                    bottomLeftRcsActivationCommand,
+                    bottomRightRcsActivationCommand));
 
             _legsActuationSegmentCommander.Setup(mock => mock.CommandLegsActuation(_sensorSuite.Object))
                 .Returns(legsActuationCommand);
@@ -104,6 +120,10 @@ namespace StarshipUnitTests.Flight.Segment
 
             // THEN
             Assert.That(commandSuite, Is.EqualTo(new CommandSuite(
+                topLeftRcsActivationCommand,
+                topRightRcsActivationCommand,
+                bottomLeftRcsActivationCommand,
+                bottomRightRcsActivationCommand,
                 legsActuationCommand,
                 topLeftFlapActuationCommand,
                 topRightFlapActuationCommand,
@@ -121,6 +141,13 @@ namespace StarshipUnitTests.Flight.Segment
         public void Should_provide_the_telemetry_of_each_sub_commander()
         {
             // GIVEN
+            _rcsActivationSegmentCommander.Setup(mock => mock.ProvideTelemetry())
+                .Returns(new List<TelemetryMessage>
+                {
+                    new TelemetryMessage("--- Rcs Activation Segment Commander Config ---"),
+                    new TelemetryMessage("-----------------------------------------------")
+                });
+
             _legsActuationSegmentCommander.Setup(mock => mock.ProvideTelemetry())
                 .Returns(new List<TelemetryMessage>
                 {
@@ -152,6 +179,8 @@ namespace StarshipUnitTests.Flight.Segment
             // THEN
             var expectedTelemetry = new List<TelemetryMessage>
             {
+                new TelemetryMessage("--- Rcs Activation Segment Commander Config ---"),
+                new TelemetryMessage("-----------------------------------------------"),
                 new TelemetryMessage("--- Legs Actuation Segment Commander Config ---"),
                 new TelemetryMessage("-----------------------------------------------"),
                 new TelemetryMessage("--- Flaps Actuation Segment Commander Config ---"),
@@ -170,12 +199,14 @@ namespace StarshipUnitTests.Flight.Segment
         {
             // GIVEN
             var flightSegmentHandoverDeciderA = new Mock<IFlightSegmentHandoverDecider>();
+            var rcsActivationSegmentCommanderA = new Mock<IRcsActivationSegmentCommander>();
             var legsActuationSegmentCommanderA = new Mock<ILegsActuationSegmentCommander>();
             var flapsActuationSegmentCommanderA = new Mock<IFlapsActuationSegmentCommander>();
             var mainEnginesGimbalSegmentCommanderA = new Mock<IMainEnginesGimbalSegmentCommander>();
             var mainEnginesThrottleSegmentCommanderA = new Mock<IMainEnginesThrottleSegmentCommander>();
 
             var flightSegmentHandoverDeciderC = new Mock<IFlightSegmentHandoverDecider>();
+            var rcsActivationSegmentCommanderC = new Mock<IRcsActivationSegmentCommander>();
             var legsActuationSegmentCommanderC = new Mock<ILegsActuationSegmentCommander>();
             var flapsActuationSegmentCommanderC = new Mock<IFlapsActuationSegmentCommander>();
             var mainEnginesGimbalSegmentCommanderC = new Mock<IMainEnginesGimbalSegmentCommander>();
@@ -183,6 +214,7 @@ namespace StarshipUnitTests.Flight.Segment
 
             var flightSegmentCommanderA = new FlightSegmentCommander(
                 flightSegmentHandoverDeciderA.Object,
+                rcsActivationSegmentCommanderA.Object,
                 legsActuationSegmentCommanderA.Object,
                 flapsActuationSegmentCommanderA.Object,
                 mainEnginesGimbalSegmentCommanderA.Object,
@@ -190,6 +222,7 @@ namespace StarshipUnitTests.Flight.Segment
 
             var flightSegmentCommanderB = new FlightSegmentCommander(
                 flightSegmentHandoverDeciderA.Object,
+                rcsActivationSegmentCommanderA.Object,
                 legsActuationSegmentCommanderA.Object,
                 flapsActuationSegmentCommanderA.Object,
                 mainEnginesGimbalSegmentCommanderA.Object,
@@ -197,6 +230,7 @@ namespace StarshipUnitTests.Flight.Segment
 
             var flightSegmentCommanderC = new FlightSegmentCommander(
                 flightSegmentHandoverDeciderC.Object,
+                rcsActivationSegmentCommanderC.Object,
                 legsActuationSegmentCommanderC.Object,
                 flapsActuationSegmentCommanderC.Object,
                 mainEnginesGimbalSegmentCommanderC.Object,

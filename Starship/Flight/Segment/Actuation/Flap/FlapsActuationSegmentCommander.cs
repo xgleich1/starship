@@ -15,14 +15,17 @@ namespace Starship.Flight.Segment.Actuation.Flap
         private readonly PidRegulator _flapsRollPidRegulator;
         private readonly PidRegulator _flapsPitchPidRegulator;
 
+        private const float FlapsActuationPidRegulatorMinimumOutput = -0.5F / 3.0F;
+        private const float FlapsActuationPidRegulatorMaximumOutput = +0.5F / 3.0F;
+
 
         public FlapsActuationSegmentCommander(FlightSegmentConfig flightSegmentConfig)
         {
             _flightSegmentConfig = flightSegmentConfig;
 
-            _flapsYawPidRegulator = CreateFlapsActuationPidRegulator();
-            _flapsRollPidRegulator = CreateFlapsActuationPidRegulator();
-            _flapsPitchPidRegulator = CreateFlapsActuationPidRegulator();
+            _flapsYawPidRegulator = CreateFlapsYawPidRegulator();
+            _flapsRollPidRegulator = CreateFlapsRollPidRegulator();
+            _flapsPitchPidRegulator = CreateFlapsPitchPidRegulator();
         }
 
         public FlapsActuationSegmentCommands CommandFlapsActuation(ISensorSuite sensorSuite)
@@ -81,11 +84,23 @@ namespace Starship.Flight.Segment.Actuation.Flap
             new TelemetryMessage(
                 $"BottomRightFlapDeployPercentOverwrite:{_flightSegmentConfig.BottomRightFlapDeployPercentOverwrite}"),
             new TelemetryMessage(
-                $"FlapsActuationPidRegulatorProportionalGain:{_flightSegmentConfig.FlapsActuationPidRegulatorProportionalGain}"),
+                $"FlapsYawPidRegulatorProportionalGain:{_flightSegmentConfig.FlapsYawPidRegulatorProportionalGain}"),
             new TelemetryMessage(
-                $"FlapsActuationPidRegulatorIntegralGain:{_flightSegmentConfig.FlapsActuationPidRegulatorIntegralGain}"),
+                $"FlapsYawPidRegulatorIntegralGain:{_flightSegmentConfig.FlapsYawPidRegulatorIntegralGain}"),
             new TelemetryMessage(
-                $"FlapsActuationPidRegulatorDerivativeGain:{_flightSegmentConfig.FlapsActuationPidRegulatorDerivativeGain}"),
+                $"FlapsYawPidRegulatorDerivativeGain:{_flightSegmentConfig.FlapsYawPidRegulatorDerivativeGain}"),
+            new TelemetryMessage(
+                $"FlapsRollPidRegulatorProportionalGain:{_flightSegmentConfig.FlapsRollPidRegulatorProportionalGain}"),
+            new TelemetryMessage(
+                $"FlapsRollPidRegulatorIntegralGain:{_flightSegmentConfig.FlapsRollPidRegulatorIntegralGain}"),
+            new TelemetryMessage(
+                $"FlapsRollPidRegulatorDerivativeGain:{_flightSegmentConfig.FlapsRollPidRegulatorDerivativeGain}"),
+            new TelemetryMessage(
+                $"FlapsPitchPidRegulatorProportionalGain:{_flightSegmentConfig.FlapsPitchPidRegulatorProportionalGain}"),
+            new TelemetryMessage(
+                $"FlapsPitchPidRegulatorIntegralGain:{_flightSegmentConfig.FlapsPitchPidRegulatorIntegralGain}"),
+            new TelemetryMessage(
+                $"FlapsPitchPidRegulatorDerivativeGain:{_flightSegmentConfig.FlapsPitchPidRegulatorDerivativeGain}"),
             new TelemetryMessage(
                 "------------------------------------------------")
         };
@@ -96,12 +111,26 @@ namespace Starship.Flight.Segment.Actuation.Flap
 
         public override int GetHashCode() => _flightSegmentConfig.GetHashCode();
 
-        private PidRegulator CreateFlapsActuationPidRegulator() => new PidRegulator(
-            minimumOutput: -0.5F / 3.0F,
-            maximumOutput: +0.5F / 3.0F,
-            _flightSegmentConfig.FlapsActuationPidRegulatorProportionalGain ?? 0.0F,
-            _flightSegmentConfig.FlapsActuationPidRegulatorIntegralGain ?? 0.0F,
-            _flightSegmentConfig.FlapsActuationPidRegulatorDerivativeGain ?? 0.0F);
+        private PidRegulator CreateFlapsYawPidRegulator() => new PidRegulator(
+            FlapsActuationPidRegulatorMinimumOutput,
+            FlapsActuationPidRegulatorMaximumOutput,
+            _flightSegmentConfig.FlapsYawPidRegulatorProportionalGain ?? 0.0F,
+            _flightSegmentConfig.FlapsYawPidRegulatorIntegralGain ?? 0.0F,
+            _flightSegmentConfig.FlapsYawPidRegulatorDerivativeGain ?? 0.0F);
+
+        private PidRegulator CreateFlapsRollPidRegulator() => new PidRegulator(
+            FlapsActuationPidRegulatorMinimumOutput,
+            FlapsActuationPidRegulatorMaximumOutput,
+            _flightSegmentConfig.FlapsRollPidRegulatorProportionalGain ?? 0.0F,
+            _flightSegmentConfig.FlapsRollPidRegulatorIntegralGain ?? 0.0F,
+            _flightSegmentConfig.FlapsRollPidRegulatorDerivativeGain ?? 0.0F);
+
+        private PidRegulator CreateFlapsPitchPidRegulator() => new PidRegulator(
+            FlapsActuationPidRegulatorMinimumOutput,
+            FlapsActuationPidRegulatorMaximumOutput,
+            _flightSegmentConfig.FlapsPitchPidRegulatorProportionalGain ?? 0.0F,
+            _flightSegmentConfig.FlapsPitchPidRegulatorIntegralGain ?? 0.0F,
+            _flightSegmentConfig.FlapsPitchPidRegulatorDerivativeGain ?? 0.0F);
 
         private float RegulateFlapsYawPercent(ISensorSuite sensorSuite) => _flapsYawPidRegulator
             .RegulateValue(_flightSegmentConfig.DesiredYawAngleInDegrees, sensorSuite.AttitudeSensor.YawAngleInDegrees);

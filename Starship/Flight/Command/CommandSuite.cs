@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Starship.Flight.Command.Activation.Rcs;
 using Starship.Flight.Command.Actuation.Engine;
 using Starship.Flight.Command.Actuation.Flap;
 using Starship.Flight.Command.Actuation.Leg;
@@ -9,6 +10,10 @@ namespace Starship.Flight.Command
 {
     public readonly struct CommandSuite : ICommandSuite
     {
+        public TopLeftRcsActivationCommand TopLeftRcsActivationCommand { get; }
+        public TopRightRcsActivationCommand TopRightRcsActivationCommand { get; }
+        public BottomLeftRcsActivationCommand BottomLeftRcsActivationCommand { get; }
+        public BottomRightRcsActivationCommand BottomRightRcsActivationCommand { get; }
         public LegsActuationCommand LegsActuationCommand { get; }
         public TopLeftFlapActuationCommand TopLeftFlapActuationCommand { get; }
         public TopRightFlapActuationCommand TopRightFlapActuationCommand { get; }
@@ -23,6 +28,10 @@ namespace Starship.Flight.Command
 
 
         public CommandSuite(
+            TopLeftRcsActivationCommand topLeftRcsActivationCommand,
+            TopRightRcsActivationCommand topRightRcsActivationCommand,
+            BottomLeftRcsActivationCommand bottomLeftRcsActivationCommand,
+            BottomRightRcsActivationCommand bottomRightRcsActivationCommand,
             LegsActuationCommand legsActuationCommand,
             TopLeftFlapActuationCommand topLeftFlapActuationCommand,
             TopRightFlapActuationCommand topRightFlapActuationCommand,
@@ -35,6 +44,10 @@ namespace Starship.Flight.Command
             BottomLeftMainEngineThrottleCommand bottomLeftMainEngineThrottleCommand,
             BottomRightMainEngineThrottleCommand bottomRightMainEngineThrottleCommand)
         {
+            TopLeftRcsActivationCommand = topLeftRcsActivationCommand;
+            TopRightRcsActivationCommand = topRightRcsActivationCommand;
+            BottomLeftRcsActivationCommand = bottomLeftRcsActivationCommand;
+            BottomRightRcsActivationCommand = bottomRightRcsActivationCommand;
             LegsActuationCommand = legsActuationCommand;
             TopLeftFlapActuationCommand = topLeftFlapActuationCommand;
             TopRightFlapActuationCommand = topRightFlapActuationCommand;
@@ -52,6 +65,10 @@ namespace Starship.Flight.Command
         {
             var telemetry = new List<TelemetryMessage>();
 
+            telemetry.AddRange(TopLeftRcsActivationCommand.ProvideTelemetry());
+            telemetry.AddRange(TopRightRcsActivationCommand.ProvideTelemetry());
+            telemetry.AddRange(BottomLeftRcsActivationCommand.ProvideTelemetry());
+            telemetry.AddRange(BottomRightRcsActivationCommand.ProvideTelemetry());
             telemetry.AddRange(LegsActuationCommand.ProvideTelemetry());
             telemetry.AddRange(TopLeftFlapActuationCommand.ProvideTelemetry());
             telemetry.AddRange(TopRightFlapActuationCommand.ProvideTelemetry());
