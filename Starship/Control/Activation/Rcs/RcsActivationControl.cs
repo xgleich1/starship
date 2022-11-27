@@ -42,9 +42,7 @@ namespace Starship.Control.Activation.Rcs
             _bottomRightRcsEngine.useEngineResponseTime = true;
         }
 
-        private static void ActivateRcsEngine(ModuleEngines rcsEngine, bool activated)
-        {
+        private static void ActivateRcsEngine(ModuleEngines rcsEngine, bool activated) =>
             rcsEngine.currentThrottle = activated ? 1.0F : 0.0F;
-        }
     }
 }
